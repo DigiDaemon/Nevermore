@@ -1,0 +1,5 @@
+hydra - hydrachat
+smelly - tukui mark bar
+tukz - tukui
+elv - elvui raid utility
+
