@@ -1,0 +1,17 @@
+local T, C, L = unpack(select(2, ...))
+
+-- exit vehicle button on left side of bottom action bar
+local vehicle = CreateFrame("Button", "NevermoreExitVehicleButton", UIParent, "SecureHandlerClickTemplate")
+vehicle:Point("BOTTOMLEFT", NevermoreCenter, "BOTTOMLEFT", 0, 0)
+vehicle:Point("BOTTOMRIGHT", NevermoreCenter, "BOTTOMRIGHT", 0, 0)
+vehicle:SetHeight(T.buttonspacing * 3.5)
+vehicle:SetFrameStrata(NevermoreCenter:GetFrameStrata())
+vehicle:SetFrameLevel(NevermoreCenter:GetFrameLevel() + 1)
+vehicle:SetTemplate("Default")
+--vehicle:SetBackdropBorderColor(75/255,  175/255, 76/255)
+vehicle:RegisterForClicks("AnyUp")
+vehicle:SetScript("OnClick", function() VehicleExit() end)
+vehicle.text = T.SetFontString(vehicle, C.media.uffont, 12)
+vehicle.text:Point("CENTER", 0, 0)
+vehicle.text:SetText("|cff4BAF4CVVVVVVV - DISMOUNT - VVVVVVV|r")
+RegisterStateDriver(vehicle, "visibility", "[target=vehicle,exists] show;hide")

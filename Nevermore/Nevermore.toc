@@ -1,0 +1,13 @@
+﻿## Interface: 40300
+## Author: Silverman
+## Credits to: Tukz, Smelly, Caith, Caellian, Shestak, Haste, Tekkub, Alza, Roth, P3lim, Tulla, Hungtar, hankthetank, Ishtara, Haleth and others...
+## Special Thanks to: Admins, Moderator and VIP's from tukui.org
+## Version: 2.0 Beta
+## Title: |cffC495DDNevermore|r
+## Notes: A Tukui Branch
+## SavedVariables: NevermoreData, NevermoreConfig
+## SavedVariablesPerCharacter: NevermoreDataPerChar
+## OptionalDeps: !ClassColors, Clique, TinyDPS, Postal, BigWigs, Super Duper Macro, Auctionator
+## X-oUF: oUFTukui
+
+Nevermore.xml
