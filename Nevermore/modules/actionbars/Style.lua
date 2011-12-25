@@ -198,7 +198,7 @@ local function SetupFlyoutButton()
 	for i=1, buttons do
 		--prevent error if you don't have max ammount of buttons
 		if _G["SpellFlyoutButton"..i] then
-			style(_G["SpellFlyoutButton"..i])
+			T.StyleActionBarButton(_G["SpellFlyoutButton"..i])
 					
 			if _G["SpellFlyoutButton"..i]:GetChecked() then
 				_G["SpellFlyoutButton"..i]:SetChecked(nil)
