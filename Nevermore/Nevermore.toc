@@ -1,15 +1,12 @@
 ﻿## Interface: 40300
-## Author: Tukz
-## Project Collaborators: Elv22, Nightcracker
-## Credits to: Caith, Caellian, Shestak, Haste, Tekkub, Alza, Roth, P3lim, Tulla, Hungtar, hankthetank, Ishtara, Haleth and others...
+## Author: Silverman
+## Credits to: Tukz, Caith, Caellian, Shestak, Haste, Tekkub, Alza, Roth, P3lim, Tulla, Hungtar, hankthetank, Ishtara, Haleth and others...
 ## Special Thanks to: Admins, Moderator and VIP's from tukui.org
-## Version: 14.14
+## Version: 2.0 Beta
 ## Title: |cffC495DDNevermore|r
-## Notes: UI of awesomeness!
 ## SavedVariables: NevermoreData, NevermoreConfig
 ## SavedVariablesPerCharacter: NevermoreDataPerChar
 ## OptionalDeps: !ClassColors, Clique, TinyDPS, Postal, BigWigs, Super Duper Macro, Auctionator
 ## X-oUF: oUFTukui
-## Website: www.tukui.org
 
 Nevermore.xml
