@@ -5,14 +5,14 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 --------------------------------------------------------------------
 
 if C["datatext"].power and C["datatext"].power > 0 then
-	local Stat = CreateFrame("Frame", "TukuiStatPower")
+	local Stat = CreateFrame("Frame", "NevermoreStatPower")
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 	Stat.Option = C.datatext.power
 	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
-	local Text  = Stat:CreateFontString("TukuiStatPowerText", "OVERLAY")
+	local Text  = Stat:CreateFontString("NevermoreStatPowerText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
 	T.PP(C["datatext"].power, Text)
 

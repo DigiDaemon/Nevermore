@@ -1,11 +1,11 @@
--- Combo Points for Tukui 14+
+-- Combo Points for Nevermore 14+
 
 local T, C, L = unpack(select(2, ...))
-local parent = TukuiTarget
+local parent = NevermoreTarget
 local stick
 
 if T.myclass == "ROGUE" and C.unitframes.movecombobar then
-	parent = TukuiPlayer
+	parent = NevermorePlayer
 	stick = true
 end
 
@@ -79,33 +79,33 @@ local function OnUpdate(self)
 end
 
 -- create the bar
-local TukuiCombo = CreateFrame("Frame", "TukuiCombo", parent)
-TukuiCombo:Point("BOTTOMLEFT", parent, "TOPLEFT", 0, 1)
-TukuiCombo:SetWidth(parent:GetWidth())
-TukuiCombo:SetHeight(8)
-TukuiCombo:SetTemplate("Default")
-TukuiCombo:SetBackdropBorderColor(unpack(C.media.backdropcolor))
-TukuiCombo:RegisterEvent("PLAYER_ENTERING_WORLD")
-TukuiCombo:RegisterEvent("UNIT_COMBO_POINTS")
-TukuiCombo:RegisterEvent("PLAYER_TARGET_CHANGED")
-TukuiCombo:SetScript("OnEvent", OnUpdate)
-TukuiCombo:Show()
+local NevermoreCombo = CreateFrame("Frame", "NevermoreCombo", parent)
+NevermoreCombo:Point("BOTTOMLEFT", parent, "TOPLEFT", 0, 1)
+NevermoreCombo:SetWidth(parent:GetWidth())
+NevermoreCombo:SetHeight(8)
+NevermoreCombo:SetTemplate("Default")
+NevermoreCombo:SetBackdropBorderColor(unpack(C.media.backdropcolor))
+NevermoreCombo:RegisterEvent("PLAYER_ENTERING_WORLD")
+NevermoreCombo:RegisterEvent("UNIT_COMBO_POINTS")
+NevermoreCombo:RegisterEvent("PLAYER_TARGET_CHANGED")
+NevermoreCombo:SetScript("OnEvent", OnUpdate)
+NevermoreCombo:Show()
 
 -- create combos
 for i = 1, 5 do
-	TukuiCombo[i] = CreateFrame("StatusBar", "TukuiComboBar"..i, TukuiCombo)
-	TukuiCombo[i]:Height(8)
-	TukuiCombo[i]:SetStatusBarTexture(C.media.normTex)
-	TukuiCombo[i]:GetStatusBarTexture():SetHorizTile(false)
-	TukuiCombo[i]:SetFrameLevel(TukuiCombo:GetFrameLevel() + 1)
-	TukuiCombo[i]:SetStatusBarColor(unpack(Colors[i]))
+	NevermoreCombo[i] = CreateFrame("StatusBar", "NevermoreComboBar"..i, NevermoreCombo)
+	NevermoreCombo[i]:Height(8)
+	NevermoreCombo[i]:SetStatusBarTexture(C.media.normTex)
+	NevermoreCombo[i]:GetStatusBarTexture():SetHorizTile(false)
+	NevermoreCombo[i]:SetFrameLevel(NevermoreCombo:GetFrameLevel() + 1)
+	NevermoreCombo[i]:SetStatusBarColor(unpack(Colors[i]))
 	
 	if i == 1 then
-		TukuiCombo[i]:Point("LEFT", TukuiCombo, "LEFT", 0, 0)
-		TukuiCombo[i]:Width(parent:GetWidth() / 5)
+		NevermoreCombo[i]:Point("LEFT", NevermoreCombo, "LEFT", 0, 0)
+		NevermoreCombo[i]:Width(parent:GetWidth() / 5)
 	else
-		TukuiCombo[i]:Point("LEFT", TukuiCombo[i-1], "RIGHT", 1, 0)
-		TukuiCombo[i]:Width(parent:GetWidth() / 5 - 1)
+		NevermoreCombo[i]:Point("LEFT", NevermoreCombo[i-1], "RIGHT", 1, 0)
+		NevermoreCombo[i]:Width(parent:GetWidth() / 5 - 1)
 	end
 	
 	if stick then

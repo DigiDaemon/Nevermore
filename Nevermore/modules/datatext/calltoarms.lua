@@ -5,7 +5,7 @@ local T, C, L = unpack(select(2, ...))
 --------------------------------------------------------------------
 
 if C["datatext"].calltoarms and C["datatext"].calltoarms > 0 then
-	local Stat = CreateFrame("Frame", "TukuiStatCallToArms")
+	local Stat = CreateFrame("Frame", "NevermoreStatCallToArms")
 	Stat:EnableMouse(true)
 	Stat:SetFrameStrata("MEDIUM")
 	Stat:SetFrameLevel(3)
@@ -13,7 +13,7 @@ if C["datatext"].calltoarms and C["datatext"].calltoarms > 0 then
 	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
-	local Text  = Stat:CreateFontString("TukuiStatCallToArmsText", "OVERLAY")
+	local Text  = Stat:CreateFontString("NevermoreStatCallToArmsText", "OVERLAY")
 	Text:SetFont(C["media"].font, C["datatext"].fontsize)
 	Text:SetShadowOffset(T.mult, -T.mult)
 	Text:SetShadowColor(0, 0, 0, 0.4)

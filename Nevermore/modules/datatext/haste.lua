@@ -4,23 +4,23 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 --------------------------------------------------------------------
 
 if C["datatext"].haste and C["datatext"].haste > 0 then
-	local Stat = CreateFrame("Frame", "TukuiStatHaste")
+	local Stat = CreateFrame("Frame", "NevermoreStatHaste")
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 	Stat.Option = C.datatext.haste
 	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
-	local Text  = Stat:CreateFontString("TukuiStatHasteText", "OVERLAY")
+	local Text  = Stat:CreateFontString("NevermoreStatHasteText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
 	T.PP(C["datatext"].haste, Text)
 
 	local int = 1
 
 	local function Update(self, t)
-		local spellhaste = GetCombatRating(20)
-		local rangedhaste = GetCombatRating(19)
-		local attackhaste = GetCombatRating(18)
+		spellhaste = GetCombatRating(20)
+		rangedhaste = GetCombatRating(19)
+		attackhaste = GetCombatRating(18)
 		
 		if attackhaste > spellhaste and select(2, UnitClass("Player")) ~= "HUNTER" then
 			haste = attackhaste

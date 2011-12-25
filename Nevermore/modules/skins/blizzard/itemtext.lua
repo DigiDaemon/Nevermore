@@ -4,7 +4,6 @@ local function LoadSkin()
 	ItemTextFrame:StripTextures(true)
 	ItemTextScrollFrame:StripTextures()
 	ItemTextFrame:SetTemplate("Default")
-	T.SkinScrollBar(ItemTextScrollFrameScrollBar)
 	T.SkinCloseButton(ItemTextCloseButton)
 	T.SkinNextPrevButton(ItemTextPrevPageButton)
 	T.SkinNextPrevButton(ItemTextNextPageButton)
@@ -12,4 +11,4 @@ local function LoadSkin()
 	ItemTextPageText.SetTextColor = T.dummy
 end
 
-tinsert(T.SkinFuncs["Tukui"], LoadSkin)
+tinsert(T.SkinFuncs["Nevermore"], LoadSkin)

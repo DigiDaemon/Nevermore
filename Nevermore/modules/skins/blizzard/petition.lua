@@ -31,4 +31,4 @@ local function LoadSkin()
 	PetitionFrameRequestButton:Point("BOTTOMLEFT", PetitionFrame, "BOTTOMLEFT", 22, 20)
 end
 
-tinsert(T.SkinFuncs["Tukui"], LoadSkin)
+tinsert(T.SkinFuncs["Nevermore"], LoadSkin)

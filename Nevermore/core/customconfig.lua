@@ -4,13 +4,13 @@
 
 --[[
 		To add your own custom config into your edited version,
-		You need to create the addon Tukui_EditedDefaultConfig and add
+		You need to create the addon Nevermore_EditedDefaultConfig and add
 		your custom configuration into it.
 		
 		A guide (example) can be downloaded at:
-		http://www.tukui.org/downloads/Tukui_EditedDefaultConfig.zip
+		http://www.Nevermore.org/downloads/Nevermore_EditedDefaultConfig.zip
 		
-		Don't forget to add in the .toc, in your edited Tukui version: Tukui_CustomConfig
+		Don't forget to add in the .toc, in your edited Nevermore version: Nevermore_CustomConfig
 		If no new option group, Add it to: ## OptionalDeps
 		If new option group, Add it to: ## RequiredDeps
 
@@ -19,13 +19,13 @@
 
 local T, C, L = unpack(select(2, ...))
 
-if not TukuiEditedDefaultConfig then return end
+if not NevermoreEditedDefaultConfig then return end
 
-local settings = TukuiEditedDefaultConfig
+local settings = NevermoreEditedDefaultConfig
 
 -- add our new options and update default
 for group, options in pairs(settings) do
-	-- create a new group of option if not found on Tukui
+	-- create a new group of option if not found on Nevermore
 	if not C[group] then
 		C[group] = {}
 	end

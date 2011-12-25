@@ -5,7 +5,7 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
 T.ChatSetup = function()
-	-- setting chat frames if using Tukui chats.					
+	-- setting chat frames if using Nevermore chats.					
 	FCF_ResetChatWindows()
 	FCF_SetLocked(ChatFrame1, 1)
 	FCF_DockFrame(ChatFrame2)
@@ -15,19 +15,19 @@ T.ChatSetup = function()
 	FCF_DockFrame(ChatFrame3)
 
 	FCF_OpenNewWindow(LOOT)
-	FCF_UnDockFrame(ChatFrame4)
 	FCF_SetLocked(ChatFrame4, 1)
+	FCF_DockFrame(ChatFrame4)
 	ChatFrame4:Show()
 
 	for i = 1, NUM_CHAT_WINDOWS do
 		local frame = _G[format("ChatFrame%s", i)]
 		local id = frame:GetID()
 
-		-- set default tukui font size
+		-- set default Nevermore font size
 		FCF_SetChatWindowFontSize(nil, frame, 12)
 		
 		-- set the size of chat frames
-		frame:Size(T.InfoLeftRightWidth + 1, 111)
+		frame:Size(NevermoreChatEdit:GetWidth(), (NevermoreChat:GetHeight() - (NevermoreChatEdit:GetHeight()*1.5)))
 		
 		-- tell wow that we are using new size
 		SetChatWindowSavedDimensions(id, T.Scale(T.InfoLeftRightWidth + 1), T.Scale(111))
@@ -143,7 +143,8 @@ end
 
 local function positionsetup()
 	-- reset saved variables on char
-	TukuiDataPerChar = {}
+	NevermoreDataPerChar = {}
+	NevermoreDataPerChar.role = {}
 	
 	-- reset movable stuff into original position
 	for i = 1, getn(T.AllowFrameMoving) do
@@ -151,20 +152,20 @@ local function positionsetup()
 	end
 end
 
-local v = CreateFrame("Button", "TukuiVersionFrame", UIParent)
+local v = CreateFrame("Button", "NevermoreVersionFrame", UIParent)
 v:SetSize(300, 36)
 v:SetPoint("CENTER")
 v:SetTemplate("Default")
 v:CreateShadow("Default")
 v:FontString("Text", C.media.font, 12)
 v.Text:SetPoint("CENTER")
-v.Text:SetText("Tukui ".. T.version .." by |cffff0000tukz@tukui.org|r, website at |cffff0000www.tukui.org|r")
+v.Text:SetText("Nevermore ".. T.version .." by |cffff0000tukz@Nevermore.org|r, website at |cffff0000www.Nevermore.org|r")
 v:SetScript("OnClick", function()
 	v:Hide()
 end)
 v:Hide()
 
-local f = CreateFrame("Frame", "TukuiInstallFrame", UIParent)
+local f = CreateFrame("Frame", "NevermoreInstallFrame", UIParent)
 f:SetSize(400, 400)
 f:SetPoint("CENTER")
 f:SetTemplate("Default")
@@ -224,64 +225,98 @@ local sbt = sb:CreateFontString(nil, "OVERLAY")
 sbt:SetFont(C.media.font, 13, "THINOUTLINE")
 sbt:SetPoint("CENTER", sb)
 
-local option1 = CreateFrame("Button", "TukuiInstallOption1", f)
+local option1 = CreateFrame("Button", "NevermoreInstallOption1", f)
 option1:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT", 20, 20)
-option1:SetSize(128, 25)
+option1:SetSize(100, 25)
 option1:SetTemplate("Default")
 option1:FontString("Text", C.media.font, 12)
 option1.Text:SetPoint("CENTER")
 
-local option2 = CreateFrame("Button", "TukuiInstallOption2", f)
-option2:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -20, 20)
-option2:SetSize(128, 25)
+local option2 = CreateFrame("Button", "NevermoreInstallOption2", f)
+option2:SetPoint("BOTTOM", f, "BOTTOM", 0, 20)
+option2:SetSize(100, 25)
 option2:SetTemplate("Default")
 option2:FontString("Text", C.media.font, 12)
 option2.Text:SetPoint("CENTER")
 
-local close = CreateFrame("Button", "TukuiInstallCloseButton", f, "UIPanelCloseButton")
+local option3 = CreateFrame("Button", "NevermoreInstallOption2", f)
+option3:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -20, 20)
+option3:SetSize(100, 25)
+option3:SetTemplate("Default")
+option3:FontString("Text", C.media.font, 12)
+option3.Text:SetPoint("CENTER")
+
+local close = CreateFrame("Button", "NevermoreInstallCloseButton", f, "UIPanelCloseButton")
 close:SetPoint("TOPRIGHT", f, "TOPRIGHT")
 T.SkinCloseButton(close)
 close:SetScript("OnClick", function()
 	f:Hide()
 end)
 
-local step4 = function()
-	TukuiDataPerChar.install = true
-	sb:SetValue(4)
+local step5 = function()
+	NevermoreDataPerChar.install = true
+	sb:SetValue(5)
 	PlaySoundFile("Sound\\interface\\LevelUp.wav")
-	header:SetText(L.install_header_11)
-	text1:SetText(L.install_step_4_line_1)
-	text2:SetText(L.install_step_4_line_2)
-	text3:SetText(L.install_step_4_line_3)
-	text4:SetText(L.install_step_4_line_4)
-	sbt:SetText("4/4")
+	header:SetText(L.install_header_12)
+	text1:SetText(L.install_step_5_line_1)
+	text2:SetText(L.install_step_5_line_2)
+	text3:SetText(L.install_step_5_line_3)
+	text4:SetText(L.install_step_5_line_4)
+	sbt:SetText("5/5")
 	option1:Hide()
+	option2:SetWidth(300)
 	option2.Text:SetText(L.install_button_finish)
 	option2:SetScript("OnClick", function()
 		ReloadUI()
 	end)
+	option3:Hide()
 end
 
-local step3 = function()
-	if not option2:IsShown() then option2:Show() end	
+local step4 = function()
+	if not option2:IsShown() then option2:Show() end
+		NevermoreDataPerChar.role = nil
+	sb:SetValue(4)
+	header:SetText(L.install_header_11)
+	text1:SetJustifyH("CENTER")
+	text1:SetText(L.install_step_4_line_1)
+	text2:SetJustifyH("CENTER")
+	text2:SetText(L.install_step_4_line_2)
+	text3:SetJustifyH("CENTER")
+	text3:SetText(L.install_step_4_line_3)
+	text4:SetJustifyH("CENTER")
+	text4:SetText(L.install_step_4_line_4)
+	sbt:SetText("4/5")
+	option1.Text:SetText(L.install_button_heal)
+	option1:SetScript("OnClick", function() NevermoreDataPerChar.role = "heal"
+		step5() end)
+	option2.Text:SetText(L.install_button_tank)
+	option2:SetScript("OnClick", function() NevermoreDataPerChar.role = "tank";
+		step5() end)
+	option3.Text:SetText(L.install_button_dps)
+	option3:SetScript("OnClick", function() NevermoreDataPerChar.role = "dps";
+		step5() end)
+	end
+
+local step3 = function()	
 	sb:SetValue(3)
 	header:SetText(L.install_header_10)
 	text1:SetText(L.install_step_3_line_1)
 	text2:SetText(L.install_step_3_line_2)
 	text3:SetText(L.install_step_3_line_3)
 	text4:SetText(L.install_step_3_line_4)
-	sbt:SetText("3/4")
+	sbt:SetText("3/5")
 	option1:SetScript("OnClick", step4)
-	option2:SetScript("OnClick", function()
+	option3:SetScript("OnClick", function()
 		positionsetup()
 		step4()
 	end)
 end
 
 local step2 = function()
+	option2:Hide()
 	sb:SetValue(2)
 	header:SetText(L.install_header_9)
-	sbt:SetText("2/4")
+	sbt:SetText("2/5")
 	if IsAddOnLoaded("Prat") or IsAddOnLoaded("Chatter") then 
 		text1:SetText(L.install_step_2_line_0)
 		text2:SetText("")
@@ -293,7 +328,7 @@ local step2 = function()
 		text2:SetText(L.install_step_2_line_2)
 		text3:SetText(L.install_step_2_line_3)
 		text4:SetText(L.install_step_2_line_4)
-		option2:SetScript("OnClick", function()
+		option3:SetScript("OnClick", function()
 			T.ChatSetup()
 			step3()
 		end)
@@ -303,7 +338,8 @@ end
 
 local step1 = function()
 	close:Hide()
-	sb:SetMinMaxValues(0, 4)
+	option2:Hide()
+	sb:SetMinMaxValues(0, 5)
 	sb:Show()
 	sb:SetValue(1)
 	sb:SetStatusBarColor(0.26, 1, 0.22)
@@ -312,15 +348,15 @@ local step1 = function()
 	text2:SetText(L.install_step_1_line_2)
 	text3:SetText(L.install_step_1_line_3)
 	text4:SetText(L.install_step_1_line_4)
-	sbt:SetText("1/4")
+	sbt:SetText("1/5")
 
 	option1:Show()
 
 	option1.Text:SetText(L.install_button_skip)
-	option2.Text:SetText(L.install_button_continue)
+	option3.Text:SetText(L.install_button_continue)
 
 	option1:SetScript("OnClick", step2)
-	option2:SetScript("OnClick", function()
+	option3:SetScript("OnClick", function()
 		cvarsetup()
 		local ms = GetCVar("gxMultisample")
 		if ms ~= "1" then
@@ -425,12 +461,13 @@ local tut1 = function()
 	option2:SetScript("OnClick", tut2)
 end
 
--- this install Tukui with default settings.
+-- this install Nevermore with default settings.
 local function install()
 	f:Show()
 	sb:Hide()
 	option1:Show()
-	option2:Show()
+	option2:Hide()
+	option3:Show()
 	close:Show()
 	header:SetText(L.install_header_1)
 	text1:SetText(L.install_init_line_1)
@@ -439,39 +476,35 @@ local function install()
 	text4:SetText(L.install_init_line_4)
 
 	option1.Text:SetText(L.install_button_tutorial)
-	option2.Text:SetText(L.install_button_install)
+	option3.Text:SetText(L.install_button_install)
 
 	option1:SetScript("OnClick", tut1)
-	option2:SetScript("OnClick", step1)			
+	option3:SetScript("OnClick", step1)			
 end
 
 ------------------------------------------------------------------------
 --	On login function, look for some infos!
 ------------------------------------------------------------------------
 
-local TukuiOnLogon = CreateFrame("Frame")
-TukuiOnLogon:RegisterEvent("PLAYER_ENTERING_WORLD")
-TukuiOnLogon:SetScript("OnEvent", function(self, event)
+local NevermoreOnLogon = CreateFrame("Frame")
+NevermoreOnLogon:RegisterEvent("PLAYER_ENTERING_WORLD")
+NevermoreOnLogon:SetScript("OnEvent", function(self, event)
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	
 	-- create empty saved vars if they doesn't exist.
-	if (TukuiData == nil) then TukuiData = {} end
-	if (TukuiDataPerChar == nil) then TukuiDataPerChar = {} end
-
+	if (NevermoreData == nil) then NevermoreData = {} end
+	if (NevermoreDataPerChar == nil) then NevermoreDataPerChar = {} end
 	if T.screenwidth < 1200 then
 			SetCVar("useUiScale", 0)
-			StaticPopup_Show("TUKUIDISABLE_UI")
+			StaticPopup_Show("NevermoreDISABLE_UI")
 	else		
-		-- install default if we never ran Tukui on this character.
-		if not TukuiDataPerChar.install then			
+		-- install default if we never ran Nevermore on this character.
+		if not NevermoreDataPerChar.install then			
 			install()
 		end
 	end
-	
-	if (IsAddOnLoaded("Tukui_Raid") and IsAddOnLoaded("Tukui_Raid_Healing")) then
-		StaticPopup_Show("TUKUIDISABLE_RAID")
-	end
 end)
+
 
 SLASH_TUTORIAL1 = "/uihelp"
 SLASH_TUTORIAL2 = "/tutorial"

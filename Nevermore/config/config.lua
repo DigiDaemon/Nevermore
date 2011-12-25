@@ -8,26 +8,19 @@ C["general"] = {
 	["autoscale"] = true,                               -- mainly enabled for users that don't want to mess with the config file
 	["uiscale"] = 0.71,                                 -- set your value (between 0.64 and 1) of your uiscale if autoscale is off
 	["overridelowtohigh"] = false,                      -- EXPERIMENTAL ONLY! override lower version to higher version on a lower reso.
-	["backdropcolor"] = { .1,.1,.1 },                   -- default backdrop color of panels
+	["backdropcolor"] = { 0, 0, 0 },                   -- default backdrop color of panels
 	["bordercolor"] = { .6,.6,.6 },                     -- default border color of panels
-	["blizzardreskin"] = true,                          -- reskin all Blizzard frames
-	["bigwigsreskin"] = true,                           -- reskin bigwigs
-	["dbmreskin"] = true,                               -- reskin dbm
-	["dxereskin"] = true,                               -- reskin dxe
-	["omenreskin"] = true,                              -- reskin omen
-	["recountreskin"] = true,                           -- reskin recount
-	["skadareskin"] = true,                             -- reskin skada
-	["tinydpsreskin"] = true,                           -- reskin tinydps
+	["blizzardreskin"] = true                           -- reskin all Blizzard frames
 }
 
 C["unitframes"] = {
 	-- general options
 	["enable"] = true,                                  -- do i really need to explain this?
 	["enemyhcolor"] = false,                            -- enemy target (players) color by hostility, very useful for healer.
-	["unitcastbar"] = true,                             -- enable tukui castbar
+	["unitcastbar"] = true,                             -- enable Nevermore castbar
 	["cblatency"] = false,                              -- enable castbar latency
 	["cbicons"] = true,                                 -- enable icons on castbar
-	["classiccombo"] = false,                           -- display classic combo points (from Tukui 13 or less)
+	["classiccombo"] = false,                           -- display classic combo points (from Nevermore 13 or less)
 	["movecombobar"] = true,                            -- display the new combo bar (t14+) from target to player (ROGUE ONLY)
 	["auratimer"] = true,                               -- enable timers on buffs/debuffs
 	["auratextscale"] = 11,                             -- the font size of buffs/debuffs timers on unitframes
@@ -67,21 +60,21 @@ C["unitframes"] = {
 	["weakenedsoulbar"] = true,                         -- show weakened soul bar
 	
 	-- class bar
-	["classbar"] = true,                                -- enable tukui classbar over player unit
+	["classbar"] = true,                                -- enable Nevermore classbar over player unit
 }
 
 C["arena"] = {
-	["unitframes"] = true,                              -- enable tukz arena unitframes (requirement : tukui unitframes enabled)
+	["unitframes"] = true,                              -- enable tukz arena unitframes (requirement : Nevermore unitframes enabled)
 }
 
 C["auras"] = {
-	["player"] = true,                                  -- enable tukui buffs/debuffs
+	["player"] = true,                                  -- enable Nevermore buffs/debuffs
 	["consolidate"] = true,                             -- enable downpdown menu with consolidate buff
 	["flash"] = false,                                   -- flash warning for buff with time < 30 sec
 }
 
 C["actionbar"] = {
-	["enable"] = true,                                  -- enable tukui action bars
+	["enable"] = true,                                  -- enable Nevermore action bars
 	["hotkey"] = true,                                  -- enable hotkey display because it was a lot requested
 	["hideshapeshift"] = false,                         -- hide shapeshift or totembar because it was a lot requested.
 	["showgrid"] = true,                                -- show grid on empty button
@@ -92,12 +85,12 @@ C["actionbar"] = {
 }
 
 C["bags"] = {
-	["enable"] = true,                                  -- enable an all in one bag mod that fit tukui perfectly
+	["enable"] = true,                                  -- enable an all in one bag mod that fit Nevermore perfectly
 }
 
 C["loot"] = {
-	["lootframe"] = true,                               -- reskin the loot frame to fit tukui
-	["rolllootframe"] = true,                           -- reskin the roll frame to fit tukui
+	["lootframe"] = true,                               -- reskin the loot frame to fit Nevermore
+	["rolllootframe"] = true,                           -- reskin the roll frame to fit Nevermore
 	["autogreed"] = true,                               -- auto-dez or auto-greed item at max level, auto-greed Frozen orb
 }
 
@@ -108,7 +101,7 @@ C["cooldown"] = {
 
 C["datatext"] = {
 	["fps_ms"] = 4,                                     -- show fps and ms on panels
-	["system"] = 5,                                     -- show total memory and others systems infos on panels
+	["system"] = 9,                                     -- show total memory and others systems infos on panels
 	["bags"] = 0,                                       -- show space used in bags on panels
 	["gold"] = 6,                                       -- show your current gold on panels
 	["wowtime"] = 8,                                    -- show time on panels
@@ -142,8 +135,19 @@ C["chat"] = {
 	["background"] = false,
 }
 
+C["ChatWindows"] = {
+	["AutoFade"] = false,       -- Auto fade out inactive frames
+	["AutoHide"] = false,       -- Automatically minimize new whisper windows
+	["ShowTitle"] = true,       -- Show persons name above chat window
+	["MinimizeAll"] = false,    -- Minimize all opened chat windows
+	["Timestamps"] = true,     -- Show timestamps in windows
+	["Width"] = 300,            -- Chat window width
+	["Height"] = 100,           -- Chat window height
+	["FontSize"] = 12,          -- Chat window font size
+}
+
 C["nameplate"] = {
-	["enable"] = true,                                  -- enable nice skinned nameplates that fit into tukui
+	["enable"] = true,                                  -- enable nice skinned nameplates that fit into Nevermore
 	["showhealth"] = false,				                -- show health text on nameplate
 	["enhancethreat"] = false,			                -- threat features based on if your a tank or not
 	["combat"] = false,					                -- only show enemy nameplates in-combat.

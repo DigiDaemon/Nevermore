@@ -18,4 +18,4 @@ local function LoadSkin()
 	DressUpFrameResetButton:Point("RIGHT", DressUpFrameCancelButton, "LEFT", -2, 0)
 end
 
-tinsert(T.SkinFuncs["Tukui"], LoadSkin)
+tinsert(T.SkinFuncs["Nevermore"], LoadSkin)

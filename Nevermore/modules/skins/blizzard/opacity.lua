@@ -5,4 +5,4 @@ local function LoadSkin()
 	OpacityFrame:SetTemplate("Default")
 end
 
-tinsert(T.SkinFuncs["Tukui"], LoadSkin)
+tinsert(T.SkinFuncs["Nevermore"], LoadSkin)

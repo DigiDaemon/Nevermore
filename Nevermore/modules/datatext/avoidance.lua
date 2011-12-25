@@ -4,8 +4,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 --------------------------------------------------------------------
 
 if C["datatext"].avd and C["datatext"].avd > 0 then
-	local dodge, parry, block, MissChance, avoidance, targetlv, playerlv, basemisschance, leveldifference
-	local Stat = CreateFrame("Frame", "TukuiStatAvoidance")
+	local Stat = CreateFrame("Frame", "NevermoreStatAvoidance")
 	Stat:EnableMouse(true)
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
@@ -13,16 +12,16 @@ if C["datatext"].avd and C["datatext"].avd > 0 then
 	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
-	local Text  = Stat:CreateFontString("TukuiStatAvoidanceText", "OVERLAY")
+	local Text  = Stat:CreateFontString("NevermoreStatAvoidanceText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
 	T.PP(C["datatext"].avd, Text)
 	
-	local targetlv, playerlv, dodge, parry, block, MissChance
+	local targetlv
+	local playerlv
 
 	local function Update(self)
 		local format = string.format
 		targetlv, playerlv = UnitLevel("target"), UnitLevel("player")
-		local basemisschance, leveldifference, avoidance
 		
 		if targetlv == -1 then
 			basemisschance = (5 - (3*.2))  --Boss Value

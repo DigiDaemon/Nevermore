@@ -11,7 +11,7 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 	end
 	
 	-- disable Blizzard party & raid frame if our Raid Frames are loaded
-	if addon == "Tukui_Raid" or addon == "Tukui_Raid_Healing" then   
+	if addon == "Nevermore_Raid" or addon == "Nevermore_Raid_Healing" then   
 		InterfaceOptionsFrameCategoriesButton11:SetScale(0.00001)
 		InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
 
@@ -59,14 +59,13 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 		end		
 	end
 	
-	if addon ~= "Tukui" then return end
+	if addon ~= "Nevermore" then return end
 		
 	StreamingIcon:Kill()
 	Advanced_UseUIScale:Kill()
 	Advanced_UIScaleSlider:Kill()
 	PartyMemberBackground:Kill()
 	TutorialFrameAlertButton:Kill()
-	GuildChallengeAlertFrame:Kill()
 	
 	if C.auras.player or C.unitframes.playerauras then
 		BuffFrame:Kill()
@@ -79,7 +78,7 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 	
 	InterfaceOptionsUnitFramePanelPartyBackground:Kill()
 
-	-- make sure boss or arena frame is always disabled when running tukui
+	-- make sure boss or arena frame is always disabled when running Nevermore
 	SetCVar("showArenaEnemyFrames", 0)
 	
 	if C.arena.unitframes then
@@ -118,7 +117,7 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 	-- I'm seriously tired of this Blizzard taint, little hack, we don't care about SearchLFGLeave()
 	-- This taint is blaming every addon even if we are not calling SearchLFGLeave() function in our addon ...
 	--[[ TAINT LOG
-			10/18 21:46:01.774  An action was blocked because of taint from Tukui - SearchLFGLeave()
+			10/18 21:46:01.774  An action was blocked because of taint from Nevermore - SearchLFGLeave()
 			10/18 21:46:01.774      Interface\FrameXML\LFRFrame.lua:395 LFRBrowseFrame_OnUpdateAlways()
 			10/18 21:46:01.774      UIParent:OnUpdate()
 	--]]

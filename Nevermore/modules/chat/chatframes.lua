@@ -2,51 +2,48 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 if C["chat"].enable ~= true then return end
 
 -----------------------------------------------------------------------
--- SETUP TUKUI CHATS
+-- SETUP Nevermore CHATS
 -----------------------------------------------------------------------
 
-local TukuiChat = CreateFrame("Frame", "TukuiChat")
+local NevermoreChat = CreateFrame("Frame", "NevermoreChat")
 local tabalpha = 1
 local tabnoalpha = 0
 local _G = _G
 local origs = {}
 local type = type
-local strings = {
-	BATTLEGROUND = L.chat_BATTLEGROUND_GET,
-	GUILD = L.chat_GUILD_GET,
-	PARTY = L.chat_PARTY_GET,
-	RAID = L.chat_RAID_GET,
-	OFFICER = L.chat_OFFICER_GET,
-	BATTLEGROUND_LEADER = L.chat_BATTLEGROUND_LEADER_GET,
-	PARTY_LEADER = L.chat_PARTY_LEADER_GET,
-	RAID_LEADER = L.chat_RAID_LEADER_GET,
-	
-	-- zhCN
-	Battleground = L.chat_BATTLEGROUND_GET,
-	Guild = L.chat_GUILD_GET,
-	raid = L.chat_RAID_GET,
-}
 
 -- function to rename channel and other stuff
-local function ShortChannel(channel)
-	return string.format("|Hchannel:%s|h[%s]|h", channel, strings[channel] or channel:gsub("channel:", ""))
+local AddMessage = function(self, text, ...)
+	if(type(text) == "string") then
+		text = text:gsub('|h%[(%d+)%. .-%]|h', '|h[%1]|h')
+	end
+	return origs[self](self, text, ...)
 end
 
-local function AddMessage(frame, str, ...)
-	str = str:gsub("|Hplayer:(.-)|h%[(.-)%]|h", "|Hplayer:%1|h%2|h")
-	str = str:gsub("|HBNplayer:(.-)|h%[(.-)%]|h", "|HBNplayer:%1|h%2|h")
-	str = str:gsub("|Hchannel:(.-)|h%[(.-)%]|h", ShortChannel)
+-- Shortcut channel name
+_G.CHAT_BATTLEGROUND_GET = "|Hchannel:Battleground|h"..L.chat_BATTLEGROUND_GET.."|h %s:\32"
+_G.CHAT_BATTLEGROUND_LEADER_GET = "|Hchannel:Battleground|h"..L.chat_BATTLEGROUND_LEADER_GET.."|h %s:\32"
+_G.CHAT_BN_WHISPER_GET = L.chat_BN_WHISPER_GET.." %s:\32"
+_G.CHAT_GUILD_GET = "|Hchannel:Guild|h"..L.chat_GUILD_GET.."|h %s:\32"
+_G.CHAT_OFFICER_GET = "|Hchannel:o|h"..L.chat_OFFICER_GET.."|h %s:\32"
+_G.CHAT_PARTY_GET = "|Hchannel:Party|h"..L.chat_PARTY_GET.."|h %s:\32"
+_G.CHAT_PARTY_GUIDE_GET = "|Hchannel:party|h"..L.chat_PARTY_GUIDE_GET.."|h %s:\32"
+_G.CHAT_PARTY_LEADER_GET = "|Hchannel:party|h"..L.chat_PARTY_LEADER_GET.."|h %s:\32"
+_G.CHAT_RAID_GET = "|Hchannel:raid|h"..L.chat_RAID_GET.."|h %s:\32"
+_G.CHAT_RAID_LEADER_GET = "|Hchannel:raid|h"..L.chat_RAID_LEADER_GET.."|h %s:\32"
+_G.CHAT_RAID_WARNING_GET = L.chat_RAID_WARNING_GET.." %s:\32"
+_G.CHAT_SAY_GET = "%s:\32"
+_G.CHAT_WHISPER_GET = L.chat_WHISPER_GET.." %s:\32"
+_G.CHAT_YELL_GET = "%s:\32"
 
-	str = str:gsub("^To (.-|h)", "|cffad2424@|r%1")
-	str = str:gsub("^(.-|h) whispers", "%1")
-	str = str:gsub("^(.-|h) says", "%1")
-	str = str:gsub("^(.-|h) yells", "%1")
-	str = str:gsub("<"..AFK..">", "|cffFF0000"..L.chat_FLAG_AFK.."|r ")
-	str = str:gsub("<"..DND..">", "|cffE7E716"..L.chat_FLAG_DND.."|r ")
-	str = str:gsub("^%["..RAID_WARNING.."%]", L.chat_RAID_WARNING_GET)
+-- color afk, dnd, gm
+_G.CHAT_FLAG_AFK = "|cffFF0000"..L.chat_FLAG_AFK.."|r "
+_G.CHAT_FLAG_DND = "|cffE7E716"..L.chat_FLAG_DND.."|r "
+_G.CHAT_FLAG_GM = "|cff4154F5"..L.chat_FLAG_GM.."|r "
 
-	return origs[frame](frame, str, ...)
-end
+-- customize online/offline msg
+_G.ERR_FRIEND_ONLINE_SS = "|Hplayer:%s|h[%s]|h "..L.chat_ERR_FRIEND_ONLINE_SS.."!"
+_G.ERR_FRIEND_OFFLINE_S = "%s "..L.chat_ERR_FRIEND_OFFLINE_S.."!"
 
 -- Hide friends micro button (added in 3.3.5)
 FriendsMicroButton:Kill()
@@ -60,17 +57,17 @@ local function SetChatStyle(frame)
 	local chat = frame:GetName()
 	local tab = _G[chat.."Tab"]
 	
-	-- always set alpha to 1, don"t fade it anymore
+	-- always set alpha to 1, don't fade it anymore
 	tab:SetAlpha(1)
 	tab.SetAlpha = UIFrameFadeRemoveFrame
 
 	if not C.chat.background and not frame.temp then
 		-- hide text when setting chat
-		_G[chat.."TabText"]:Hide()
+		_G[chat.."TabText"]:Show()
 		
 		-- now show text if mouse is found over tab.
 		tab:HookScript("OnEnter", function() _G[chat.."TabText"]:Show() end)
-		tab:HookScript("OnLeave", function() _G[chat.."TabText"]:Hide() end)
+		tab:HookScript("OnLeave", function() _G[chat.."TabText"]:Show() end)
 	end
 	
 	-- change tab font
@@ -85,14 +82,14 @@ local function SetChatStyle(frame)
 	-- Stop the chat chat from fading out
 	_G[chat]:SetFading(false)
 	
-	-- set min height/width to original tukui size
+	-- set min height/width to original Nevermore size
 	_G[chat]:SetMinResize(371,111)
 	_G[chat]:SetMinResize(T.InfoLeftRightWidth + 1,111)
 	
 	-- move the chat edit box
 	_G[chat.."EditBox"]:ClearAllPoints()
-	_G[chat.."EditBox"]:Point("TOPLEFT", TukuiTabsLeftBackground or TukuiInfoLeft, 2, -2)
-	_G[chat.."EditBox"]:Point("BOTTOMRIGHT", TukuiTabsLeftBackground or TukuiInfoLeft, -2, 2)	
+	_G[chat.."EditBox"]:Point("TOPLEFT", "NevermoreChatEdit", 2, -2)
+	_G[chat.."EditBox"]:Point("BOTTOMRIGHT", "NevermoreChatEdit", -2, 2)	
 	
 	-- Hide textures
 	for j = 1, #CHAT_FRAME_TEXTURES do
@@ -149,10 +146,10 @@ local function SetChatStyle(frame)
 	_G[chat.."Tab"]:HookScript("OnClick", function() _G[chat.."EditBox"]:Hide() end)
 			
 	-- create our own texture for edit box
-	local EditBoxBackground = CreateFrame("frame", "TukuiChatchatEditBoxBackground", _G[chat.."EditBox"])
+	local EditBoxBackground = CreateFrame("frame", "NevermoreChatchatEditBoxBackground", _G[chat.."EditBox"])
 	EditBoxBackground:CreatePanel("Default", 1, 1, "LEFT", _G[chat.."EditBox"], "LEFT", 0, 0)
 	EditBoxBackground:ClearAllPoints()
-	EditBoxBackground:SetAllPoints(TukuiTabsLeftBackground or TukuiInfoLeft)
+	EditBoxBackground:SetAllPoints("NevermoreChatEdit")
 	EditBoxBackground:SetFrameStrata("LOW")
 	EditBoxBackground:SetFrameLevel(1)
 	
@@ -210,8 +207,9 @@ local function SetupChat(self)
 	ChatTypeInfo.CHANNEL.sticky = 1
 end
 
-TukuiChat:RegisterEvent("ADDON_LOADED")
-TukuiChat:SetScript("OnEvent", function(self, event, addon)
+
+NevermoreChat:RegisterEvent("ADDON_LOADED")
+NevermoreChat:SetScript("OnEvent", function(self, event, addon)
 	if addon == "Blizzard_CombatLog" then
 		self:UnregisterEvent("ADDON_LOADED")
 		SetupChat(self)
@@ -234,10 +232,10 @@ hooksecurefunc("FCF_OpenTemporaryWindow", SetupTempChat)
 -- reposition battle.net popup over chat #1
 BNToastFrame:HookScript("OnShow", function(self)
 	self:ClearAllPoints()
-	if C.chat.background and TukuiChatBackgroundLeft then
-		self:Point("BOTTOMLEFT", TukuiChatBackgroundLeft, "TOPLEFT", 0, 6)
+	if C.chat.background and NevermoreChatBackgroundLeft then
+		self:Point("BOTTOMLEFT", NevermoreMicroMenu, "TOPLEFT", 0, T.buttonspacing)
 	else
-		self:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 0, 6)
+		self:Point("BOTTOMLEFT", NevermoreMicroMenu, "TOPLEFT", 0, T.buttonspacing)
 	end
 end)
 
@@ -254,7 +252,7 @@ T.SetDefaultChatPosition = function(frame)
 		local name = FCF_GetChatWindowInfo(id)
 		local fontSize = select(2, frame:GetFont())
 
-		-- well... tukui font under fontsize 12 is unreadable. Just a small protection!
+		-- well... Nevermore font under fontsize 12 is unreadable. Just a small protection!
 		if fontSize < 12 then		
 			FCF_SetChatWindowFontSize(nil, frame, 12)
 		else
@@ -263,11 +261,11 @@ T.SetDefaultChatPosition = function(frame)
 		
 		if id == 1 then
 			frame:ClearAllPoints()
-			frame:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 0, 6)
+			frame:Point("BOTTOMLEFT", "NevermoreChat", "BOTTOMLEFT", T.buttonspacing, 6)
 		elseif id == 4 and name == LOOT then
 			if not frame.isDocked then
 				frame:ClearAllPoints()
-				frame:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, 6)
+				frame:Point("BOTTOMLEFT", "NevermoreChat", "BOTTOMLEFT", T.buttonspacing, 6)
 				frame:SetJustifyH("RIGHT")
 			end
 		end

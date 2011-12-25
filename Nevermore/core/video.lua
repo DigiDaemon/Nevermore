@@ -32,7 +32,7 @@ elseif (T.screenwidth >= 3840) or (UIParent:GetWidth() + 1 > T.screenwidth) then
 	if width >= 4080 and width < 4320 then width = 1360 end 	                -- WXGA
 	if width >= 3840 and width < 4080 then width = 1224 end 	                -- SXGA & SXGA (UVGA) & WXGA & HDTV
 	
-	-- yep, now set Tukui to lower reso if screen #1 width < 1600
+	-- yep, now set Nevermore to lower reso if screen #1 width < 1600
 	if width < 1600 and not C.general.overridelowtohigh then
 		T.lowversion = true
 	end
@@ -78,7 +78,7 @@ end
 local Graphic = CreateFrame("Frame")
 Graphic:RegisterEvent("PLAYER_ENTERING_WORLD")
 Graphic:SetScript("OnEvent", function(self, event)
-	-- always enable uiscale for Tukui (needed)
+	-- always enable uiscale for Nevermore (needed)
 	local useUiScale = GetCVar("useUiScale")
 	if useUiScale ~= "1" then
 		SetCVar("useUiScale", 1)

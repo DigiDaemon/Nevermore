@@ -109,9 +109,9 @@ do
 end
 
 --[[ The main thing ]]--
-local TukuiRange = timer_Create(CreateFrame('Frame', 'TukuiRange'), UPDATE_DELAY)
+local NevermoreRange = timer_Create(CreateFrame('Frame', 'NevermoreRange'), UPDATE_DELAY)
 
-function TukuiRange:Load()
+function NevermoreRange:Load()
 	self:SetScript('OnEvent', self.OnEvent)
 	self:RegisterEvent('PLAYER_LOGIN')
 	self:RegisterEvent('PLAYER_LOGOUT')
@@ -119,7 +119,7 @@ end
 
 
 --[[ Frame Events ]]--
-function TukuiRange:OnEvent(event, ...)
+function NevermoreRange:OnEvent(event, ...)
 	local action = self[event]
 	if action then
 		action(self, event, ...)
@@ -127,17 +127,17 @@ function TukuiRange:OnEvent(event, ...)
 end
 
 --[[ Game Events ]]--
-function TukuiRange:PLAYER_LOGIN()
-	if not TukuiRange_COLORS then
-		TukuiRange_COLORS = {}
+function NevermoreRange:PLAYER_LOGIN()
+	if not NevermoreRange_COLORS then
+		NevermoreRange_COLORS = {}
 	end
-	self.colors = copyDefaults(TukuiRange_COLORS, self:GetDefaults())
+	self.colors = copyDefaults(NevermoreRange_COLORS, self:GetDefaults())
 
 	--add options loader
 	local f = CreateFrame('Frame', nil, InterfaceOptionsFrame)
 	f:SetScript('OnShow', function(self)
 		self:SetScript('OnShow', nil)
-		LoadAddOn('TukuiRange_Config')
+		LoadAddOn('NevermoreRange_Config')
 	end)
 
 	self.buttonsToUpdate = {}
@@ -147,22 +147,22 @@ function TukuiRange:PLAYER_LOGIN()
 	hooksecurefunc('ActionButton_Update', self.OnButtonUpdate)
 end
 
-function TukuiRange:PLAYER_LOGOUT()
-	removeDefaults(TukuiRange_COLORS, self:GetDefaults())
+function NevermoreRange:PLAYER_LOGOUT()
+	removeDefaults(NevermoreRange_COLORS, self:GetDefaults())
 end
 
 --[[ Actions ]]--
-function TukuiRange:Update()
+function NevermoreRange:Update()
 	return self:UpdateButtons(UPDATE_DELAY)
 end
 
-function TukuiRange:ForceColorUpdate()
+function NevermoreRange:ForceColorUpdate()
 	for button in pairs(self.buttonsToUpdate) do
-		TukuiRange.OnUpdateButtonUsable(button)
+		NevermoreRange.OnUpdateButtonUsable(button)
 	end
 end
 
-function TukuiRange:UpdateActive()
+function NevermoreRange:UpdateActive()
 	if next(self.buttonsToUpdate) then
 		if not self:Active() then
 			self:Start()
@@ -172,7 +172,7 @@ function TukuiRange:UpdateActive()
 	end
 end
 
-function TukuiRange:UpdateButtons(elapsed)
+function NevermoreRange:UpdateButtons(elapsed)
 	if next(self.buttonsToUpdate) then
 		for button in pairs(self.buttonsToUpdate) do
 			self:UpdateButton(button, elapsed)
@@ -182,12 +182,12 @@ function TukuiRange:UpdateButtons(elapsed)
 	return false
 end
 
-function TukuiRange:UpdateButton(button, elapsed)
-	TukuiRange.UpdateButtonUsable(button)
-	TukuiRange.UpdateFlash(button, elapsed)
+function NevermoreRange:UpdateButton(button, elapsed)
+	NevermoreRange.UpdateButtonUsable(button)
+	NevermoreRange.UpdateFlash(button, elapsed)
 end
 
-function TukuiRange:UpdateButtonStatus(button)
+function NevermoreRange:UpdateButtonStatus(button)
 	local action = ActionButton_GetPagedID(button)
 	if button:IsVisible() and action and HasAction(action) and ActionHasRange(action) then
 		self.buttonsToUpdate[button] = true
@@ -198,33 +198,33 @@ function TukuiRange:UpdateButtonStatus(button)
 end
 
 --[[ Button Hooking ]]--
-function TukuiRange.RegisterButton(button)
-	button:HookScript('OnShow', TukuiRange.OnButtonShow)
-	button:HookScript('OnHide', TukuiRange.OnButtonHide)
+function NevermoreRange.RegisterButton(button)
+	button:HookScript('OnShow', NevermoreRange.OnButtonShow)
+	button:HookScript('OnHide', NevermoreRange.OnButtonHide)
 	button:SetScript('OnUpdate', nil)
 
-	TukuiRange:UpdateButtonStatus(button)
+	NevermoreRange:UpdateButtonStatus(button)
 end
 
-function TukuiRange.OnButtonShow(button)
-	TukuiRange:UpdateButtonStatus(button)
+function NevermoreRange.OnButtonShow(button)
+	NevermoreRange:UpdateButtonStatus(button)
 end
 
-function TukuiRange.OnButtonHide(button)
-	TukuiRange:UpdateButtonStatus(button)
+function NevermoreRange.OnButtonHide(button)
+	NevermoreRange:UpdateButtonStatus(button)
 end
 
-function TukuiRange.OnUpdateButtonUsable(button)
-	button.TukuiRangeColor = nil
-	TukuiRange.UpdateButtonUsable(button)
+function NevermoreRange.OnUpdateButtonUsable(button)
+	button.NevermoreRangeColor = nil
+	NevermoreRange.UpdateButtonUsable(button)
 end
 
-function TukuiRange.OnButtonUpdate(button)
-	 TukuiRange:UpdateButtonStatus(button)
+function NevermoreRange.OnButtonUpdate(button)
+	 NevermoreRange:UpdateButtonStatus(button)
 end
 
 --[[ Range Coloring ]]--
-function TukuiRange.UpdateButtonUsable(button)
+function NevermoreRange.UpdateButtonUsable(button)
 	local action = ActionButton_GetPagedID(button)
 	local isUsable, notEnoughMana = IsUsableAction(action)
 
@@ -232,35 +232,35 @@ function TukuiRange.UpdateButtonUsable(button)
 	if isUsable then
 		--but out of range
 		if IsActionInRange(action) == 0 then
-			TukuiRange.SetButtonColor(button, 'oor')
+			NevermoreRange.SetButtonColor(button, 'oor')
 		--a holy power abilty, and we're less than 3 Holy Power
 		elseif PLAYER_IS_PALADIN and isHolyPowerAbility(action) and not(UnitPower('player', SPELL_POWER_HOLY_POWER) == 3 or UnitBuff('player', HAND_OF_LIGHT)) then
-			TukuiRange.SetButtonColor(button, 'ooh')
+			NevermoreRange.SetButtonColor(button, 'ooh')
 		--in range
 		else
-			TukuiRange.SetButtonColor(button, 'normal')
+			NevermoreRange.SetButtonColor(button, 'normal')
 		end
 	--out of mana
 	elseif notEnoughMana then
-		TukuiRange.SetButtonColor(button, 'oom')
+		NevermoreRange.SetButtonColor(button, 'oom')
 	--unusable
 	else
-		button.TukuiRangeColor = 'unusuable'
+		button.NevermoreRangeColor = 'unusuable'
 	end
 end
 
-function TukuiRange.SetButtonColor(button, colorType)
-	if button.TukuiRangeColor ~= colorType then
-		button.TukuiRangeColor = colorType
+function NevermoreRange.SetButtonColor(button, colorType)
+	if button.NevermoreRangeColor ~= colorType then
+		button.NevermoreRangeColor = colorType
 
-		local r, g, b = TukuiRange:GetColor(colorType)
+		local r, g, b = NevermoreRange:GetColor(colorType)
 
 		local icon =  _G[button:GetName() .. 'Icon']
 		icon:SetVertexColor(r, g, b)
 	end
 end
 
-function TukuiRange.UpdateFlash(button, elapsed)
+function NevermoreRange.UpdateFlash(button, elapsed)
 	if ActionButton_IsFlashing(button) then
 		local flashtime = button.flashtime - elapsed
 
@@ -285,7 +285,7 @@ end
 
 
 --[[ Configuration ]]--
-function TukuiRange:GetDefaults()
+function NevermoreRange:GetDefaults()
 	return {
 		normal = {1, 1, 1},
 		oor = {1, 0.1, 0.1},
@@ -294,14 +294,14 @@ function TukuiRange:GetDefaults()
 	}
 end
 
-function TukuiRange:Reset()
-	TukuiRange_COLORS = {}
-	self.colors = copyDefaults(TukuiRange_COLORS, self:GetDefaults())
+function NevermoreRange:Reset()
+	NevermoreRange_COLORS = {}
+	self.colors = copyDefaults(NevermoreRange_COLORS, self:GetDefaults())
 
 	self:ForceColorUpdate()
 end
 
-function TukuiRange:SetColor(index, r, g, b)
+function NevermoreRange:SetColor(index, r, g, b)
 	local color = self.colors[index]
 	color[1] = r
 	color[2] = g
@@ -310,10 +310,10 @@ function TukuiRange:SetColor(index, r, g, b)
 	self:ForceColorUpdate()
 end
 
-function TukuiRange:GetColor(index)
+function NevermoreRange:GetColor(index)
 	local color = self.colors[index]
 	return color[1], color[2], color[3]
 end
 
 --[[ Load The Thing ]]--
-TukuiRange:Load()
+NevermoreRange:Load()

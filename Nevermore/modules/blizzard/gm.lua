@@ -4,25 +4,25 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 ------------------------------------------------------------------------
 
 -- create our moving area
-local TukuiGMFrameAnchor = CreateFrame("Button", "TukuiGMFrameAnchor", UIParent)
-TukuiGMFrameAnchor:SetFrameStrata("TOOLTIP")
-TukuiGMFrameAnchor:SetFrameLevel(20)
-TukuiGMFrameAnchor:SetHeight(40)
-TukuiGMFrameAnchor:SetWidth(TicketStatusFrameButton:GetWidth())
-TukuiGMFrameAnchor:SetClampedToScreen(true)
-TukuiGMFrameAnchor:SetMovable(true)
-TukuiGMFrameAnchor:SetTemplate("Default")
-TukuiGMFrameAnchor:SetBackdropBorderColor(1,0,0,1)
-TukuiGMFrameAnchor:SetBackdropColor(unpack(C.media.backdropcolor))
-TukuiGMFrameAnchor:Point("TOPLEFT", 4, -4)
-TukuiGMFrameAnchor.text = T.SetFontString(TukuiGMFrameAnchor, C.media.uffont, 12)
-TukuiGMFrameAnchor.text:SetPoint("CENTER")
-TukuiGMFrameAnchor.text:SetText(L.move_gmframe)
-TukuiGMFrameAnchor.text:SetParent(TukuiGMFrameAnchor)
-TukuiGMFrameAnchor:Hide()
+local NevermoreGMFrameAnchor = CreateFrame("Button", "NevermoreGMFrameAnchor", UIParent)
+NevermoreGMFrameAnchor:SetFrameStrata("TOOLTIP")
+NevermoreGMFrameAnchor:SetFrameLevel(20)
+NevermoreGMFrameAnchor:SetHeight(40)
+NevermoreGMFrameAnchor:SetWidth(TicketStatusFrameButton:GetWidth())
+NevermoreGMFrameAnchor:SetClampedToScreen(true)
+NevermoreGMFrameAnchor:SetMovable(true)
+NevermoreGMFrameAnchor:SetTemplate("Default")
+NevermoreGMFrameAnchor:SetBackdropBorderColor(1,0,0,1)
+NevermoreGMFrameAnchor:SetBackdropColor(unpack(C.media.backdropcolor))
+NevermoreGMFrameAnchor:Point("TOPLEFT", 4, -4)
+NevermoreGMFrameAnchor.text = T.SetFontString(NevermoreGMFrameAnchor, C.media.uffont, 12)
+NevermoreGMFrameAnchor.text:SetPoint("CENTER")
+NevermoreGMFrameAnchor.text:SetText(L.move_gmframe)
+NevermoreGMFrameAnchor.text:SetParent(NevermoreGMFrameAnchor)
+NevermoreGMFrameAnchor:Hide()
 
 TicketStatusFrame:ClearAllPoints()
-TicketStatusFrame:SetPoint("TOP", TukuiGMFrameAnchor, "TOP")
+TicketStatusFrame:SetPoint("TOP", NevermoreGMFrameAnchor, "TOP")
 
 ------------------------------------------------------------------------
 --	GM toggle command

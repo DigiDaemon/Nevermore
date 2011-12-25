@@ -1,5 +1,5 @@
 local T, C, L = unpack(select(2, ...))
-if not TukuiInfoRight then return end
+if not NevermoreInfoRight then return end
 
 --[[local aggroColors = {
 	[1] = {12/255, 151/255,  15/255},
@@ -7,26 +7,26 @@ if not TukuiInfoRight then return end
 	[3] = {163/255,  24/255,  24/255},
 }]]
 
-local TukuiThreatBar = CreateFrame("StatusBar", "TukuiThreatBar", TukuiInfoRight)
-TukuiThreatBar:Point("TOPLEFT", 2, -2)
-TukuiThreatBar:Point("BOTTOMRIGHT", -2, 2)
+local NevermoreThreatBar = CreateFrame("StatusBar", "NevermoreThreatBar", NevermoreInfoRight)
+NevermoreThreatBar:Point("TOPLEFT", 2, -2)
+NevermoreThreatBar:Point("BOTTOMRIGHT", -2, 2)
 
-TukuiThreatBar:SetStatusBarTexture(C.media.normTex)
-TukuiThreatBar:GetStatusBarTexture():SetHorizTile(false)
-TukuiThreatBar:SetBackdrop({bgFile = C.media.blank})
-TukuiThreatBar:SetBackdropColor(0, 0, 0, 0)
-TukuiThreatBar:SetMinMaxValues(0, 100)
+NevermoreThreatBar:SetStatusBarTexture(C.media.normTex)
+NevermoreThreatBar:GetStatusBarTexture():SetHorizTile(false)
+NevermoreThreatBar:SetBackdrop({bgFile = C.media.blank})
+NevermoreThreatBar:SetBackdropColor(0, 0, 0, 0)
+NevermoreThreatBar:SetMinMaxValues(0, 100)
 
-TukuiThreatBar.text = T.SetFontString(TukuiThreatBar, C.media.font, 12)
-TukuiThreatBar.text:Point("RIGHT", TukuiThreatBar, "RIGHT", -30, 0)
+NevermoreThreatBar.text = T.SetFontString(NevermoreThreatBar, C.media.font, 12)
+NevermoreThreatBar.text:Point("RIGHT", NevermoreThreatBar, "RIGHT", -T.buttonspacing, 0)
 
-TukuiThreatBar.Title = T.SetFontString(TukuiThreatBar, C.media.font, 12)
-TukuiThreatBar.Title:SetText(L.unitframes_ouf_threattext)
-TukuiThreatBar.Title:SetPoint("LEFT", TukuiThreatBar, "LEFT", T.Scale(30), 0)
+NevermoreThreatBar.Title = T.SetFontString(NevermoreThreatBar, C.media.font, 12)
+NevermoreThreatBar.Title:SetText(L.unitframes_ouf_threattext)
+NevermoreThreatBar.Title:SetPoint("LEFT", NevermoreThreatBar, "LEFT", T.buttonspacing, 0)
 	  
-TukuiThreatBar.bg = TukuiThreatBar:CreateTexture(nil, 'BORDER')
-TukuiThreatBar.bg:SetAllPoints(TukuiThreatBar)
-TukuiThreatBar.bg:SetTexture(0.1,0.1,0.1)
+NevermoreThreatBar.bg = NevermoreThreatBar:CreateTexture(nil, 'BORDER')
+NevermoreThreatBar.bg:SetAllPoints(NevermoreThreatBar)
+NevermoreThreatBar.bg:SetTexture(C["general"].backdropcolor)
 
 local function OnEvent(self, event, ...)
 	local party = GetNumPartyMembers()
@@ -71,12 +71,12 @@ local function OnUpdate(self, event, unit)
 	end
 end
 
-TukuiThreatBar:RegisterEvent("PLAYER_ENTERING_WORLD")
-TukuiThreatBar:RegisterEvent("PLAYER_REGEN_ENABLED")
-TukuiThreatBar:RegisterEvent("PLAYER_REGEN_DISABLED")
-TukuiThreatBar:SetScript("OnEvent", OnEvent)
-TukuiThreatBar:SetScript("OnUpdate", OnUpdate)
-TukuiThreatBar.unit = "player"
-TukuiThreatBar.tar = TukuiThreatBar.unit.."target"
-TukuiThreatBar.Colors = aggroColors
-TukuiThreatBar:SetAlpha(0)
+NevermoreThreatBar:RegisterEvent("PLAYER_ENTERING_WORLD")
+NevermoreThreatBar:RegisterEvent("PLAYER_REGEN_ENABLED")
+NevermoreThreatBar:RegisterEvent("PLAYER_REGEN_DISABLED")
+NevermoreThreatBar:SetScript("OnEvent", OnEvent)
+NevermoreThreatBar:SetScript("OnUpdate", OnUpdate)
+NevermoreThreatBar.unit = "player"
+NevermoreThreatBar.tar = NevermoreThreatBar.unit.."target"
+NevermoreThreatBar.Colors = aggroColors
+NevermoreThreatBar:SetAlpha(0)

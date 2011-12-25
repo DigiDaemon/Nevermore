@@ -7,18 +7,23 @@ SlashCmdList.ENABLE_ADDON = function(addon) local _, _, _, _, _, reason, _ = Get
 SLASH_ENABLE_ADDON1 = "/enable"
 
 -- switch to heal layout via a command
-SLASH_TUKUIHEAL1 = "/heal"
-SlashCmdList.TUKUIHEAL = function()
-	DisableAddOn("Tukui_Raid")
-	EnableAddOn("Tukui_Raid_Healing")
+SLASH_NevermoreHEAL1 = "/heal"
+SlashCmdList.NevermoreHEAL = function()
+NevermoreDataPerChar.role = "heal"
 	ReloadUI()
 end
 
 -- switch to dps layout via a command
-SLASH_TUKUIDPS1 = "/dps"
-SlashCmdList.TUKUIDPS = function()
-	DisableAddOn("Tukui_Raid_Healing")
-	EnableAddOn("Tukui_Raid")
+SLASH_NevermoreDPS1 = "/dps"
+SlashCmdList.NevermoreDPS = function()
+NevermoreDataPerChar.role = "dps"
+	ReloadUI()
+end
+
+-- switch to tank layout via a command
+SLASH_NevermoreTANK1 = "/tank"
+SlashCmdList.NevermoreTANK = function()
+NevermoreDataPerChar.role = "tank"
 	ReloadUI()
 end
 
@@ -32,7 +37,7 @@ SLASH_RCSLASH1 = "/rc"
 
 SlashCmdList["GROUPDISBAND"] = function()
 	if UnitIsRaidOfficer("player") then
-		StaticPopup_Show("TUKUIDISBAND_RAID")
+		StaticPopup_Show("NevermoreDISBAND_RAID")
 	end
 end
 SLASH_GROUPDISBAND1 = '/rd'

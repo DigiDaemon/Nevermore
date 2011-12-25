@@ -1,7 +1,7 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
 ---------------------------------------------------------------------
--- original by haste, edited for tukui :)
+-- original by haste, edited for Nevermore :)
 ---------------------------------------------------------------------
 
 local _, settings = ...
@@ -128,7 +128,7 @@ frame:SetScript('OnEvent', function(self, event, ...)
 end)
 
 function frame:ADDON_LOADED(addon)
-	if(addon == 'Tukui') then
+	if(addon == 'Nevermore') then
 		UIParent:UnregisterEvent'MIRROR_TIMER_START'
 
 		self:UnregisterEvent'ADDON_LOADED'

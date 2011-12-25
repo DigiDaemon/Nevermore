@@ -6,14 +6,14 @@ local media = C["media"]
 local securehandler = CreateFrame("Frame", nil, nil, "SecureHandlerBaseTemplate")
 local replace = string.gsub
 
-function T.StyleActionBarButton(self)
+local function style(self)
 	local name = self:GetName()
 	
 	--> fixing a taint issue while changing totem flyout button in combat.
 	if name:match("MultiCast") then return end
 	
 	--> don't skin the boss encounter extra button to match texture (4.3 patch)
-	--> http://www.tukui.org/storage/viewer.php?id=913811extrabar.jpg
+	--> http://www.Nevermore.org/storage/viewer.php?id=913811extrabar.jpg
 	if name:match("ExtraActionButton") then return end
 	
 	local action = self.action
@@ -84,7 +84,7 @@ function T.StyleActionBarButton(self)
 	end 
 end
 
-function T.StyleActionBarPetAndShiftButton(normal, button, icon, name, pet)
+local function stylesmallbutton(normal, button, icon, name, pet)
 	button:SetNormalTexture("")
 	
 	-- bug fix when moving spell from bar
@@ -135,7 +135,7 @@ function T.StyleShift()
 		local button  = _G[name]
 		local icon  = _G[name.."Icon"]
 		local normal  = _G[name.."NormalTexture"]
-		T.StyleActionBarPetAndShiftButton(normal, button, icon, name)
+		stylesmallbutton(normal, button, icon, name)
 	end
 end
 
@@ -145,11 +145,11 @@ function T.StylePet()
 		local button  = _G[name]
 		local icon  = _G[name.."Icon"]
 		local normal  = _G[name.."NormalTexture2"]
-		T.StyleActionBarPetAndShiftButton(normal, button, icon, name, true)
+		stylesmallbutton(normal, button, icon, name, true)
 	end
 end
 
-function T.UpdateActionBarHotKey(self, actionButtonType)
+local function updatehotkey(self, actionButtonType)
 	local hotkey = _G[self:GetName() .. 'HotKey']
 	local text = hotkey:GetText()
 	
@@ -198,7 +198,7 @@ local function SetupFlyoutButton()
 	for i=1, buttons do
 		--prevent error if you don't have max ammount of buttons
 		if _G["SpellFlyoutButton"..i] then
-			T.StyleActionBarButton(_G["SpellFlyoutButton"..i])
+			style(_G["SpellFlyoutButton"..i])
 					
 			if _G["SpellFlyoutButton"..i]:GetChecked() then
 				_G["SpellFlyoutButton"..i]:SetChecked(nil)
@@ -210,7 +210,7 @@ SpellFlyout:HookScript("OnShow", SetupFlyoutButton)
 
  
 --Hide the Mouseover texture and attempt to find the ammount of buttons to be skinned
-function T.StyleActionBarFlyout(self)
+local function styleflyout(self)
 	if not self.FlyoutArrow then return end
 	
 	self.FlyoutBorder:SetAlpha(0)
@@ -256,7 +256,7 @@ function T.StyleActionBarFlyout(self)
 	end
 end
 
--- rework the mouseover, pushed, checked texture to match Tukui theme.
+-- rework the mouseover, pushed, checked texture to match Nevermore theme.
 do
 	for i = 1, 12 do
 		_G["ActionButton"..i]:StyleButton(true)
@@ -272,9 +272,9 @@ do
 	end
 end
 
-hooksecurefunc("ActionButton_Update", T.StyleActionBarButton)
-hooksecurefunc("ActionButton_UpdateHotkeys", T.UpdateActionBarHotKey)
-hooksecurefunc("ActionButton_UpdateFlyout", T.StyleActionBarFlyout)
+hooksecurefunc("ActionButton_Update", style)
+hooksecurefunc("ActionButton_UpdateHotkeys", updatehotkey)
+hooksecurefunc("ActionButton_UpdateFlyout", styleflyout)
 
 ---------------------------------------------------------------
 -- Totem Style, they need a lot more work than "normal" buttons

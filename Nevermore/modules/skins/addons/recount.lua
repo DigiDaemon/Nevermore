@@ -1,8 +1,6 @@
 ﻿if not IsAddOnLoaded("Recount") then return end
 
 local T, C, L = unpack(select(2, ...))
-if not C.general.recountreskin then return end
-
 local Recount = _G.Recount
 
 local function SkinFrame(frame)

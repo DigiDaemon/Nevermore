@@ -5,7 +5,7 @@ local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Lo
 
 if not C["datatext"].system or C["datatext"].system == 0 then return end
 
-local Stat = CreateFrame("Frame", "TukuiStatSystem")
+local Stat = CreateFrame("Frame", "NevermoreStatSystem")
 Stat:RegisterEvent("PLAYER_ENTERING_WORLD")
 Stat:SetFrameStrata("BACKGROUND")
 Stat:SetFrameLevel(3)
@@ -15,7 +15,7 @@ Stat.tooltip = false
 Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
-local Text  = Stat:CreateFontString("TukuiStatSystemText", "OVERLAY")
+local Text  = Stat:CreateFontString("NevermoreStatSystemText", "OVERLAY")
 Text:SetFont(C.media.font, C["datatext"].fontsize)
 T.PP(C["datatext"].system, Text)
 

@@ -5,7 +5,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 --------------------------------------------------------------------
 
 if C["datatext"].fps_ms and C["datatext"].fps_ms > 0 then
-	local Stat = CreateFrame("Frame", "TukuiStatFPS")
+	local Stat = CreateFrame("Frame", "NevermoreStatFPS")
 	Stat:SetFrameStrata("BACKGROUND")	
 	Stat:SetFrameLevel(3)
 	Stat:EnableMouse(true)
@@ -13,7 +13,7 @@ if C["datatext"].fps_ms and C["datatext"].fps_ms > 0 then
 	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
-	local Text  = Stat:CreateFontString("TukuiStatFPSText", "OVERLAY")
+	local Text  = Stat:CreateFontString("NevermoreStatFPSText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
 	T.PP(C["datatext"].fps_ms, Text)
 

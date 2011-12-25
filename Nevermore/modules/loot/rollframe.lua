@@ -186,7 +186,7 @@ local function CreateRollFrame()
 end
 
 
-local anchor = CreateFrame("Button", "TukuiRollAnchor", UIParent)
+local anchor = CreateFrame("Button", "NevermoreRollAnchor", UIParent)
 anchor:Width(300) 
 anchor:Height(22)
 anchor:SetBackdrop(backdrop)
@@ -334,7 +334,7 @@ end
 
 anchor:RegisterEvent("ADDON_LOADED")
 anchor:SetScript("OnEvent", function(frame, event, addon)
-	if addon ~= "Tukui" then return end
+	if addon ~= "Nevermore" then return end
 
 	anchor:UnregisterEvent("ADDON_LOADED")
 	anchor:RegisterEvent("START_LOOT_ROLL")

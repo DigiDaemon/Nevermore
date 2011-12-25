@@ -134,8 +134,8 @@ local function LoadSkin()
 
 		if event == "PLAYER_LOGIN" then
 			if not miniWorldMap then
-				WorldMapFrame:Show()
-				WorldMapFrame:Hide()
+				ToggleFrame(WorldMapFrame)
+				ToggleFrame(WorldMapFrame)
 			end
 		elseif event == "PLAYER_REGEN_DISABLED" then
 			WorldMapFrameSizeDownButton:Disable()
@@ -263,4 +263,4 @@ local function LoadSkin()
 	end)
 end
 
-tinsert(T.SkinFuncs["Tukui"], LoadSkin)
+tinsert(T.SkinFuncs["Nevermore"], LoadSkin)

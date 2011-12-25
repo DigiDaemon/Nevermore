@@ -4,7 +4,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 if IsAddOnLoaded("Capping") then return end
 
 -- BG TINY MAP (BG, mining, etc)
-local tinymap = CreateFrame("Frame", "TukuiZoneMap", UIParent)
+local tinymap = CreateFrame("Frame", "NevermoreZoneMap", UIParent)
 tinymap:SetPoint("CENTER")
 tinymap:SetSize(223, 150)
 tinymap:EnableMouse(true)

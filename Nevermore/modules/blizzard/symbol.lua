@@ -1,10 +1,10 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
 --[[ 	
-		original code by alza, edited by tukz for tukui
+		original code by alza, edited by tukz for Nevermore
 --]]
 
-local menuFrame = CreateFrame("Frame", "TukuiMarkingFrame", UIParent, "UIDropDownMenuTemplate")
+local menuFrame = CreateFrame("Frame", "NevermoreMarkingFrame", UIParent, "UIDropDownMenuTemplate")
 local menuList = {
     {text = L.symbol_CLEAR,
     func = function() SetRaidTarget("target", 0) end},

@@ -1,0 +1,16 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+<Script file="plugins\oUF_AuraTracker.lua"/>
+<Script file="plugins\oUF_AuraWatch.lua"/>
+<Script file="plugins\oUF_ClassIcons.lua"/>
+<Script file="plugins\oUF_CombatFeedback.lua"/>
+<Script file="plugins\oUF_DebuffHighlight.lua"/>
+<Script file="plugins\oUF_Experience.lua"/>
+<Script file="plugins\oUF_NecroStrike.lua"/>
+<Script file="plugins\oUF_RaidDebuffs.lua"/>
+<Script file="plugins\oUF_Reputation.lua"/>
+<Script file="plugins\oUF_Smooth.lua"/>
+<Script file="plugins\oUF_Talents.lua"/>
+<Script file="plugins\oUF_TotemBar.lua"/>
+<Script file="plugins\oUF_Trinkets.lua"/>
+<Script file="plugins\oUF_WeakenedSoul.lua"/>
+</Ui>

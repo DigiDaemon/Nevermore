@@ -6,17 +6,17 @@ if not C["actionbar"].enable == true then return end
 ---------------------------------------------------------------------------
 
 -- used for anchor totembar or shapeshiftbar
-local TukuiShift = CreateFrame("Frame","TukuiShiftBar",UIParent)
-TukuiShift:SetPoint("TOPLEFT", 4, -46)
-TukuiShift:SetWidth((T.petbuttonsize * 5) + (T.petbuttonsize * 4))
-TukuiShift:SetHeight(10)
-TukuiShift:SetFrameStrata("MEDIUM")
-TukuiShift:SetMovable(true)
-TukuiShift:SetClampedToScreen(true)
+local NevermoreShift = CreateFrame("Frame","NevermoreShiftBar",NevermoreStance)
+NevermoreShift:SetPoint("BOTTOM", 0, 0)
+NevermoreShift:SetWidth(NevermoreStance:GetWidth())
+NevermoreShift:SetHeight(NevermoreStance:GetHeight())
+NevermoreShift:SetFrameStrata("MEDIUM")
+NevermoreShift:SetMovable(true)
+NevermoreShift:SetClampedToScreen(true)
 
 -- shapeshift command to move totem or shapeshift in-game
-local ssmover = CreateFrame("Frame", "TukuiShapeShiftHolder", UIParent)
-ssmover:SetAllPoints(TukuiShift)
+local ssmover = CreateFrame("Frame", "NevermoreShapeShiftHolder", NevermoreStance)
+ssmover:SetAllPoints(NevermoreStance)
 ssmover:SetTemplate("Default")
 ssmover:SetFrameStrata("HIGH")
 ssmover:SetBackdropBorderColor(1,0,0)
@@ -26,12 +26,12 @@ ssmover.text:SetPoint("CENTER")
 ssmover.text:SetText(L.move_shapeshift)
 
 -- hide it if not needed and stop executing code
-if C.actionbar.hideshapeshift then TukuiShift:Hide() return end
+if C.actionbar.hideshapeshift then NevermoreShift:Hide() return end
 
 -- create the shapeshift bar if we enabled it
-local bar = CreateFrame("Frame", "TukuiShapeShift", TukuiShift, "SecureHandlerStateTemplate")
+local bar = CreateFrame("Frame", "NevermoreShapeShift", NevermoreShift, "SecureHandlerStateTemplate")
 bar:ClearAllPoints()
-bar:SetAllPoints(TukuiShift)
+bar:SetAllPoints(NevermoreShift)
 
 local States = {
 	["DRUID"] = "show",
@@ -60,10 +60,10 @@ bar:SetScript("OnEvent", function(self, event, ...)
 			button:SetParent(self)
 			button:SetFrameStrata("LOW")
 			if i == 1 then
-				button:Point("BOTTOMLEFT", TukuiShift, 0, 24)
+				button:Point("BOTTOMLEFT", NevermoreShift, 0, T.buttonspacing)
 			else
 				local previous = _G["ShapeshiftButton"..i-1]
-				button:Point("LEFT", previous, "RIGHT", T.buttonspacing, 0)
+				button:Point("BOTTOM", previous, "TOP", 0, T.buttonspacing)
 			end
 			local _, name = GetShapeshiftFormInfo(i)
 			if name then
@@ -85,10 +85,10 @@ bar:SetScript("OnEvent", function(self, event, ...)
 				button:Hide()
 			end
 		end
-		T.TukuiShiftBarUpdate()
+		T.NevermoreShiftBarUpdate()
 	elseif event == "PLAYER_ENTERING_WORLD" then
 		T.StyleShift()
 	else
-		T.TukuiShiftBarUpdate()
+		T.NevermoreShiftBarUpdate()
 	end
 end)

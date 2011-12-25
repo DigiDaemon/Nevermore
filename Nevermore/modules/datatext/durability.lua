@@ -4,7 +4,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 --------------------------------------------------------------------
 	
 if C["datatext"].dur and C["datatext"].dur > 0 then
-	local Stat = CreateFrame("Frame", "TukuiStatDurability")
+	local Stat = CreateFrame("Frame", "NevermoreStatDurability")
 	Stat:EnableMouse(true)
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
@@ -12,14 +12,14 @@ if C["datatext"].dur and C["datatext"].dur > 0 then
 	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
-	local Text  = Stat:CreateFontString("TukuiStatDurabilityText", "OVERLAY")
+	local Text  = Stat:CreateFontString("NevermoreStatDurabilityText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
 	T.PP(C["datatext"].dur, Text)
 
+	local Total = 0
+	local current, max
+
 	local function OnEvent(self)
-		local Total = 0
-		local current, max
-		
 		for i = 1, 11 do
 			if GetInventoryItemLink("player", L.Slots[i][1]) ~= nil then
 				current, max = GetInventoryItemDurability(L.Slots[i][1])
@@ -53,7 +53,6 @@ if C["datatext"].dur and C["datatext"].dur > 0 then
 			GameTooltip:ClearLines()
 			for i = 1, 11 do
 				if L.Slots[i][3] ~= 1000 then
-					local green, red
 					green = L.Slots[i][3]*2
 					red = 1 - green
 					GameTooltip:AddDoubleLine(L.Slots[i][2], floor(L.Slots[i][3]*100).."%",1 ,1 , 1, red + 1, green, 0)

@@ -90,4 +90,4 @@ local function LoadSkin()
 	T.SkinScrollBar(RaidFinderQueueFrameScrollFrame)
 end
 
-tinsert(T.SkinFuncs["Tukui"], LoadSkin)
+tinsert(T.SkinFuncs["Nevermore"], LoadSkin)

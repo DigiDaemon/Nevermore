@@ -12,7 +12,7 @@ local EOTS = 482
 local TBFG = 736
 local AB = 461
 
-local bgframe = TukuiInfoLeftBattleGround
+local bgframe = NevermoreInfoLeftBattleGround
 bgframe:SetScript("OnEnter", function(self)
 	local numScores = GetNumBattlefieldScores()
 	for i=1, numScores do
@@ -60,26 +60,26 @@ bgframe:SetScript("OnEnter", function(self)
 end) 
 bgframe:SetScript("OnLeave", function(self) GameTooltip:Hide() end)
 
-local Stat = CreateFrame("Frame", "TukuiStatBattleGround", UIParent)
+local Stat = CreateFrame("Frame", "NevermoreStatBattleGround", UIParent)
 Stat:EnableMouse(true)
 Stat.Option = C.datatext.battleground
 Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
-local Text1  = TukuiInfoLeftBattleGround:CreateFontString("TukuiStatBattleGroundText1", "OVERLAY")
+local Text1  = NevermoreInfoLeftBattleGround:CreateFontString("NevermoreStatBattleGroundText1", "OVERLAY")
 Text1:SetFont(C.media.font, C["datatext"].fontsize)
 Text1:SetPoint("LEFT", 30, 0.5)
-Text1:SetHeight(TukuiInfoLeft:GetHeight())
+Text1:SetHeight(NevermoreInfoLeft:GetHeight())
 
-local Text2  = TukuiInfoLeftBattleGround:CreateFontString("TukuiStatBattleGroundText2", "OVERLAY")
+local Text2  = NevermoreInfoLeftBattleGround:CreateFontString("NevermoreStatBattleGroundText2", "OVERLAY")
 Text2:SetFont(C.media.font, C["datatext"].fontsize)
 Text2:SetPoint("CENTER", 0, 0.5)
-Text2:SetHeight(TukuiInfoLeft:GetHeight())
+Text2:SetHeight(NevermoreInfoLeft:GetHeight())
 
-local Text3  = TukuiInfoLeftBattleGround:CreateFontString("TukuiStatBattleGroundText3", "OVERLAY")
+local Text3  = NevermoreInfoLeftBattleGround:CreateFontString("NevermoreStatBattleGroundText3", "OVERLAY")
 Text3:SetFont(C.media.font, C["datatext"].fontsize)
 Text3:SetPoint("RIGHT", -30, 0.5)
-Text3:SetHeight(TukuiInfoLeft:GetHeight())
+Text3:SetHeight(NevermoreInfoLeft:GetHeight())
 
 local int = 2
 local function Update(self, t)

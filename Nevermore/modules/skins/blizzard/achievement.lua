@@ -155,7 +155,7 @@ local function LoadSkin()
 		--Initiate fucked up method of creating a backdrop
 		frame.bg1 = frame:CreateTexture(nil, "BACKGROUND")
 		frame.bg1:SetDrawLayer("BACKGROUND", 4)
-		frame.bg1:SetTexture(C["media"].normTex) --Default TukUI users this is normTex, glossTex doesn't exist
+		frame.bg1:SetTexture(C["media"].normTex) --Default Nevermore users this is normTex, glossTex doesn't exist
 		frame.bg1:SetVertexColor(unpack(C["media"].backdropcolor))
 		frame.bg1:Point("TOPLEFT", T.mult*4, -T.mult*4)
 		frame.bg1:Point("BOTTOMRIGHT", -T.mult*4, T.mult*4)				
@@ -236,7 +236,7 @@ local function LoadSkin()
 			--Initiate fucked up method of creating a backdrop
 			_G[frame].bg1 = _G[frame]:CreateTexture(nil, "BACKGROUND")
 			_G[frame].bg1:SetDrawLayer("BACKGROUND", 4)
-			_G[frame].bg1:SetTexture(C["media"].glossTex) --Default TukUI users this is normTex, glossTex doesn't exist
+			_G[frame].bg1:SetTexture(C["media"].glossTex) --Default Nevermore users this is normTex, glossTex doesn't exist
 			_G[frame].bg1:SetVertexColor(unpack(C["media"].backdropcolor))
 			_G[frame].bg1:Point("TOPLEFT", T.mult*4, -T.mult*4)
 			_G[frame].bg1:Point("BOTTOMRIGHT", -T.mult*4, T.mult*4)				

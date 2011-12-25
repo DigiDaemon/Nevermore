@@ -3,7 +3,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 -- move vehicle indicator
 --------------------------------------------------------------------------
 
-local anchor = CreateFrame("Frame", "TukuiVehicleAnchor", UIParent)
+local anchor = CreateFrame("Frame", "NevermoreVehicleAnchor", UIParent)
 anchor:Point("BOTTOM", UIParent, "BOTTOM", 0, 208)
 anchor:Size(120, 20)
 anchor:SetMovable(true)

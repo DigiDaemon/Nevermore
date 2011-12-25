@@ -1,6 +1,6 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
-local AchievementHolder = CreateFrame("Frame", "TukuiAchievementHolder", UIParent)
+local AchievementHolder = CreateFrame("Frame", "NevermoreAchievementHolder", UIParent)
 AchievementHolder:Width(180)
 AchievementHolder:Height(20)
 AchievementHolder:SetPoint("CENTER", UIParent, "CENTER", 0, 170)

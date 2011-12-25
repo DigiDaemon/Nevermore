@@ -81,5 +81,5 @@ local function LoadRaidSkin()
 	end
 end
 
-tinsert(T.SkinFuncs["Tukui"], LoadSkin)
+tinsert(T.SkinFuncs["Nevermore"], LoadSkin)
 T.SkinFuncs["Blizzard_RaidUI"] = LoadRaidSkin

@@ -4,7 +4,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 --------------------------------------------------------------------
 
 if C["datatext"].gold and C["datatext"].gold > 0 then
-	local Stat = CreateFrame("Frame", "TukuiStatGold")
+	local Stat = CreateFrame("Frame", "NevermoreStatGold")
 	Stat:EnableMouse(true)
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
@@ -12,7 +12,7 @@ if C["datatext"].gold and C["datatext"].gold > 0 then
 	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
-	local Text  = Stat:CreateFontString("TukuiStatGoldText", "OVERLAY")
+	local Text  = Stat:CreateFontString("NevermoreStatGoldText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
 	T.PP(C["datatext"].gold, Text)
 
@@ -60,10 +60,10 @@ if C["datatext"].gold and C["datatext"].gold > 0 then
 		self:SetAllPoints(Text)
 
 		local myPlayerName  = UnitName("player");				
-		if (TukuiData == nil) then TukuiData = {}; end
-		if (TukuiData.gold == nil) then TukuiData.gold = {}; end
-		if (TukuiData.gold[myPlayerRealm]==nil) then TukuiData.gold[myPlayerRealm]={}; end
-		TukuiData.gold[myPlayerRealm][myPlayerName] = GetMoney();
+		if (NevermoreData == nil) then NevermoreData = {}; end
+		if (NevermoreData.gold == nil) then NevermoreData.gold = {}; end
+		if (NevermoreData.gold[myPlayerRealm]==nil) then NevermoreData.gold[myPlayerRealm]={}; end
+		NevermoreData.gold[myPlayerRealm][myPlayerName] = GetMoney();
 				
 		OldMoney = NewMoney
 	end
@@ -93,7 +93,7 @@ if C["datatext"].gold and C["datatext"].gold > 0 then
 		
 			local totalGold = 0				
 			GameTooltip:AddLine(L.datatext_character)			
-			local thisRealmList = TukuiData.gold[myPlayerRealm];
+			local thisRealmList = NevermoreData.gold[myPlayerRealm];
 			for k,v in pairs(thisRealmList) do
 				GameTooltip:AddDoubleLine(k, FormatTooltipMoney(v), 1, 1, 1, 1, 1, 1)
 				totalGold=totalGold+v;
@@ -121,9 +121,9 @@ if C["datatext"].gold and C["datatext"].gold > 0 then
 		local myPlayerRealm = GetCVar("realmName");
 		local myPlayerName  = UnitName("player");
 		
-		TukuiData.gold = {}
-		TukuiData.gold[myPlayerRealm]={}
-		TukuiData.gold[myPlayerRealm][myPlayerName] = GetMoney();
+		NevermoreData.gold = {}
+		NevermoreData.gold[myPlayerRealm]={}
+		NevermoreData.gold[myPlayerRealm][myPlayerName] = GetMoney();
 	end
 	SLASH_RESETGOLD1 = "/resetgold"
 	SlashCmdList["RESETGOLD"] = RESETGOLD

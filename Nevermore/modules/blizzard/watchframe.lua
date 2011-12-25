@@ -1,57 +1,57 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
-local TukuiWatchFrame = CreateFrame("Frame", "TukuiWatchFrame", UIParent)
-TukuiWatchFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
+local NevermoreWatchFrame = CreateFrame("Frame", "NevermoreWatchFrame", UIParent)
+NevermoreWatchFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 
 -- to be compatible with blizzard option
 local wideFrame = GetCVar("watchFrameWidth")
 
 -- create our moving area
-local TukuiWatchFrameAnchor = CreateFrame("Button", "TukuiWatchFrameAnchor", UIParent)
-TukuiWatchFrameAnchor:SetFrameStrata("HIGH")
-TukuiWatchFrameAnchor:SetFrameLevel(20)
-TukuiWatchFrameAnchor:SetHeight(20)
-TukuiWatchFrameAnchor:SetClampedToScreen(true)
-TukuiWatchFrameAnchor:SetMovable(true)
-TukuiWatchFrameAnchor:EnableMouse(false)
-TukuiWatchFrameAnchor:SetTemplate("Default")
-TukuiWatchFrameAnchor:SetBackdropBorderColor(0,0,0,0)
-TukuiWatchFrameAnchor:SetBackdropColor(0,0,0,0)
-TukuiWatchFrameAnchor.text = T.SetFontString(TukuiWatchFrameAnchor, C.media.uffont, 12)
-TukuiWatchFrameAnchor.text:SetPoint("CENTER")
-TukuiWatchFrameAnchor.text:SetText(L.move_watchframe)
-TukuiWatchFrameAnchor.text:Hide()
+local NevermoreWatchFrameAnchor = CreateFrame("Button", "NevermoreWatchFrameAnchor", UIParent)
+NevermoreWatchFrameAnchor:SetFrameStrata("HIGH")
+NevermoreWatchFrameAnchor:SetFrameLevel(20)
+NevermoreWatchFrameAnchor:SetHeight(20)
+NevermoreWatchFrameAnchor:SetClampedToScreen(true)
+NevermoreWatchFrameAnchor:SetMovable(true)
+NevermoreWatchFrameAnchor:EnableMouse(false)
+NevermoreWatchFrameAnchor:SetTemplate("Default")
+NevermoreWatchFrameAnchor:SetBackdropBorderColor(0,0,0,0)
+NevermoreWatchFrameAnchor:SetBackdropColor(0,0,0,0)
+NevermoreWatchFrameAnchor.text = T.SetFontString(NevermoreWatchFrameAnchor, C.media.uffont, 12)
+NevermoreWatchFrameAnchor.text:SetPoint("CENTER")
+NevermoreWatchFrameAnchor.text:SetText(L.move_watchframe)
+NevermoreWatchFrameAnchor.text:Hide()
 
 -- set default position according to how many right bars we have
-TukuiWatchFrameAnchor:Point("TOPRIGHT", UIParent, -210, -220)
+NevermoreWatchFrameAnchor:Point("TOPRIGHT", UIParent, -T.buttonsize*2, -220)
 
 -- width of the watchframe according to our Blizzard cVar.
 if wideFrame == "1" then
-	TukuiWatchFrame:SetWidth(350)
-	TukuiWatchFrameAnchor:SetWidth(350)
+	NevermoreWatchFrame:SetWidth(350)
+	NevermoreWatchFrameAnchor:SetWidth(350)
 else
-	TukuiWatchFrame:SetWidth(250)
-	TukuiWatchFrameAnchor:SetWidth(250)
+	NevermoreWatchFrame:SetWidth(250)
+	NevermoreWatchFrameAnchor:SetWidth(250)
 end
 
 local screenheight = T.screenheight
-TukuiWatchFrame:SetParent(TukuiWatchFrameAnchor)
-TukuiWatchFrame:SetHeight(screenheight / 1.6)
-TukuiWatchFrame:ClearAllPoints()
-TukuiWatchFrame:SetPoint("TOP")
+NevermoreWatchFrame:SetParent(NevermoreWatchFrameAnchor)
+NevermoreWatchFrame:SetHeight(screenheight / 2)
+NevermoreWatchFrame:ClearAllPoints()
+NevermoreWatchFrame:SetPoint("TOP")
 
 local function init()
-	TukuiWatchFrame:UnregisterEvent("PLAYER_ENTERING_WORLD")
-	TukuiWatchFrame:RegisterEvent("CVAR_UPDATE")
-	TukuiWatchFrame:SetScript("OnEvent", function(_,_,cvar,value)
+	NevermoreWatchFrame:UnregisterEvent("PLAYER_ENTERING_WORLD")
+	NevermoreWatchFrame:RegisterEvent("CVAR_UPDATE")
+	NevermoreWatchFrame:SetScript("OnEvent", function(_,_,cvar,value)
 		if cvar == "WATCH_FRAME_WIDTH_TEXT" then
 			if not WatchFrame.userCollapsed then
 				if value == "1" then
-					TukuiWatchFrame:SetWidth(350)
-					TukuiWatchFrameAnchor:SetWidth(350)
+					NevermoreWatchFrame:SetWidth(350)
+					NevermoreWatchFrameAnchor:SetWidth(350)
 				else
-					TukuiWatchFrame:SetWidth(250)
-					TukuiWatchFrameAnchor:SetWidth(250)
+					NevermoreWatchFrame:SetWidth(250)
+					NevermoreWatchFrameAnchor:SetWidth(250)
 				end
 			end
 			wideFrame = value
@@ -60,7 +60,7 @@ local function init()
 end
 
 local function setup()	
-	WatchFrame:SetParent(TukuiWatchFrame)
+	WatchFrame:SetParent(NevermoreWatchFrame)
 	WatchFrame:SetFrameStrata("LOW")
 	WatchFrame:SetFrameLevel(3)
 	WatchFrame:SetClampedToScreen(false)
@@ -70,9 +70,10 @@ local function setup()
 	WatchFrame:SetPoint("BOTTOMRIGHT", 4,0)
 	WatchFrame.SetPoint = T.dummy
 
-	WatchFrameTitle:SetParent(TukuiWatchFrame)
-	WatchFrameCollapseExpandButton:SetParent(TukuiWatchFrame)
+	WatchFrameTitle:SetParent(NevermoreWatchFrame)
+	WatchFrameCollapseExpandButton:SetParent(NevermoreWatchFrame)
 	WatchFrameCollapseExpandButton:SetSize(16, 16)
+	WatchFrameCollapseExpandButton:SetTemplate("Default")
 	WatchFrameCollapseExpandButton:SetFrameStrata(WatchFrameHeader:GetFrameStrata())
 	WatchFrameCollapseExpandButton:SetFrameLevel(WatchFrameHeader:GetFrameLevel() + 1)
 	WatchFrameCollapseExpandButton:SetNormalTexture("")
@@ -80,11 +81,14 @@ local function setup()
 	WatchFrameCollapseExpandButton:SetHighlightTexture("")
 	T.SkinCloseButton(WatchFrameCollapseExpandButton)
 	WatchFrameCollapseExpandButton.t:SetFont(C.media.font, 12, "OUTLINE")
+	WatchFrameCollapseExpandButton.t:SetPoint("CENTER", 2, 0) 
 	WatchFrameCollapseExpandButton:HookScript("OnClick", function(self) 
 		if WatchFrame.collapsed then 
-			self.t:SetText("V") 
+			self.t:SetText("V")
+			self.t:SetPoint("CENTER", 2, 0) 
 		else 
 			self.t:SetText("X")
+			self.t:SetPoint("CENTER", 2, 0) 
 		end 
 	end)
 	WatchFrameTitle:Kill()
@@ -104,4 +108,4 @@ f:SetScript("OnUpdate", function(self, elapsed)
 		f:Hide()
 	end
 end)
-TukuiWatchFrame:SetScript("OnEvent", function() if not IsAddOnLoaded("Who Framed Watcher Wabbit") or not IsAddOnLoaded("Fux") then init() f:Show() end end)
+NevermoreWatchFrame:SetScript("OnEvent", function() if not IsAddOnLoaded("Who Framed Watcher Wabbit") or not IsAddOnLoaded("Fux") then init() f:Show() end end)

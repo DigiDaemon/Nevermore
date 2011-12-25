@@ -243,4 +243,4 @@ local function LoadSkin()
 	T.SkinScrollBar(ChannelRosterScrollFrameScrollBar)
 end
 
-tinsert(T.SkinFuncs["Tukui"], LoadSkin)
+tinsert(T.SkinFuncs["Nevermore"], LoadSkin)

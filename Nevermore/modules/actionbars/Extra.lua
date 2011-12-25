@@ -3,9 +3,9 @@ if T.toc < 40300 then return end
 if not C.actionbar.enable then return end
 
 -- create the holder to allow moving extra button
-local holder = CreateFrame("Frame", "TukuiExtraActionBarFrameHolder", UIParent)
+local holder = CreateFrame("Frame", "NevermoreExtraActionBarFrameHolder", UIParent)
 holder:Size(160, 80)
-holder:SetPoint("BOTTOM", 0, 250)
+holder:SetPoint("BOTTOM", NevermoreCenter, "TOP", 0, -T.buttonspacing * 3)
 holder:SetMovable(true)
 holder:SetTemplate("Default")
 holder:SetBackdropBorderColor(0,0,0,0)

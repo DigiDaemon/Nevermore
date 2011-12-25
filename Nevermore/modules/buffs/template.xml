@@ -1,5 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Button name="TukuiAurasAuraTemplate" inherits="SecureActionButtonTemplate" virtual="true">
+	<Button name="NevermoreAurasAuraTemplate" inherits="SecureActionButtonTemplate" virtual="true">
 		<Size x="30" y="30"/>
 
 		<Attributes>
@@ -9,7 +9,7 @@
 		<Scripts>
 			<OnLoad>
 				-- Avoiding XML 101:
-				TukuiAuras.Skin(self)
+				NevermoreAuras.Skin(self)
 
 				self:RegisterForClicks'RightButtonUp'
 			</OnLoad>
@@ -27,12 +27,12 @@
 		</Scripts>
 	</Button>
 
-	<Frame name="TukuiAurasProxyTemplate" inherits="SecureUnitButtonTemplate, SecureHandlerEnterLeaveTemplate" virtual="true">
+	<Frame name="NevermoreAurasProxyTemplate" inherits="SecureUnitButtonTemplate, SecureHandlerEnterLeaveTemplate" virtual="true">
 		<Size x="30" y="30"/>
 		<Scripts>
 			<OnLoad>
 				-- Avoiding XML 101:
-				TukuiAuras.Skin(self)
+				NevermoreAuras.Skin(self)
 			</OnLoad>
 		</Scripts>
 	</Frame>

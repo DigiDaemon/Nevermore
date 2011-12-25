@@ -5,7 +5,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 
 if C["datatext"].hps_text and C["datatext"].hps_text > 0 then
 	local events = {SPELL_HEAL = true, SPELL_PERIODIC_HEAL = true}
-	local HPS_FEED = CreateFrame("Frame", "TukuiStatHeal")
+	local HPS_FEED = CreateFrame("Frame", "NevermoreStatHeal")
 	HPS_FEED.Option = C.datatext.hps_text
 	HPS_FEED.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 	HPS_FEED.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
@@ -14,7 +14,7 @@ if C["datatext"].hps_text and C["datatext"].hps_text > 0 then
 	local actual_heals_total, cmbt_time = 0
 	local amount_healed, amount_over_healed = 0
  
-	local hText = HPS_FEED:CreateFontString("TukuiStatHealText", "OVERLAY")
+	local hText = HPS_FEED:CreateFontString("NevermoreStatHealText", "OVERLAY")
 	hText:SetFont(C.media.font, C["datatext"].fontsize)
 	hText:SetText("0.0 ",L.datatext_hps)
  

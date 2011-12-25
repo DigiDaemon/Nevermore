@@ -88,4 +88,4 @@ local function LoadSkin()
 	T.SkinNextPrevButton(MerchantPrevPageButton)
 end
 
-tinsert(T.SkinFuncs["Tukui"], LoadSkin)
+tinsert(T.SkinFuncs["Nevermore"], LoadSkin)

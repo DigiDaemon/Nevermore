@@ -6,12 +6,12 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 
 -- Hit Rating
 if not C["datatext"].hit == nil or C["datatext"].hit > 0 then
-	local Stat = CreateFrame("Frame", "TukuiStatHit")
+	local Stat = CreateFrame("Frame", "NevermoreStatHit")
 	Stat.Option = C.datatext.hit
 	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
-	local Text  = Stat:CreateFontString("TukuiStatHitText", "OVERLAY")
+	local Text  = Stat:CreateFontString("NevermoreStatHitText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
 	T.PP(C["datatext"].hit, Text)
 

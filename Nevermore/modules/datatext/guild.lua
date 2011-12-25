@@ -5,7 +5,7 @@ local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Lo
 
 if not C["datatext"].guild or C["datatext"].guild == 0 then return end
 
-local Stat = CreateFrame("Frame", "TukuiStatGuild")
+local Stat = CreateFrame("Frame", "NevermoreStatGuild")
 Stat:EnableMouse(true)
 Stat:SetFrameStrata("BACKGROUND")
 Stat:SetFrameLevel(3)
@@ -29,7 +29,7 @@ local officerNoteString = "  o: '%s'"
 local guildTable, guildXP, guildMotD = {}, {}, ""
 local totalOnline = 0
 
-local Text = Stat:CreateFontString("TukuiStatGuildText", "OVERLAY")
+local Text = Stat:CreateFontString("NevermoreStatGuildText", "OVERLAY")
 Text:SetFont(C.media.font, C["datatext"].fontsize)
 T.PP(C["datatext"].guild, Text)
 
@@ -88,7 +88,7 @@ local function Update(self, event, ...)
 	self:SetAllPoints(Text)
 end
 	
-local menuFrame = CreateFrame("Frame", "TukuiGuildRightClickMenu", UIParent, "UIDropDownMenuTemplate")
+local menuFrame = CreateFrame("Frame", "NevermoreGuildRightClickMenu", UIParent, "UIDropDownMenuTemplate")
 local menuList = {
 	{ text = OPTIONS_MENU, isTitle = true,notCheckable=true},
 	{ text = INVITE, hasArrow = true,notCheckable=true,},

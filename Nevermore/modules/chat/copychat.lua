@@ -11,22 +11,18 @@ local editBox = nil
 local isf = nil
 
 local function CreatCopyFrame()
-	frame = CreateFrame("Frame", "TukuiChatCopyFrame", UIParent)
+	frame = CreateFrame("Frame", "NevermoreChatCopyFrame", UIParent)
 	frame:SetTemplate("Default")
-	if T.lowversion then
-		frame:Width(TukuiBar1:GetWidth() + 10)
-	else
-		frame:Width((TukuiBar1:GetWidth() * 2) + 20)
-	end
-	frame:Height(250)
+	frame:Width(NevermoreCenter:GetWidth())
+	frame:Height(NevermoreCenter:GetHeight())
 	frame:SetScale(1)
-	frame:Point("BOTTOM", UIParent, "BOTTOM", 0, 10)
+	frame:Point("BOTTOM", NevermoreCenter, "BOTTOM", 0, 0)
 	frame:Hide()
 	frame:SetFrameStrata("DIALOG")
 
-	local scrollArea = CreateFrame("ScrollFrame", "TukuiChatCopyScroll", frame, "UIPanelScrollFrameTemplate")
+	local scrollArea = CreateFrame("ScrollFrame", "NevermoreChatCopyScroll", frame, "UIPanelScrollFrameTemplate")
 	scrollArea:Point("TOPLEFT", frame, "TOPLEFT", 8, -30)
-	scrollArea:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -30, 8)
+	scrollArea:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -T.buttonsize, 8)
 
 	editBox = CreateFrame("EditBox", "CopyBox", frame)
 	editBox:SetMultiLine(true)
@@ -34,12 +30,8 @@ local function CreatCopyFrame()
 	editBox:EnableMouse(true)
 	editBox:SetAutoFocus(false)
 	editBox:SetFontObject(ChatFontNormal)
-	if T.lowversion then
-		editBox:Width(TukuiBar1:GetWidth() + 10)
-	else
-		editBox:Width((TukuiBar1:GetWidth() * 2) + 20)
-	end
-	editBox:Height(250)
+	editBox:Width(NevermoreCenter:GetWidth())
+	editBox:Height(NevermoreCenter:GetHeight())
 	editBox:SetScript("OnEscapePressed", function() frame:Hide() end)
 
 	scrollArea:SetScrollChild(editBox)
@@ -47,7 +39,7 @@ local function CreatCopyFrame()
 	local close = CreateFrame("Button", "CopyCloseButton", frame, "UIPanelCloseButton")
 	close:SetPoint("TOPRIGHT", frame, "TOPRIGHT")
 	T.SkinCloseButton(close)
-	T.SkinScrollBar(TukuiChatCopyScrollScrollBar)
+	T.SkinScrollBar(NevermoreChatCopyScrollScrollBar)
 
 	isf = true
 end
@@ -80,12 +72,12 @@ end
 local function ChatCopyButtons()
 	for i = 1, NUM_CHAT_WINDOWS do
 		local cf = _G[format("ChatFrame%d",  i)]
-		local button = CreateFrame("Button", format("TukuiButtonCF%d", i), cf)
-		button:SetPoint("TOPRIGHT", 0, 0)
-		button:Height(20)
-		button:Width(20)
+		local button = CreateFrame("Button", format("NevermoreButtonCF%d", i), cf)
+		button:SetPoint("TOPRIGHT", T.buttonsize + 1, 0)
+		button:Height(24)
+		button:Width(T.buttonsize)
 		button:SetNormalTexture(C.media.copyicon)
-		button:SetAlpha(0)
+		button:SetAlpha(1)
 		button:SetTemplate("Default")
 
 		button:SetScript("OnMouseUp", function(self)
@@ -94,7 +86,7 @@ local function ChatCopyButtons()
 		button:SetScript("OnEnter", function() 
 			button:SetAlpha(1) 
 		end)
-		button:SetScript("OnLeave", function() button:SetAlpha(0) end)
+		button:SetScript("OnLeave", function() button:SetAlpha(1) end)
 	end
 end
 ChatCopyButtons()

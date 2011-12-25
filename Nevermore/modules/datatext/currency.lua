@@ -4,7 +4,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 --------------------------------------------------------------------
 
 if C["datatext"].currency and C["datatext"].currency > 0 then
-	local Stat = CreateFrame("Frame", "TukuiStatCurrency")
+	local Stat = CreateFrame("Frame", "NevermoreStatCurrency")
 	Stat:EnableMouse(true)
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
@@ -12,7 +12,7 @@ if C["datatext"].currency and C["datatext"].currency > 0 then
 	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
-	local Text  = Stat:CreateFontString("TukuiStatCurrencyText", "OVERLAY")
+	local Text  = Stat:CreateFontString("NevermoreStatCurrencyText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
 	T.PP(C["datatext"].currency, Text)
 	
@@ -22,7 +22,7 @@ if C["datatext"].currency and C["datatext"].currency > 0 then
 			local name, count, _, _, _ = GetBackpackCurrencyInfo(i)
 			if name and count then
 				if(i ~= 1) then _text = _text .. " " else _text = "" end
-				local words = { strsplit(" ", name) }
+				words = { strsplit(" ", name) }
 				for _, word in ipairs(words) do
 					_text = _text .. Stat.Color1..string.sub(word,1,1).."|r"
 				end

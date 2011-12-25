@@ -3,7 +3,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 
 if not C["tooltip"].enable then return end
 
-local TukuiTooltip = CreateFrame("Frame", "TukuiTooltip", UIParent)
+local NevermoreTooltip = CreateFrame("Frame", "NevermoreTooltip", UIParent)
 
 local _G = getfenv(0)
 
@@ -25,16 +25,16 @@ local classification = {
 
 local NeedBackdropBorderRefresh = true
 
-local anchor = CreateFrame("Frame", "TukuiTooltipAnchor", UIParent)
-anchor:SetSize(200, TukuiInfoRight:GetHeight())
+local anchor = CreateFrame("Frame", "NevermoreTooltipAnchor", UIParent)
+anchor:SetSize(200, NevermoreInfoRight:GetHeight())
 anchor:SetFrameStrata("TOOLTIP")
 anchor:SetFrameLevel(20)
 anchor:SetClampedToScreen(true)
 anchor:SetAlpha(0)
-if C.chat.background and TukuiChatBackgroundRight then
-	anchor:SetPoint("BOTTOMRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", 0, -TukuiInfoRight:GetHeight())
+if C.chat.background and NevermoreChatBackgroundRight then
+	anchor:SetPoint("BOTTOMRIGHT", NevermoreInfo, "TOPRIGHT", 0, 0)
 else
-	anchor:SetPoint("BOTTOMRIGHT", TukuiInfoRight)
+	anchor:SetPoint("BOTTOMRIGHT", NevermoreInfo, "TOPRIGHT", 0, T.buttonspacing)
 end
 anchor:SetTemplate("Default")
 anchor:SetBackdropBorderColor(1, 0, 0, 1)
@@ -43,7 +43,7 @@ anchor.text = T.SetFontString(anchor, C.media.uffont, 12)
 anchor.text:SetPoint("CENTER")
 anchor.text:SetText(L.move_tooltip)
 
--- Update Tukui Tooltip Position on some specifics Tooltip
+-- Update Nevermore Tooltip Position on some specifics Tooltip
 -- Also used because on Eyefinity, SetClampedToScreen doesn't work on left and right side of screen #1
 local function UpdateTooltip(self)
 	local owner = self:GetOwner()
@@ -69,50 +69,50 @@ local function UpdateTooltip(self)
 		self:Hide()
 	end
 	
-	if name and (TukuiPlayerBuffs or TukuiPlayerDebuffs) then
-		if (TukuiPlayerBuffs:GetPoint():match("LEFT") or TukuiPlayerDebuffs:GetPoint():match("LEFT")) and (name:match("TukuiPlayerBuffs") or name:match("TukuiPlayerDebuffs")) then
+	if name and (NevermorePlayerBuffs or NevermorePlayerDebuffs) then
+		if (NevermorePlayerBuffs:GetPoint():match("LEFT") or NevermorePlayerDebuffs:GetPoint():match("LEFT")) and (name:match("NevermorePlayerBuffs") or name:match("NevermorePlayerDebuffs")) then
 			self:SetAnchorType("ANCHOR_BOTTOMRIGHT", x, -x)
 		end
 	end
 		
-	if (owner == MiniMapBattlefieldFrame or owner == MiniMapMailFrame) and TukuiMinimap then
-		if TukuiMinimap:GetPoint():match("LEFT") then 
+	if (owner == MiniMapBattlefieldFrame or owner == MiniMapMailFrame) and NevermoreMinimap then
+		if NevermoreMinimap:GetPoint():match("LEFT") then 
 			self:SetAnchorType("ANCHOR_TOPRIGHT", x, -x)
 		end
 	end
 	
-	if self:GetAnchorType() == "ANCHOR_NONE" and TukuiTooltipAnchor then
-		local point = TukuiTooltipAnchor:GetPoint()
+	if self:GetAnchorType() == "ANCHOR_NONE" and NevermoreTooltipAnchor then
+		local point = NevermoreTooltipAnchor:GetPoint()
 		if point == "TOPLEFT" then
 			self:ClearAllPoints()
-			self:SetPoint("TOPLEFT", TukuiTooltipAnchor, "BOTTOMLEFT", 0, -x)			
+			self:SetPoint("TOPLEFT", NevermoreTooltipAnchor, "BOTTOMLEFT", 0, -x)			
 		elseif point == "TOP" then
 			self:ClearAllPoints()
-			self:SetPoint("TOP", TukuiTooltipAnchor, "BOTTOM", 0, -x)			
+			self:SetPoint("TOP", NevermoreTooltipAnchor, "BOTTOM", 0, -x)			
 		elseif point == "TOPRIGHT" then
 			self:ClearAllPoints()
-			self:SetPoint("TOPRIGHT", TukuiTooltipAnchor, "BOTTOMRIGHT", 0, -x)			
+			self:SetPoint("TOPRIGHT", NevermoreTooltipAnchor, "BOTTOMRIGHT", 0, -x)			
 		elseif point == "BOTTOMLEFT" or point == "LEFT" then
 			self:ClearAllPoints()
-			self:SetPoint("BOTTOMLEFT", TukuiTooltipAnchor, "TOPLEFT", 0, x)		
+			self:SetPoint("BOTTOMLEFT", NevermoreTooltipAnchor, "TOPLEFT", 0, x)		
 		elseif point == "BOTTOMRIGHT" or point == "RIGHT" then
-			if TukuiBags and TukuiBags:IsShown() then
+			if NevermoreBags and NevermoreBags:IsShown() then
 				self:ClearAllPoints()
-				self:SetPoint("BOTTOMRIGHT", TukuiBags, "TOPRIGHT", 0, x)			
+				self:SetPoint("BOTTOMRIGHT", NevermoreBags, "TOPRIGHT", 0, x)			
 			else
 				self:ClearAllPoints()
-				self:SetPoint("BOTTOMRIGHT", TukuiTooltipAnchor, "TOPRIGHT", 0, x)
+				self:SetPoint("BOTTOMRIGHT", NevermoreTooltipAnchor, "TOPRIGHT", 0, x)
 			end
 		else
 			self:ClearAllPoints()
-			self:SetPoint("BOTTOM", TukuiTooltipAnchor, "TOP", 0, x)		
+			self:SetPoint("BOTTOM", NevermoreTooltipAnchor, "TOP", 0, x)		
 		end
 	end
 end
 
 hooksecurefunc("GameTooltip_SetDefaultAnchor", function(self, parent)
 	if C["tooltip"].cursor == true then
-		if IsAddOnLoaded("Tukui_Raid_Healing") and parent ~= UIParent then
+		if IsAddOnLoaded("Nevermore_Raid_Healing") and parent ~= UIParent then
 			self:SetOwner(parent, "ANCHOR_NONE")
 		else
 			self:SetOwner(parent, "ANCHOR_CURSOR")
@@ -180,7 +180,7 @@ GameTooltipStatusBar:SetScript("OnValueChanged", function(self, value)
 
 	if not self.text then
 		self.text = self:CreateFontString(nil, "OVERLAY")
-		local position = TukuiTooltipAnchor:GetPoint()
+		local position = NevermoreTooltipAnchor:GetPoint()
 		if position:match("TOP") then
 			self.text:Point("CENTER", GameTooltipStatusBar, 0, -6)
 		else
@@ -363,9 +363,9 @@ local SetStyle = function(self)
 	BorderColor(self)
 end
 
-TukuiTooltip:RegisterEvent("PLAYER_ENTERING_WORLD")
-TukuiTooltip:RegisterEvent("ADDON_LOADED")
-TukuiTooltip:SetScript("OnEvent", function(self, event, addon)
+NevermoreTooltip:RegisterEvent("PLAYER_ENTERING_WORLD")
+NevermoreTooltip:RegisterEvent("ADDON_LOADED")
+NevermoreTooltip:SetScript("OnEvent", function(self, event, addon)
 	if event == "PLAYER_ENTERING_WORLD" then
 		for _, tt in pairs(Tooltips) do
 			tt:HookScript("OnShow", SetStyle)
@@ -379,7 +379,7 @@ TukuiTooltip:SetScript("OnEvent", function(self, event, addon)
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 		
 		-- move health status bar if anchor is found at top
-		local position = TukuiTooltipAnchor:GetPoint()
+		local position = NevermoreTooltipAnchor:GetPoint()
 		if position:match("TOP") then
 			healthBar:ClearAllPoints()
 			healthBar:Point("TOPLEFT", healthBar:GetParent(), "BOTTOMLEFT", 2, -5)

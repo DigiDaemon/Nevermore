@@ -1,24 +1,24 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 --------------------------------------------------------------------
--- Tukui Minimap Script
+-- Nevermore Minimap Script
 --------------------------------------------------------------------
 
-local TukuiMinimap = CreateFrame("Frame", "TukuiMinimap", UIParent)
-TukuiMinimap:CreatePanel("Default", 1, 1, "CENTER", UIParent, "CENTER", 0, 0)
-TukuiMinimap:RegisterEvent("ADDON_LOADED")
-TukuiMinimap:Point("TOPRIGHT", UIParent, "TOPRIGHT", -24, -22)
-TukuiMinimap:Size(144)
-TukuiMinimap:SetClampedToScreen(true)
-TukuiMinimap:SetMovable(true)
-TukuiMinimap.text = T.SetFontString(TukuiMinimap, C.media.uffont, 12)
-TukuiMinimap.text:SetPoint("CENTER")
-TukuiMinimap.text:SetText(L.move_minimap)
+local NevermoreMinimap = CreateFrame("Frame", "NevermoreMinimap", UIParent)
+NevermoreMinimap:CreatePanel("Default", 1, 1, "CENTER", UIParent, "CENTER", 0, 0)
+NevermoreMinimap:RegisterEvent("ADDON_LOADED")
+NevermoreMinimap:Point("TOPRIGHT", UIParent, "TOPRIGHT", -T.buttonspacing, -T.buttonsize)
+NevermoreMinimap:Size(144)
+NevermoreMinimap:SetClampedToScreen(true)
+NevermoreMinimap:SetMovable(true)
+NevermoreMinimap.text = T.SetFontString(NevermoreMinimap, C.media.uffont, 12)
+NevermoreMinimap.text:SetPoint("CENTER")
+NevermoreMinimap.text:SetText(L.move_minimap)
 
 -- kill the minimap cluster
 MinimapCluster:Kill()
 
 -- Parent Minimap into our Map frame.
-Minimap:SetParent(TukuiMinimap)
+Minimap:SetParent(NevermoreMinimap)
 Minimap:ClearAllPoints()
 Minimap:Point("TOPLEFT", 2, -2)
 Minimap:Point("BOTTOMRIGHT", -2, 2)
@@ -50,7 +50,7 @@ GameTimeFrame:Hide()
 MiniMapMailFrame:ClearAllPoints()
 MiniMapMailFrame:Point("TOPRIGHT", Minimap, 3, 3)
 MiniMapMailBorder:Hide()
-MiniMapMailIcon:SetTexture("Interface\\AddOns\\Tukui\\medias\\textures\\mail")
+MiniMapMailIcon:SetTexture("Interface\\AddOns\\Nevermore\\medias\\textures\\mail")
 
 -- Move battleground icon
 MiniMapBattlefieldFrame:ClearAllPoints()
@@ -58,28 +58,28 @@ MiniMapBattlefieldFrame:Point("BOTTOMRIGHT", Minimap, 3, 0)
 MiniMapBattlefieldBorder:Hide()
 
 -- Ticket Frame
-local TukuiTicket = CreateFrame("Frame", "TukuiTicket", TukuiMinimap)
-TukuiTicket:CreatePanel("Default", 1, 1, "CENTER", TukuiMinimap, "CENTER", 0, 0)
-TukuiTicket:Size(TukuiMinimap:GetWidth() - 4, 24)
-TukuiTicket:SetFrameStrata("MEDIUM")
-TukuiTicket:SetFrameLevel(20)
-TukuiTicket:Point("TOP", 0, -2)
-TukuiTicket:FontString("Text", C.media.font, 12)
-TukuiTicket.Text:SetPoint("CENTER")
-TukuiTicket.Text:SetText(HELP_TICKET_EDIT)
-TukuiTicket:SetBackdropBorderColor(255/255, 243/255,  82/255)
-TukuiTicket.Text:SetTextColor(255/255, 243/255,  82/255)
-TukuiTicket:SetAlpha(0)
+local NevermoreTicket = CreateFrame("Frame", "NevermoreTicket", NevermoreMinimap)
+NevermoreTicket:CreatePanel("Default", 1, 1, "CENTER", NevermoreMinimap, "CENTER", 0, 0)
+NevermoreTicket:Size(NevermoreMinimap:GetWidth() - 4, 24)
+NevermoreTicket:SetFrameStrata("MEDIUM")
+NevermoreTicket:SetFrameLevel(20)
+NevermoreTicket:Point("TOP", 0, -2)
+NevermoreTicket:FontString("Text", C.media.font, 12)
+NevermoreTicket.Text:SetPoint("CENTER")
+NevermoreTicket.Text:SetText(HELP_TICKET_EDIT)
+NevermoreTicket:SetBackdropBorderColor(255/255, 243/255,  82/255)
+NevermoreTicket.Text:SetTextColor(255/255, 243/255,  82/255)
+NevermoreTicket:SetAlpha(0)
 
-HelpOpenTicketButton:SetParent(TukuiTicket)
-HelpOpenTicketButton:SetFrameLevel(TukuiTicket:GetFrameLevel() + 1)
-HelpOpenTicketButton:SetFrameStrata(TukuiTicket:GetFrameStrata())
+HelpOpenTicketButton:SetParent(NevermoreTicket)
+HelpOpenTicketButton:SetFrameLevel(NevermoreTicket:GetFrameLevel() + 1)
+HelpOpenTicketButton:SetFrameStrata(NevermoreTicket:GetFrameStrata())
 HelpOpenTicketButton:ClearAllPoints()
 HelpOpenTicketButton:SetAllPoints()
 HelpOpenTicketButton:SetHighlightTexture(nil)
 HelpOpenTicketButton:SetAlpha(0)
-HelpOpenTicketButton:HookScript("OnShow", function(self) TukuiTicket:SetAlpha(1) end)
-HelpOpenTicketButton:HookScript("OnHide", function(self) TukuiTicket:SetAlpha(0) end)
+HelpOpenTicketButton:HookScript("OnShow", function(self) NevermoreTicket:SetAlpha(1) end)
+HelpOpenTicketButton:HookScript("OnHide", function(self) NevermoreTicket:SetAlpha(0) end)
 
 -- Hide world map button
 MiniMapWorldMapButton:Hide()
@@ -113,7 +113,7 @@ status:SetTemplate("Default")
 
 -- for t13+, if we move map we need to point status according to our Minimap position.
 local function UpdateLFGTooltip()
-	local position = TukuiMinimap:GetPoint()
+	local position = NevermoreMinimap:GetPoint()
 	status:ClearAllPoints()
 	if position:match("BOTTOMRIGHT") then
 		status:SetPoint("BOTTOMRIGHT", MiniMapLFGFrame, "BOTTOMLEFT", 0, 0)
@@ -144,7 +144,7 @@ Minimap:SetMaskTexture(C.media.blank)
 function GetMinimapShape() return "SQUARE" end
 
 -- do some stuff on addon loaded or player login event
-TukuiMinimap:SetScript("OnEvent", function(self, event, addon)
+NevermoreMinimap:SetScript("OnEvent", function(self, event, addon)
 	if addon == "Blizzard_TimeManager" then
 		-- Hide Game Time
 		TimeManagerClockButton:Kill()
@@ -157,15 +157,15 @@ end)
 
 Minimap:SetScript("OnMouseUp", function(self, btn)
 	local xoff = 0
-	local position = TukuiMinimap:GetPoint()
+	local position = NevermoreMinimap:GetPoint()
 	
 	if btn == "RightButton" then	
 		if position:match("RIGHT") then xoff = T.Scale(-8) end
-		ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, TukuiMinimap, xoff, T.Scale(-2))
+		ToggleDropDownMenu(1, nil, MiniMapTrackingDropDown, NevermoreMinimap, xoff, T.Scale(-2))
 	elseif btn == "MiddleButton" then
-		if not TukuiMicroButtonsDropDown then return end
+		if not NevermoreMicroButtonsDropDown then return end
 		if position:match("RIGHT") then xoff = T.Scale(-160) end
-		EasyMenu(T.MicroMenu, TukuiMicroButtonsDropDown, "cursor", xoff, 0, "MENU", 2)
+		EasyMenu(T.MicroMenu, NevermoreMicroButtonsDropDown, "cursor", xoff, 0, "MENU", 2)
 	else
 		Minimap_OnClick(self)
 	end
@@ -175,45 +175,69 @@ end)
 -- Mouseover map, displaying zone and coords
 ----------------------------------------------------------------------------------------
 
-local m_zone = CreateFrame("Frame","TukuiMinimapZone",TukuiMinimap)
-m_zone:CreatePanel("Default", 0, 20, "TOPLEFT", TukuiMinimap, "TOPLEFT", 2,-2)
+local m_zone = CreateFrame("Frame","NevermoreMinimapZone",NevermoreMinimap)
+m_zone:CreatePanel("", 0, 20, "TOP", PP5, "TOP", 2,-2)
 m_zone:SetFrameLevel(5)
 m_zone:SetFrameStrata("LOW")
-m_zone:Point("TOPRIGHT",TukuiMinimap,-2,-2)
-m_zone:SetAlpha(0)
+m_zone:SetWidth(150)
+m_zone:Point("TOP", PP5,-2,-2)
+m_zone:SetBackdropColor(0, 0, 0, 0)
+m_zone:SetBackdropBorderColor(0, 0, 0, 0)
+m_zone:SetAlpha(1)
 
-local m_zone_text = m_zone:CreateFontString("TukuiMinimapZoneText","Overlay")
+local m_zone_text = m_zone:CreateFontString("NevermoreMinimapZoneText","Overlay")
 m_zone_text:SetFont(C["media"].font,12)
 m_zone_text:Point("TOP", 0, -1)
 m_zone_text:SetPoint("BOTTOM")
 m_zone_text:Height(12)
 m_zone_text:Width(m_zone:GetWidth()-6)
-m_zone_text:SetAlpha(0)
+m_zone_text:SetAlpha(1)
 
-local m_coord = CreateFrame("Frame","TukuiMinimapCoord",TukuiMinimap)
-m_coord:CreatePanel("Default", 40, 20, "BOTTOMLEFT", TukuiMinimap, "BOTTOMLEFT", 2,2)
+local m_cover = CreateFrame("Frame","NevermoreMinimapCoordCover",NevermoreMinimap)
+m_cover:CreatePanel("", 36, 5, "TOP", m_zone, "BOTTOM", 0, 2)
+m_cover:SetBackdrop({
+            bgFile = "Interface\\Buttons\\WHITE8x8", 
+            edgeFile = "Interface\\Buttons\\WHITE8x8", 
+            tile = false,
+            tileSize = 0,
+            edgeSize = 1, 
+            insets = {
+            left = -1,
+            right = -1,
+            top = -1,
+            bottom = -1
+            }
+        });
+m_cover:SetBackdropColor(0, 0, 0, 1);
+m_cover:SetBackdropBorderColor(0, 0, 0);
+m_cover:SetFrameStrata("MEDIUM")
+m_cover:SetAlpha(1)
+
+local m_coord = CreateFrame("Frame","NevermoreMinimapCoord",NevermoreMinimap)
+m_coord:CreatePanel("", 40, 20, "TOP", m_zone, "BOTTOM", 0, 0)
+m_coord:SetBackdrop({
+            bgFile = "Interface\\Buttons\\WHITE8x8", 
+            edgeFile = "Interface\\Buttons\\WHITE8x8", 
+            tile = false,
+            tileSize = 0,
+            edgeSize = 1, 
+            insets = {
+            left = 0,
+            right = 0,
+            top = -1,
+            bottom = -1
+            }
+        });
+m_coord:SetBackdropColor(0, 0, 0, 1);
+m_coord:SetBackdropBorderColor(0.6, 0.6, 0.6);
 m_coord:SetFrameStrata("LOW")
-m_coord:SetAlpha(0)
+m_coord:SetAlpha(1)
 
-local m_coord_text = m_coord:CreateFontString("TukuiMinimapCoordText","Overlay")
+local m_coord_text = m_coord:CreateFontString("NevermoreMinimapCoordText","Overlay")
 m_coord_text:SetFont(C["media"].font,12)
 m_coord_text:Point("Center",-1,0)
-m_coord_text:SetAlpha(0)
+m_coord_text:SetAlpha(1)
 m_coord_text:SetText("00,00")
-
-Minimap:SetScript("OnEnter",function()
-	m_zone:SetAlpha(1)
-	m_zone_text:SetAlpha(1)
-	m_coord:SetAlpha(1)
-	m_coord_text:SetAlpha(1)
-end)
-
-Minimap:SetScript("OnLeave",function()
-	m_zone:SetAlpha(0)
-	m_zone_text:SetAlpha(0)
-	m_coord:SetAlpha(0)
-	m_coord_text:SetAlpha(0)
-end)
  
 local ela = 0
 local coord_Update = function(self,t)

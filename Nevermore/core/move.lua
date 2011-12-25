@@ -3,21 +3,21 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 -- all the frame we want to move
 -- all our frames that we want being movable.
 T.AllowFrameMoving = {
-	TukuiMinimap,
-	TukuiTooltipAnchor,
-	TukuiAurasPlayerBuffs,
-	TukuiShiftBar,
-	TukuiRollAnchor,
-	TukuiAchievementHolder,
-	TukuiWatchFrameAnchor,
-	TukuiGMFrameAnchor,
-	TukuiVehicleAnchor,
-	TukuiExtraActionBarFrameHolder,
+	NevermoreMinimap,
+	NevermoreTooltipAnchor,
+	NevermoreAurasPlayerBuffs,
+	NevermoreShiftBar,
+	NevermoreRollAnchor,
+	NevermoreAchievementHolder,
+	NevermoreWatchFrameAnchor,
+	NevermoreGMFrameAnchor,
+	NevermoreVehicleAnchor,
+	NevermoreExtraActionBarFrameHolder,
 }
 
 -- used to exec various code if we enable or disable moving
 local function exec(self, enable)
-	if self == TukuiGMFrameAnchor then
+	if self == NevermoreGMFrameAnchor then
 		if enable then
 			self:Show()
 		else
@@ -25,7 +25,7 @@ local function exec(self, enable)
 		end
 	end
 	
-	if self == TukuiMinimap then
+	if self == NevermoreMinimap then
 		if enable then 
 			Minimap:Hide()
 			self:SetBackdropBorderColor(1,0,0,1)
@@ -35,11 +35,11 @@ local function exec(self, enable)
 		end
 	end
 	
-	if self == TukuiAurasPlayerBuffs then
+	if self == NevermoreAurasPlayerBuffs then
 		if not self:GetBackdrop() then self:SetTemplate("Default") end
 		
-		local buffs = TukuiAurasPlayerBuffs
-		local debuffs = TukuiAurasPlayerDebuffs
+		local buffs = NevermoreAurasPlayerBuffs
+		local debuffs = NevermoreAurasPlayerDebuffs
 		
 		if enable then
 			buffs:SetBackdropColor(unpack(C.media.backdropcolor))
@@ -69,13 +69,13 @@ local function exec(self, enable)
 		end
 	end
 	
-	if self == TukuiTooltipAnchor or self == TukuiRollAnchor or self == TukuiAchievementHolder or self == TukuiVehicleAnchor then
+	if self == NevermoreTooltipAnchor or self == NevermoreRollAnchor or self == NevermoreAchievementHolder or self == NevermoreVehicleAnchor then
 		if enable then
 			self:SetAlpha(1)
 		else
 			self:SetAlpha(0)
-			if self == TukuiTooltipAnchor then 
-				local position = TukuiTooltipAnchor:GetPoint()
+			if self == NevermoreTooltipAnchor then 
+				local position = NevermoreTooltipAnchor:GetPoint()
 				local healthBar = GameTooltipStatusBar
 				if position:match("TOP") then
 					healthBar:ClearAllPoints()
@@ -92,7 +92,7 @@ local function exec(self, enable)
 		end		
 	end
 	
-	if self == TukuiWatchFrameAnchor or self == TukuiExtraActionBarFrameHolder then
+	if self == NevermoreWatchFrameAnchor or self == NevermoreExtraActionBarFrameHolder then
 		if enable then
 			self:SetBackdropBorderColor(1,0,0,1)
 			self:SetBackdropColor(unpack(C.media.backdropcolor))		
@@ -102,11 +102,11 @@ local function exec(self, enable)
 		end
 	end
 	
-	if self == TukuiShiftBar then
+	if self == NevermoreShiftBar then
 		if enable then
-			TukuiShapeShiftHolder:SetAlpha(1)
+			NevermoreShapeShiftHolder:SetAlpha(1)
 		else
-			TukuiShapeShiftHolder:SetAlpha(0)
+			NevermoreShapeShiftHolder:SetAlpha(0)
 		end
 	end
 end
@@ -155,7 +155,7 @@ T.MoveUIElements = function()
 	
 	if enable then enable = false else enable = true end
 end
-SLASH_MOVING1 = "/mtukui"
+SLASH_MOVING1 = "/mNevermore"
 SLASH_MOVING2 = "/moveui"
 SlashCmdList["MOVING"] = T.MoveUIElements
 

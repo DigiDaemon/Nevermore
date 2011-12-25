@@ -4,14 +4,14 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 --------------------------------------------------------------------
 
 if C["datatext"].crit and C["datatext"].crit > 0 then
-	local Stat = CreateFrame("Frame", "TukuiStatCrit")
+	local Stat = CreateFrame("Frame", "NevermoreStatCrit")
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
 	Stat.Option = C.datatext.crit
 	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
-	local Text  = Stat:CreateFontString("TukuiStatCritText", "OVERLAY")
+	local Text  = Stat:CreateFontString("NevermoreStatCritText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
 	T.PP(C["datatext"].crit, Text)
 
@@ -19,10 +19,9 @@ if C["datatext"].crit and C["datatext"].crit > 0 then
 
 	local function Update(self, t)
 		int = int - t
-		local meleecrit = GetCritChance()
-		local spellcrit = GetSpellCritChance(1)
-		local rangedcrit = GetRangedCritChance()
-		local CritChance
+		meleecrit = GetCritChance()
+		spellcrit = GetSpellCritChance(1)
+		rangedcrit = GetRangedCritChance()
 		if spellcrit > meleecrit then
 			CritChance = spellcrit
 		elseif select(2, UnitClass("Player")) == "HUNTER" then    

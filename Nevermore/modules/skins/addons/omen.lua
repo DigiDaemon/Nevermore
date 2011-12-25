@@ -1,9 +1,8 @@
 ﻿if not IsAddOnLoaded("Omen") then return end
 local T, C, L = unpack(select(2, ...)) 
-if not C.general.omenreskin then return end
 
--- kill the tukui threat bar
-if TukuiThreatBar then TukuiThreatBar:Kill() end
+-- kill the Nevermore threat bar
+if NevermoreThreatBar then NevermoreThreatBar:Kill() end
 
 local Omen = LibStub("AceAddon-3.0"):GetAddon("Omen")
 local borderWidth = T.Scale(2, 2)

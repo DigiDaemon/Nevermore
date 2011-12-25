@@ -1,0 +1,6 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+<Script file="layout\switch.lua"/>
+<Script file="layout\single.lua"/>
+<Script file="layout\party.lua"/>
+<Script file="layout\raid.lua"/>
+</Ui>

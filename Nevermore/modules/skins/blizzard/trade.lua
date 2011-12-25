@@ -78,4 +78,4 @@ local function LoadSkin()
 	TradeHighlightRecipientEnchant:SetFrameStrata("HIGH")	
 end
 
-tinsert(T.SkinFuncs["Tukui"], LoadSkin)
+tinsert(T.SkinFuncs["Nevermore"], LoadSkin)

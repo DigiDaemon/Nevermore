@@ -421,9 +421,9 @@ function Stuffing:CreateBagFrame(w)
 	f:SetFrameLevel(20)
 
 	if w == "Bank" then
-		f:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 0, 5)
+		f:Point("BOTTOMLEFT", NevermoreChat, "BOTTOMLEFT", 0, 0)
 	else
-		f:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, 5)
+		f:Point("BOTTOMRIGHT", NevermoreInfo, "BOTTOMRIGHT", 0, 0)
 	end
 	
 	-- close button
@@ -833,7 +833,7 @@ end
 
 
 function Stuffing:ADDON_LOADED(addon)
-	if addon ~= "Tukui" then
+	if addon ~= "Nevermore" then
 		return nil
 	end
 
@@ -905,7 +905,7 @@ function Stuffing:PLAYER_ENTERING_WORLD()
 	end)
 	
 	ContainerFrame1:ClearAllPoints()
-	ContainerFrame1:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 4, 5)
+	ContainerFrame1:Point("BOTTOMRIGHT", NevermoreInfoRight, "TOPRIGHT", 4, 5)
 	ContainerFrame1.ClearAllPoints = T.dummy
 	ContainerFrame1.SetPoint = T.dummy
 end
@@ -1051,6 +1051,7 @@ function Stuffing:SortOnUpdate(e)
 			end
 		end
 	end
+
 
 	-- go through the list and move stuff if we can.
 	for i, v in ipairs (self.sortList) do
@@ -1389,6 +1390,16 @@ function Stuffing.Menu(self, level)
 		end
 		UIDropDownMenu_AddButton(info, level)
 	end
+
+if Stuffing.bankFrame and Stuffing.bankFrame:IsShown() then
+	wipe(info)
+	info.text = L.bags_purchase
+	info.notCheckable = 1
+	info.func = function()
+		PurchaseSlot()
+	end
+	UIDropDownMenu_AddButton(info, level)
+end
 
 	wipe(info)
 	info.disabled = nil

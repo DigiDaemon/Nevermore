@@ -1,5 +1,5 @@
 ----------------------------------------------------------------
--- Initiation of Tukui engine
+-- Initiation of Nevermore engine
 ----------------------------------------------------------------
 
 -- including system
@@ -8,18 +8,18 @@ engine[1] = {} -- T, functions, constants, variables
 engine[2] = {} -- C, config
 engine[3] = {} -- L, localization
 
-Tukui = engine -- Allow other addons to use Engine
+Nevermore = engine -- Allow other addons to use Engine
 
 --[[
-		This should be at the top of every file inside of the Tukui AddOn:	
+		This should be at the top of every file inside of the Nevermore AddOn:	
 		local T, C, L = unpack(select(2, ...))
 
-		This is how another addon imports the Tukui engine:	
-		local T, C, L = unpack(Tukui)
+		This is how another addon imports the Nevermore engine:	
+		local T, C, L = unpack(Nevermore)
 --]]
 
 --------------------------------------------------
--- We need this as soon we begin loading Tukui
+-- We need this as soon we begin loading Nevermore
 --------------------------------------------------
 
 local T, C, L = unpack(select(2, ...))
@@ -33,7 +33,7 @@ T.client = GetLocale()
 T.resolution = GetCVar("gxResolution")
 T.screenheight = tonumber(string.match(T.resolution, "%d+x(%d+)"))
 T.screenwidth = tonumber(string.match(T.resolution, "(%d+)x+%d"))
-T.version = GetAddOnMetadata("Tukui", "Version")
+T.version = GetAddOnMetadata("Nevermore", "Version")
 T.versionnumber = tonumber(T.version)
 T.incombat = UnitAffectingCombat("player")
 T.patch, T.buildtext, T.releasedate, T.toc = GetBuildInfo()

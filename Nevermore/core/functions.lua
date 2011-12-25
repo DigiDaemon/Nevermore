@@ -18,7 +18,7 @@ end
 -- just for creating text
 T.SetFontString = function(parent, fontName, fontHeight, fontStyle)
 	local fs = parent:CreateFontString(nil, "OVERLAY")
-	fs:SetFont(fontName, fontHeight, fontStyle)
+	fs:SetFont(C["media"].font, C["media"].fontsizenorm, C["media"].fonttnoutline)
 	fs:SetJustifyH("LEFT")
 	fs:SetShadowColor(0, 0, 0)
 	fs:SetShadowOffset(1.25, -1.25)
@@ -27,59 +27,43 @@ end
 
 -- datatext panel position
 T.PP = function(p, obj)
-	local left = TukuiInfoLeft
-	local right = TukuiInfoRight
-	local mapleft = TukuiMinimapStatsLeft
-	local mapright = TukuiMinimapStatsRight
-	
+	local bar = NevermoreInfoBar
 	if p == 1 then
-		obj:SetParent(left)
-		obj:SetHeight(left:GetHeight())
-		obj:SetPoint("LEFT", left, 30, 0)
-		obj:SetPoint('TOP', left)
-		obj:SetPoint('BOTTOM', left)
+		obj:SetParent(bar)
+		obj:SetHeight(bar:GetHeight())
+		obj:SetPoint("TOP", bar, "TOP", -600, 0)
 	elseif p == 2 then
-		obj:SetParent(left)
-		obj:SetHeight(left:GetHeight())
-		obj:SetPoint('TOP', left)
-		obj:SetPoint('BOTTOM', left)
+		obj:SetParent(bar)
+		obj:SetHeight(bar:GetHeight())
+		obj:SetPoint('TOP', bar, "TOP", -450, 0)
 	elseif p == 3 then
-		obj:SetParent(left)
-		obj:SetHeight(left:GetHeight())
-		obj:SetPoint("RIGHT", left, -30, 0)
-		obj:SetPoint('TOP', left)
-		obj:SetPoint('BOTTOM', left)
+		obj:SetParent(bar)
+		obj:SetHeight(bar:GetHeight())
+		obj:SetPoint("TOP", bar, "TOP", -300, 0)
 	elseif p == 4 then
-		obj:SetParent(right)
-		obj:SetHeight(right:GetHeight())
-		obj:SetPoint("LEFT", right, 30, 0)
-		obj:SetPoint('TOP', right)
-		obj:SetPoint('BOTTOM', right)
+		obj:SetParent(bar)
+		obj:SetHeight(bar:GetHeight())
+		obj:SetPoint("TOP", bar, "TOP", -150, 0)
 	elseif p == 5 then
-		obj:SetParent(right)
-		obj:SetHeight(right:GetHeight())
-		obj:SetPoint('TOP', right)
-		obj:SetPoint('BOTTOM', right)
+		obj:SetParent(bar)
+		obj:SetHeight(bar:GetHeight())
+		obj:SetPoint("TOP", bar, "TOP", 0, 0)
 	elseif p == 6 then
-		obj:SetParent(right)
-		obj:SetHeight(right:GetHeight())
-		obj:SetPoint("RIGHT", right, -30, 0)
-		obj:SetPoint('TOP', right)
-		obj:SetPoint('BOTTOM', right)
-	end
-	
-	if TukuiMinimap then
-		if p == 7 then
-			obj:SetParent(mapleft)
-			obj:SetHeight(mapleft:GetHeight())
-			obj:SetPoint('TOP', mapleft)
-			obj:SetPoint('BOTTOM', mapleft)
-		elseif p == 8 then
-			obj:SetParent(mapright)
-			obj:SetHeight(mapright:GetHeight())
-			obj:SetPoint('TOP', mapright)
-			obj:SetPoint('BOTTOM', mapright)
-		end
+		obj:SetParent(bar)
+		obj:SetHeight(bar:GetHeight())
+		obj:SetPoint("TOP", bar, "TOP", 150, 0)
+	elseif p == 7 then
+		obj:SetParent(bar)
+		obj:SetHeight(bar:GetHeight())
+		obj:SetPoint("TOP", bar, "TOP", 300, 0)
+	elseif p == 8 then
+		obj:SetParent(bar)
+		obj:SetHeight(bar:GetHeight())
+		obj:SetPoint("TOP", bar, "TOP", 450, 0)
+	elseif p == 9 then
+		obj:SetParent(bar)
+		obj:SetHeight(bar:GetHeight())
+		obj:SetPoint("TOP", bar, "TOP", 600, 0)
 	end
 end
 
@@ -90,20 +74,20 @@ T.DataTextTooltipAnchor = function(self)
 	local xoff = 0
 	local yoff = T.Scale(5)
 	
-	if panel == TukuiInfoLeft then
+	if panel == NevermoreInfoLeft then
 		anchor = "ANCHOR_TOPLEFT"
-	elseif panel == TukuiInfoRight then
+	elseif panel == NevermoreInfoRight then
 		anchor = "ANCHOR_TOPRIGHT"
-	elseif panel == TukuiMinimapStatsLeft or panel == TukuiMinimapStatsRight then
-		local position = TukuiMinimap:GetPoint()
+	elseif panel == NevermoreMinimapStatsLeft or panel == NevermoreMinimapStatsRight then
+		local position = NevermoreMinimap:GetPoint()
 		if position:match("LEFT") then
 			anchor = "ANCHOR_BOTTOMRIGHT"
 			yoff = T.Scale(-6)
-			xoff = 0 - TukuiMinimapStatsRight:GetWidth()
+			xoff = 0 - NevermoreMinimapStatsRight:GetWidth()
 		elseif position:match("RIGHT") then
 			anchor = "ANCHOR_BOTTOMLEFT"
 			yoff = T.Scale(-6)
-			xoff = TukuiMinimapStatsRight:GetWidth()
+			xoff = NevermoreMinimapStatsRight:GetWidth()
 		else
 			anchor = "ANCHOR_BOTTOM"
 			yoff = T.Scale(-6)
@@ -114,7 +98,7 @@ T.DataTextTooltipAnchor = function(self)
 end
 
 -- used to update shift action bar buttons
-T.TukuiShiftBarUpdate = function()
+T.NevermoreShiftBarUpdate = function()
 	local numForms = GetNumShapeshiftForms()
 	local texture, name, isActive, isCastable
 	local button, icon, cooldown
@@ -153,7 +137,7 @@ T.TukuiShiftBarUpdate = function()
 end
 
 -- used to update pet bar buttons
-T.TukuiPetBarUpdate = function(self, event)
+T.NevermorePetBarUpdate = function(self, event)
 	local petActionButton, petActionIcon, petAutoCastableTexture, petAutoCastShine
 	for i=1, NUM_PET_ACTION_SLOTS, 1 do
 		local buttonName = "PetActionButton" .. i
@@ -315,7 +299,7 @@ end
 ------------------------------------------------------------------------
 
 T.SkinFuncs = {}
-T.SkinFuncs["Tukui"] = {}
+T.SkinFuncs["Nevermore"] = {}
 
 function T.SetModifiedBackdrop(self)
 	local color = RAID_CLASS_COLORS[T.myclass]
@@ -382,7 +366,7 @@ function T.SkinScrollBar(frame)
 			_G[frame:GetName().."ScrollUpButton"].texture = _G[frame:GetName().."ScrollUpButton"]:CreateTexture(nil, 'OVERLAY')
 			_G[frame:GetName().."ScrollUpButton"].texture:Point("TOPLEFT", 2, -2)
 			_G[frame:GetName().."ScrollUpButton"].texture:Point("BOTTOMRIGHT", -2, 2)
-			_G[frame:GetName().."ScrollUpButton"].texture:SetTexture([[Interface\AddOns\Tukui\medias\textures\arrowup.tga]])
+			_G[frame:GetName().."ScrollUpButton"].texture:SetTexture([[Interface\AddOns\Nevermore\medias\textures\arrowup.tga]])
 			_G[frame:GetName().."ScrollUpButton"].texture:SetVertexColor(unpack(C["media"].bordercolor))
 		end	
 		
@@ -393,7 +377,7 @@ function T.SkinScrollBar(frame)
 			_G[frame:GetName().."ScrollDownButton"].texture = _G[frame:GetName().."ScrollDownButton"]:CreateTexture(nil, 'OVERLAY')
 			_G[frame:GetName().."ScrollDownButton"].texture:Point("TOPLEFT", 2, -2)
 			_G[frame:GetName().."ScrollDownButton"].texture:Point("BOTTOMRIGHT", -2, 2)
-			_G[frame:GetName().."ScrollDownButton"].texture:SetTexture([[Interface\AddOns\Tukui\medias\textures\arrowdown.tga]])
+			_G[frame:GetName().."ScrollDownButton"].texture:SetTexture([[Interface\AddOns\Nevermore\medias\textures\arrowdown.tga]])
 			_G[frame:GetName().."ScrollDownButton"].texture:SetVertexColor(unpack(C["media"].bordercolor))
 		end				
 		
@@ -543,10 +527,10 @@ function T.SkinCheckBox(frame)
 		frame:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check")
 	end
 	
-	if frame.SetDisabledCheckedTexture then
-		frame:SetDisabledCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check-Disabled")
+	if frame.SetDisabledTexture then        
+		frame:SetDisabledTexture("Interface\\Buttons\\UI-CheckBox-Check-Disabled")
 	end
-	
+
 	frame.SetNormalTexture = T.dummy
 	frame.SetPushedTexture = T.dummy
 	frame.SetHighlightTexture = T.dummy
@@ -597,10 +581,10 @@ end)
 --	unitframes Functions
 ------------------------------------------------------------------------
 
--- tell oUF Framework that we use our own oUF version (ns.oUF, also know as X-oUF in /Tukui/Tukui.toc)
+-- tell oUF Framework that we use our own oUF version (ns.oUF, also know as X-oUF in /Nevermore/Nevermore.toc)
 local ADDON_NAME, ns = ...
 local oUF = ns.oUF
-assert(oUF, "Tukui was unable to locate oUF install.")
+assert(oUF, "Nevermore was unable to locate oUF install.")
 
 -- a function to update all unit frames
 T.updateAllElements = function(frame)
@@ -681,7 +665,7 @@ T.PostUpdateHealth = function(health, unit, min, max)
 	else
 		local r, g, b
 		
-		-- overwrite healthbar color for enemy player (a tukui option if enabled), target vehicle/pet too far away returning unitreaction nil and friend unit not a player. (mostly for overwrite tapped for friendly)
+		-- overwrite healthbar color for enemy player (a Nevermore option if enabled), target vehicle/pet too far away returning unitreaction nil and friend unit not a player. (mostly for overwrite tapped for friendly)
 		-- I don't know if we really need to call C["unitframes"].unicolor but anyway, it's safe this way.
 		if (C["unitframes"].unicolor ~= true and C["unitframes"].enemyhcolor and unit == "target" and UnitIsEnemy(unit, "player") and UnitIsPlayer(unit)) or (C["unitframes"].unicolor ~= true and unit == "target" and not UnitIsPlayer(unit) and UnitIsFriend(unit, "player")) then
 			local c = T.UnitColor.reaction[UnitReaction(unit, "player")]
@@ -898,7 +882,7 @@ local CreateAuraTimer = function(self, elapsed)
 end
 
 -- create a skin for all unitframes buffs/debuffs
-T.PostCreateAura = function(self, button)
+T.PostCreateAura = function(element, button)
 	button:SetTemplate("Default")
 	
 	button.remaining = T.SetFontString(button, C["media"].font, C["unitframes"].auratextscale, "THINOUTLINE")
@@ -935,21 +919,12 @@ T.PostCreateAura = function(self, button)
 	button.Glow:SetBackdrop{edgeFile = C["media"].glowTex, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0}}
 	button.Glow:SetBackdropColor(0, 0, 0, 0)
 	button.Glow:SetBackdropBorderColor(0, 0, 0)
-	
-	local Animation = button:CreateAnimationGroup()
-	Animation:SetLooping("BOUNCE")
-
-	local FadeOut = Animation:CreateAnimation("Alpha")
-	FadeOut:SetChange(-.9)
-	FadeOut:SetDuration(.6)
-	FadeOut:SetSmoothing("IN_OUT")
-
-	button.Animation = Animation
 end
 
 -- update cd, border color, etc on buffs / debuffs
-T.PostUpdateAura = function(self, unit, icon, index, offset, filter, isDebuff, duration, timeLeft)
-	local _, _, _, _, dtype, duration, expirationTime, unitCaster, isStealable = UnitAura(unit, index, icon.filter)
+T.PostUpdateAura = function(icons, unit, icon, index, offset, filter, isDebuff, duration, timeLeft)
+	local _, _, _, _, dtype, duration, expirationTime, unitCaster, _ = UnitAura(unit, index, icon.filter)
+
 	if(icon.debuff) then
 		if(not UnitIsFriend("player", unit) and icon.owner ~= "player" and icon.owner ~= "vehicle") then
 			icon:SetBackdropBorderColor(unpack(C["media"].bordercolor))
@@ -961,13 +936,9 @@ T.PostUpdateAura = function(self, unit, icon, index, offset, filter, isDebuff, d
 		end
 	else
 		if (isStealable or ((T.myclass == "MAGE" or T.myclass == "PRIEST" or T.myclass == "SHAMAN") and dtype == "Magic")) and not UnitIsFriend("player", unit) then
-			if not icon.Animation:IsPlaying() then
-				icon.Animation:Play()
-			end
+			icon:SetBackdropBorderColor(1, 0.85, 0, 1)
 		else
-			if icon.Animation:IsPlaying() then
-				icon.Animation:Stop()
-			end
+			icon:SetBackdropBorderColor(unpack(C.media.bordercolor))
 		end
 	end
 	
@@ -1283,6 +1254,30 @@ T.createAuraWatch = function(self, unit)
 	
 	self.AuraWatch = auras
 end
+
+-- ***** Heal Com ***** --
+T.createHealComm = function(self, unit)    
+	local mhpb = CreateFrame('StatusBar', nil, self.Health)
+		mhpb:SetPoint('TOPLEFT', self.Health:GetStatusBarTexture(), 'TOPRIGHT', 0, 0)
+		mhpb:SetPoint('BOTTOMLEFT', self.Health:GetStatusBarTexture(), 'BOTTOMRIGHT', 0, 0)
+		mhpb:SetWidth(150)
+		mhpb:SetStatusBarTexture(C["media"].normTex)
+		mhpb:SetStatusBarColor(0, 1, 0.5, 0.25)
+
+	local ohpb = CreateFrame('StatusBar', nil, self.Health)
+		ohpb:SetPoint('TOPLEFT', mhpb:GetStatusBarTexture(), 'TOPRIGHT', 0, 0)
+		ohpb:SetPoint('BOTTOMLEFT', mhpb:GetStatusBarTexture(), 'BOTTOMRIGHT', 0, 0)
+		ohpb:SetWidth(150)
+		ohpb:SetStatusBarTexture(C["media"].normTex)
+		ohpb:SetStatusBarColor(0, 1, 0, 0.25)
+
+		self.HealPrediction = {
+			myBar = mhpb,
+			otherBar = ohpb,
+			maxOverflow = 1,
+		}
+	return
+end;
 
 --------------------------------------------------------------------------------------------
 -- This is the "Grid" theme debuff display section, like what GridStatusDebuffs does

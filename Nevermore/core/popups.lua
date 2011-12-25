@@ -4,28 +4,17 @@ local T, C, L = unpack(select(2, ...))
 --	General Popups
 ------------------------------------------------------------------------
 
-StaticPopupDialogs["TUKUIDISABLE_UI"] = {
+StaticPopupDialogs["NevermoreDISABLE_UI"] = {
 	text = L.popup_disableui,
 	button1 = ACCEPT,
 	button2 = CANCEL,
-	OnAccept = function() DisableAddOn("Tukui") ReloadUI() end,
+	OnAccept = function() DisableAddOn("Nevermore") ReloadUI() end,
 	timeout = 0,
 	whileDead = 1,
 	preferredIndex = 3,
 }
 
-StaticPopupDialogs["TUKUIDISABLE_RAID"] = {
-	text = L.popup_2raidactive,
-	button1 = "DPS - TANK",
-	button2 = "HEAL",
-	OnAccept = function() DisableAddOn("Tukui_Raid_Healing") EnableAddOn("Tukui_Raid") ReloadUI() end,
-	OnCancel = function() EnableAddOn("Tukui_Raid_Healing") DisableAddOn("Tukui_Raid") ReloadUI() end,
-	timeout = 0,
-	whileDead = 1,
-	preferredIndex = 3,
-}
-
-StaticPopupDialogs["TUKUIDISBAND_RAID"] = {
+StaticPopupDialogs["NevermoreDISBAND_RAID"] = {
 	text = L.disband,
 	button1 = ACCEPT,
 	button2 = CANCEL,
@@ -54,7 +43,7 @@ StaticPopupDialogs["TUKUIDISBAND_RAID"] = {
 	preferredIndex = 3,
 }
 
-StaticPopupDialogs["TUKUI_FIX_AB"] = {
+StaticPopupDialogs["Nevermore_FIX_AB"] = {
 	text = L.popup_fix_ab,
 	button1 = ACCEPT,
 	button2 = CANCEL,

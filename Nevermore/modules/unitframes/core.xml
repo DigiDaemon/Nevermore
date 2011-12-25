@@ -1,0 +1,9 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="core\variables.lua"/>
+	<Script file="core\aurawatch.lua"/>
+	<Script file="core\raiddebuffs.lua"/>
+	<Script file="core\functions.lua"/>
+	<Script file="core\colors.lua"/>
+	<Script file="core\tags.lua"/>
+	<Script file="core\updates.lua"/>
+</Ui>

@@ -135,4 +135,4 @@ local function LoadSkin()
 	SendMailMailButton:Point("RIGHT", SendMailCancelButton, "LEFT", -2, 0)
 end
 
-tinsert(T.SkinFuncs["Tukui"], LoadSkin)
+tinsert(T.SkinFuncs["Nevermore"], LoadSkin)

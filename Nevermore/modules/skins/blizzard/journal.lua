@@ -103,7 +103,7 @@ local function LoadSkin()
 end
 
 if T.toc == 40200 then
-	tinsert(T.SkinFuncs["Tukui"], LoadSkin)
+	tinsert(T.SkinFuncs["Nevermore"], LoadSkin)
 else
 	T.SkinFuncs["Blizzard_EncounterJournal"] = LoadSkin
 end

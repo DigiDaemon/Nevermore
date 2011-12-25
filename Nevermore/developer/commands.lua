@@ -53,15 +53,15 @@ SLASH_LUAERROR1 = '/luaerror'
 local testui = TestUI or function() end
 TestUI = function(msg)
     if msg == "a" or msg == "arena" then
-        TukuiArena1:Show(); TukuiArena1.Hide = function() end; TukuiArena1.unit = "player"
-        TukuiArena2:Show(); TukuiArena2.Hide = function() end; TukuiArena2.unit = "player"
-        TukuiArena3:Show(); TukuiArena3.Hide = function() end; TukuiArena3.unit = "player"
+        NevermoreArena1:Show(); NevermoreArena1.Hide = function() end; NevermoreArena1.unit = "player"
+        NevermoreArena2:Show(); NevermoreArena2.Hide = function() end; NevermoreArena2.unit = "player"
+        NevermoreArena3:Show(); NevermoreArena3.Hide = function() end; NevermoreArena3.unit = "player"
     elseif msg == "boss" or msg == "b" then
-        TukuiBoss1:Show(); TukuiBoss1.Hide = function() end; TukuiBoss1.unit = "player"
-        TukuiBoss2:Show(); TukuiBoss2.Hide = function() end; TukuiBoss2.unit = "player"
-        TukuiBoss3:Show(); TukuiBoss3.Hide = function() end; TukuiBoss3.unit = "player"
+        NevermoreBoss1:Show(); NevermoreBoss1.Hide = function() end; NevermoreBoss1.unit = "player"
+        NevermoreBoss2:Show(); NevermoreBoss2.Hide = function() end; NevermoreBoss2.unit = "player"
+        NevermoreBoss3:Show(); NevermoreBoss3.Hide = function() end; NevermoreBoss3.unit = "player"
     elseif msg == "pet" then
-		TukuiPet:Show(); TukuiPet.Hide = function() end; TukuiPet.unit = "player"
+		NevermorePet:Show(); NevermorePet.Hide = function() end; NevermorePet.unit = "player"
 	elseif msg == "buffs" then
         UnitAura = function()
             -- name, rank, texture, count, dtype, duration, timeLeft, caster

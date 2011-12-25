@@ -8,4 +8,4 @@ local function LoadSkin()
 	T.SkinCloseButton(TaxiFrameCloseButton)
 end
 
-tinsert(T.SkinFuncs["Tukui"], LoadSkin)
+tinsert(T.SkinFuncs["Nevermore"], LoadSkin)

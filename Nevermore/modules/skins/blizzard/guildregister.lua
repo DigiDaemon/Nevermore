@@ -28,4 +28,4 @@ local function LoadSkin()
 	AvailableServicesText:SetTextColor(1, 1, 0)
 end
 
-tinsert(T.SkinFuncs["Tukui"], LoadSkin)
+tinsert(T.SkinFuncs["Nevermore"], LoadSkin)

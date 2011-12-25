@@ -17,7 +17,6 @@ local function LoadSkin()
 	T.SkinButton(GuildBankFrameWithdrawButton, true)
 	T.SkinButton(GuildBankInfoSaveButton, true)
 	T.SkinButton(GuildBankFramePurchaseButton, true)
-	T.SkinScrollBar(GuildBankTransactionsScrollFrameScrollBar)
 	
 	GuildBankFrameWithdrawButton:Point("RIGHT", GuildBankFrameDepositButton, "LEFT", -2, 0)
 

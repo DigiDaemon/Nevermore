@@ -3,7 +3,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 
 if not C["loot"].lootframe == true then return end
 
-local addon = CreateFrame("Button", "TukuiLootFrame")
+local addon = CreateFrame("Button", "NevermoreLootFrame")
 local title = addon:CreateFontString(nil, "OVERLAY")
 
 local iconSize = 30
@@ -60,7 +60,7 @@ end
 
 local createSlot = function(id)
 	local iconsize = iconSize-2
-	local frame = CreateFrame("Button", 'TukuiLootFrameSlot'..id, addon)
+	local frame = CreateFrame("Button", 'NevermoreLootFrameSlot'..id, addon)
 	frame:Point("LEFT", 8, 0)
 	frame:Point("RIGHT", -8, 0)
 	frame:Height(iconsize)
@@ -288,7 +288,7 @@ addon.UPDATE_MASTER_LOOT_LIST = function(self)
 end
 
 addon.ADDON_LOADED = function(self, event, addon)
-	if(addon == "Tukui") then
+	if(addon == "Nevermore") then
 		self:SetScale(frameScale)
 
 		-- clean up.
@@ -311,7 +311,7 @@ addon:Hide()
 
 -- Fuzz
 LootFrame:UnregisterAllEvents()
-table.insert(UISpecialFrames, "TukuiLootFrame")
+table.insert(UISpecialFrames, "NevermoreLootFrame")
 
 function _G.GroupLootDropDown_GiveLoot(self)
 	if ( sq >= MASTER_LOOT_THREHOLD ) then

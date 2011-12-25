@@ -1,6 +1,6 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 -----------------------------------------
--- Tukui Micro Menu
+-- Nevermore Micro Menu
 --
 -- By: Rian Quinn
 -- Date: 12-17-2010
@@ -13,7 +13,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 -----------------------------------------
 
 if C["datatext"].micromenu and C["datatext"].micromenu > 0 then
-	local Stat = CreateFrame("Frame", "TukuiStatMicroMenu")
+	local Stat = CreateFrame("Frame", "NevermoreStatMicroMenu")
 	Stat:EnableMouse(true)
 	Stat:SetFrameStrata("BACKGROUND")
 	Stat:SetFrameLevel(3)
@@ -21,7 +21,7 @@ if C["datatext"].micromenu and C["datatext"].micromenu > 0 then
 	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
-	local Text  = Stat:CreateFontString("TukuiStatMicroMenuText", "OVERLAY")
+	local Text  = Stat:CreateFontString("NevermoreStatMicroMenuText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
 	T.PP(C["datatext"].micromenu, Text)
 
@@ -31,8 +31,8 @@ if C["datatext"].micromenu and C["datatext"].micromenu > 0 then
 	end
 
 	local function OpenMenu()
-		if not TukuiMicroButtonsDropDown then return end
-		EasyMenu(T.MicroMenu, TukuiMicroButtonsDropDown, "cursor", 0, 0, "MENU", 2)
+		if not NevermoreMicroButtonsDropDown then return end
+		EasyMenu(T.MicroMenu, NevermoreMicroButtonsDropDown, "cursor", 0, 0, "MENU", 2)
 	end
 
 	Stat:RegisterEvent("PLAYER_LOGIN")

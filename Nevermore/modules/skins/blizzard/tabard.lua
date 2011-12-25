@@ -34,4 +34,4 @@ local function LoadSkin()
 	TabardCharacterModelRotateRightButton.SetPoint = T.dummy
 end
 
-tinsert(T.SkinFuncs["Tukui"], LoadSkin)
+tinsert(T.SkinFuncs["Nevermore"], LoadSkin)

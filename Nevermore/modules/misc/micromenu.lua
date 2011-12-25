@@ -1,6 +1,6 @@
 local T, C, L = unpack(select(2, ...))
 
-local menuFrame = CreateFrame("Frame", "TukuiMicroButtonsDropDown", UIParent, "UIDropDownMenuTemplate")
+local menuFrame = CreateFrame("Frame", "NevermoreMicroButtonsDropDown", UIParent, "UIDropDownMenuTemplate")
 T.MicroMenu = {
 	{text = CHARACTER_BUTTON,
 	func = function() ToggleCharacter("PaperDollFrame") end},

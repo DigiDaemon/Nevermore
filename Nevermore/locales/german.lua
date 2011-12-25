@@ -1,17 +1,17 @@
 local T, C, L = unpack(select(2, ...))
 
 if T.client == "deDE" then
-	L.chat_BATTLEGROUND_GET = "B"
-	L.chat_BATTLEGROUND_LEADER_GET = "B"
+	L.chat_BATTLEGROUND_GET = "[B]"
+	L.chat_BATTLEGROUND_LEADER_GET = "[B]"
 	L.chat_BN_WHISPER_GET = "Von"
-	L.chat_GUILD_GET = "G"
-	L.chat_OFFICER_GET = "O"
-	L.chat_PARTY_GET = "P"
-	L.chat_PARTY_GUIDE_GET = "P"
-	L.chat_PARTY_LEADER_GET = "P"
-	L.chat_RAID_GET = "R"
-	L.chat_RAID_LEADER_GET = "R"
-	L.chat_RAID_WARNING_GET = "W"
+	L.chat_GUILD_GET = "[G]"
+	L.chat_OFFICER_GET = "[O]"
+	L.chat_PARTY_GET = "[P]"
+	L.chat_PARTY_GUIDE_GET = "[P]"
+	L.chat_PARTY_LEADER_GET = "[P]"
+	L.chat_RAID_GET = "[R]"
+	L.chat_RAID_LEADER_GET = "[R]"
+	L.chat_RAID_WARNING_GET = "[W]"
 	L.chat_WHISPER_GET = "Von"
 	L.chat_FLAG_AFK = "[AFK]"
 	L.chat_FLAG_DND = "[DND]"
@@ -25,6 +25,18 @@ if T.client == "deDE" then
 	L.chat_recrutment = "Gildenrekrutierung"
 	L.chat_lfg = "SucheNachGruppe"
 	
+	L.AutoFade = "Autom. verblassen"
+	L.AutoHide = "Autom. verstecken"
+	L.ShowTitle = "Zeige Titel"
+	L.Minimize = "Minimiere alle"
+	L.Maximize = "Maximiere alle"
+	L.To = "Zu"
+	L.From = "Von"
+	L.FontSize = "Schriftgröße"
+	L.Width = "Breite"
+	L.Height = "Höhe"
+	L.Chat = "Chat"
+
 	L.disband = "Gruppe wird aufgelöst ?"  
 
 	L.datatext_notalents ="Keine Spezalisierung"  --changed
@@ -193,6 +205,7 @@ if T.client == "deDE" then
  
 	L.symbol_CLEAR = "Entfernen" 
 	L.symbol_SKULL = "Totenschädel"
+
 	L.symbol_CROSS = "Kreuz"
 	L.symbol_SQUARE = "Quadrat"
 	L.symbol_MOON = "Mond"

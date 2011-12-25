@@ -8,7 +8,7 @@ if not C["actionbar"].enable == true then return end
 -- Since t12, it's also working for druid cat stealth. (a lot requested)
 ---------------------------------------------------------------------------
 
-local bar = TukuiBar1
+local bar = NevermoreBar1
 --[[ 
 	Bonus bar classes id
 

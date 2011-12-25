@@ -1,25 +1,25 @@
 ----------------------------------------------------------------------------
--- This Module loads new user settings if TukUI_ConfigUI is loaded
+-- This Module loads new user settings if Nevermore_ConfigUI is loaded
 ----------------------------------------------------------------------------
 local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
 
 local myPlayerRealm = GetCVar("realmName")
 local myPlayerName  = UnitName("player")
 
-if not IsAddOnLoaded("Tukui_ConfigUI") then return end
+if not IsAddOnLoaded("Nevermore_ConfigUI") then return end
 
-if not TukuiConfigAll then TukuiConfigAll = {} end		
-if (TukuiConfigAll[myPlayerRealm] == nil) then TukuiConfigAll[myPlayerRealm] = {} end
-if (TukuiConfigAll[myPlayerRealm][myPlayerName] == nil) then TukuiConfigAll[myPlayerRealm][myPlayerName] = false end
+if not NevermoreConfigAll then NevermoreConfigAll = {} end		
+if (NevermoreConfigAll[myPlayerRealm] == nil) then NevermoreConfigAll[myPlayerRealm] = {} end
+if (NevermoreConfigAll[myPlayerRealm][myPlayerName] == nil) then NevermoreConfigAll[myPlayerRealm][myPlayerName] = false end
 
-if TukuiConfigAll[myPlayerRealm][myPlayerName] == true and not TukuiConfigPrivate then return end
-if TukuiConfigAll[myPlayerRealm][myPlayerName] == false and not TukuiConfigPublic then return end
+if NevermoreConfigAll[myPlayerRealm][myPlayerName] == true and not NevermoreConfigPrivate then return end
+if NevermoreConfigAll[myPlayerRealm][myPlayerName] == false and not NevermoreConfigPublic then return end
 
 local setting
-if TukuiConfigAll[myPlayerRealm][myPlayerName] == true then
-	setting = TukuiConfigPrivate
+if NevermoreConfigAll[myPlayerRealm][myPlayerName] == true then
+	setting = NevermoreConfigPrivate
 else
-	setting = TukuiConfigPublic
+	setting = NevermoreConfigPublic
 end
 
 for group,options in pairs(setting) do
@@ -35,7 +35,7 @@ for group,options in pairs(setting) do
 				end
 			end
 		end
-		-- keeps TukuiConfig clean and small
+		-- keeps NevermoreConfig clean and small
 		if count == 0 then setting[group] = nil end
 	else
 		setting[group] = nil

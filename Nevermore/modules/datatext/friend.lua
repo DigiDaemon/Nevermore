@@ -7,7 +7,7 @@ local T, C, L = unpack(select(2, ...))
 if not C["datatext"].friends or C["datatext"].friends == 0 then return end
 
 -- create a popup
-StaticPopupDialogs.TUKUI_SET_BN_BROADCAST = {
+StaticPopupDialogs.Nevermore_SET_BN_BROADCAST = {
 	text = BN_BROADCAST_TOOLTIP,
 	button1 = ACCEPT,
 	button2 = CANCEL,
@@ -26,7 +26,7 @@ StaticPopupDialogs.TUKUI_SET_BN_BROADCAST = {
 	preferredIndex = 3,
 }
 
-local Stat = CreateFrame("Frame", "TukuiStatFriends")
+local Stat = CreateFrame("Frame", "NevermoreStatFriends")
 Stat:EnableMouse(true)
 Stat:SetFrameStrata("BACKGROUND")
 Stat:SetFrameLevel(3)
@@ -34,12 +34,12 @@ Stat.Option = C.datatext.friends
 Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
-local Text  = Stat:CreateFontString("TukuiStatFriendsText", "OVERLAY")
+local Text  = Stat:CreateFontString("NevermoreStatFriendsText", "OVERLAY")
 Text:SetFont(C.media.font, C["datatext"].fontsize)
 Text:SetShadowOffset(T.mult, -T.mult)
 T.PP(C["datatext"].friends, Text)
 
-local menuFrame = CreateFrame("Frame", "TukuiFriendRightClickMenu", UIParent, "UIDropDownMenuTemplate")
+local menuFrame = CreateFrame("Frame", "NevermoreFriendRightClickMenu", UIParent, "UIDropDownMenuTemplate")
 local menuList = {
 	{ text = OPTIONS_MENU, isTitle = true,notCheckable=true},
 	{ text = INVITE, hasArrow = true,notCheckable=true, },
@@ -51,7 +51,7 @@ local menuList = {
 			{ text = "|cffFF0000"..AFK.."|r", notCheckable=true, func = function() if not IsChatAFK() then SendChatMessage("", "AFK") end end },
 		},
 	},
-	{ text = BN_BROADCAST_TOOLTIP, notCheckable=true, func = function() StaticPopup_Show("TUKUI_SET_BN_BROADCAST") end },
+	{ text = BN_BROADCAST_TOOLTIP, notCheckable=true, func = function() StaticPopup_Show("Nevermore_SET_BN_BROADCAST") end },
 }
 
 local function GetTableIndex(table, fieldIndex, value)
@@ -112,7 +112,7 @@ local function UpdateFriendTable(total)
 		for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do if class == v then class = k end end
 		
 		-- get the correct index in our table		
-		local index = GetTableIndex(friendTable, 1, name)
+		index = GetTableIndex(friendTable, 1, name)
 		-- we cannot find a friend in our table, so rebuild it
 		if index == -1 then
 			BuildFriendTable(total)
@@ -171,7 +171,7 @@ local function UpdateBNTable(total)
 		for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do if class == v then class = k end end
 		
 		-- get the correct index in our table		
-		local index = GetTableIndex(BNTable, 1, presenceID)
+		index = GetTableIndex(BNTable, 1, presenceID)
 		-- we cannot find a BN member in our table, so rebuild it
 		if index == -1 then
 			BuildBNTable(total)

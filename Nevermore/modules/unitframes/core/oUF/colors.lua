@@ -1,5 +1,6 @@
 local parent, ns = ...
 local oUF = ns.oUF
+
 local Private = oUF.Private
 
 local frame_metatable = Private.frame_metatable

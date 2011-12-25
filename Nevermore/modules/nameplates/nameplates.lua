@@ -25,7 +25,7 @@ if C["nameplate"].showhealth ~= true then
 	iconSize = 20
 end
 
-local NamePlates = CreateFrame("Frame", "TukuiNameplates", UIParent)
+local NamePlates = CreateFrame("Frame", "NevermoreNameplates", UIParent)
 NamePlates:SetScript("OnEvent", function(self, event, ...) self[event](self, ...) end)
 
 SetCVar("bloatthreat", 0)
@@ -59,6 +59,13 @@ local PlateBlacklist = {
 
 	--Army of the Dead
 	["Army of the Dead Ghoul"] = true,
+
+	--Hunter Trap
+	["Venomous Snake"] = true,
+	["Viper"] = true,
+
+	--Test
+	--["Unbound Seer"] = true,
 }
 
 -- Check Player's Role
@@ -379,7 +386,7 @@ local function SkinObjects(frame)
 	raidicon:ClearAllPoints()
 	raidicon:SetPoint("BOTTOM", hp, "TOP", 0, 16)
 	raidicon:SetSize(iconSize*1.4, iconSize*1.4)
-	raidicon:SetTexture([[Interface\AddOns\Tukui\medias\textures\raidicons.blp]])
+	raidicon:SetTexture([[Interface\AddOns\Nevermore\medias\textures\raidicons.blp]])
 	frame.raidicon = raidicon
 	
 	--Hide Old Stuff
@@ -535,7 +542,7 @@ local function HookFrames(...)
 end
 
 --Core right here, scan for any possible nameplate frames that are Children of the WorldFrame
-NamePlates:SetScript('OnUpdate', function(self, elapsed)
+CreateFrame('Frame'):SetScript('OnUpdate', function(self, elapsed)
 	if(WorldFrame:GetNumChildren() ~= numChildren) then
 		numChildren = WorldFrame:GetNumChildren()
 		HookFrames(WorldFrame:GetChildren())

@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------
 -- We don't want 2 addons enabled doing the same thing. 
--- Disable a feature on Tukui if X addon is found.
+-- Disable a feature on Nevermore if X addon is found.
 ------------------------------------------------------------------------
 
 local T, C, L = unpack(select(2, ...))

@@ -271,6 +271,61 @@ local tagStrings = {
 	['maxmana'] = [[function(unit)
 		return UnitPowerMax(unit, SPELL_POWER_MANA)
 	end]],
+
+	['curxp'] = [[function(unit)
+			return UnitXP(unit)
+	end]],
+	['curshortxp'] = [[function(unit)
+			return ("%.1fk"):format(UnitXP(unit) / 1e3):gsub("%.?0+([km])$", "%1")
+	end]],
+
+	['maxxp'] = [[function(unit)
+			return UnitXPMax(unit)
+	end]],
+
+	['maxshortxp'] = [[function(unit)
+			return ("%.1fk"):format(UnitXPMax(unit) / 1e3):gsub("%.?0+([km])$", "%1")
+	end]],
+
+	['perxp'] = [[function(unit)
+			return math.floor(UnitXP(unit) / UnitXPMax(unit) * 100 + 0.5)
+	end]],
+
+	['currested'] = [[function()
+		return GetXPExhaustion()
+	end]],
+
+	['perrested'] = [[function(unit)
+		local rested = GetXPExhaustion()
+		if(rested and rested > 0) then
+			return math.floor(rested / UnitXPMax(unit) * 100 + 0.5)
+		end
+	end]],
+
+	['currep'] = [[function()
+		local _, _, min, _, value = GetWatchedFactionInfo()
+		return value - min
+	end]],
+
+	['maxrep'] = [[function()
+		local _, _, min, max = GetWatchedFactionInfo()
+		return max - min
+	end]],
+
+	['perrep'] = [[function()
+		local _, _, min, max, value = GetWatchedFactionInfo()
+		return math.floor((value - min) / (max - min) * 100 + 0.5)
+	end]],
+
+	['standing'] = [[function()
+		local _, standing = GetWatchedFactionInfo()
+		return standing
+	end]],
+
+	['reputation'] = [[function()
+		return GetWatchedFactionInfo()
+	end]],
+
 }
 
 local tags = setmetatable(
@@ -348,17 +403,24 @@ local tagEvents = {
 	["pereclipse"]          = 'UNIT_POWER',
 	['curmana']             = 'UNIT_POWER UNIT_MAXPOWER',
 	['maxmana']             = 'UNIT_POWER UNIT_MAXPOWER',
+	['currep']		= 'UPDATE_FACTION',
+	['maxrep']		= 'UPDATE_FACTION',
+	['perrep']		= 'UPDATE_FACTION',
+	['standing']		= 'UPDATE_FACTION',
+	['reputation']		= 'UPDATE_FACTION',
+	['curxp']		= 'PLAYER_XP_UPDATE PLAYER_LEVEL_UP UPDATE_EXHAUSTION',
+	['maxxp']		= 'PLAYER_XP_UPDATE PLAYER_LEVEL_UP UPDATE_EXHAUSTION',
+	['perxp']		= 'PLAYER_XP_UPDATE PLAYER_LEVEL_UP UPDATE_EXHAUSTION',
+	['currested']		= 'PLAYER_XP_UPDATE PLAYER_LEVEL_UP UPDATE_EXHAUSTION',
+	['perrested']		= 'PLAYER_XP_UPDATE PLAYER_LEVEL_UP UPDATE_EXHAUSTION',
 }
 
 local unitlessEvents = {
 	PLAYER_LEVEL_UP = true,
 	PLAYER_UPDATE_RESTING = true,
 	PLAYER_TARGET_CHANGED = true,
-
 	PARTY_LEADER_CHANGED = true,
-
 	RAID_ROSTER_UPDATE = true,
-
 	UNIT_COMBO_POINTS = true
 }
 

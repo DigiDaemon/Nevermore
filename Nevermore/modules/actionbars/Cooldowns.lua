@@ -1,6 +1,6 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 --[[
-        An edited lightweight OmniCC for Tukui
+        An edited lightweight OmniCC for Nevermore
                 A featureless, 'pure' version of OmniCC.
                 This version should work on absolutely everything, but I've removed pretty much all of the options
 --]]

@@ -4,12 +4,12 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 ----------------------------------------------------------------
 
 if not C["datatext"].mastery == nil or C["datatext"].mastery > 0 then
-	local Stat = CreateFrame("Frame", "TukuiStatMastery")
+	local Stat = CreateFrame("Frame", "NevermoreStatMastery")
 	Stat.Option = C.datatext.mastery
 	Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 	Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
-	local Text  = Stat:CreateFontString("TukuiStatMasteryText", "OVERLAY")
+	local Text  = Stat:CreateFontString("NevermoreStatMasteryText", "OVERLAY")
 	Text:SetFont(C.media.font, C["datatext"].fontsize)
 	T.PP(C["datatext"].mastery, Text)
 

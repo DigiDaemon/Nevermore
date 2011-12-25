@@ -130,4 +130,4 @@ local function LoadSkin()
 	end)
 end	
 
-tinsert(T.SkinFuncs["Tukui"], LoadSkin)
+tinsert(T.SkinFuncs["Nevermore"], LoadSkin)

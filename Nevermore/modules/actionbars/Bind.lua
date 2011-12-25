@@ -1,6 +1,6 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 -- keybind feature
-local bind = CreateFrame("Frame", "TukuiHoverBind", UIParent)
+local bind = CreateFrame("Frame", "NevermoreHoverBind", UIParent)
 
 -- SLASH COMMAND
 SlashCmdList.MOUSEOVERBIND = function()
@@ -86,7 +86,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 				
 				bind.button.bindings = {GetBindingKey(spellmacro.." "..bind.button.name)}
 					if #bind.button.bindings == 0 then
-						GameTooltip:AddLine(EMPTY, .6, .6, .6)
+						GameTooltip:AddLine("No bindings set.", .6, .6, .6)
 					else
 						GameTooltip:AddDoubleLine("Binding", "Key", .6, .6, .6, .6, .6, .6)
 						for i = 1, #bind.button.bindings do
@@ -114,9 +114,9 @@ SlashCmdList.MOUSEOVERBIND = function()
 					self:AddLine(bind.button.name, 1, 1, 1)
 					bind.button.bindings = {GetBindingKey(bind.button.bindstring)}
 					if #bind.button.bindings == 0 then
-						self:AddLine(EMPTY, .6, .6, .6)
+						self:AddLine("No bindings set.", .6, .6, .6)
 					else
-						self:AddDoubleLine(KEY_BINDING, "Key", .6, .6, .6, .6, .6, .6)
+						self:AddDoubleLine("Binding", "Key", .6, .6, .6, .6, .6, .6)
 						for i = 1, #bind.button.bindings do
 							self:AddDoubleLine(i, bind.button.bindings[i])
 						end
@@ -157,7 +157,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 					if #bind.button.bindings == 0 then
 						self:AddLine("No bindings set.", .6, .6, .6)
 					else
-						self:AddDoubleLine(KEY_BINDING, "Key", .6, .6, .6, .6, .6, .6)
+						self:AddDoubleLine("Binding", "Key", .6, .6, .6, .6, .6, .6)
 						for i = 1, #bind.button.bindings do
 							self:AddDoubleLine(i, bind.button.bindings[i])
 						end
@@ -226,10 +226,10 @@ SlashCmdList.MOUSEOVERBIND = function()
 			self.enabled = false
 			self:HideFrame()
 			self:UnregisterEvent("PLAYER_REGEN_DISABLED")
-			StaticPopup_Hide("TUKUI_KEYBIND_MODE")
+			StaticPopup_Hide("Nevermore_KEYBIND_MODE")
 		end
 
-		StaticPopupDialogs["TUKUI_KEYBIND_MODE"] = {
+		StaticPopupDialogs["Nevermore_KEYBIND_MODE"] = {
 			text = L.bind_instruct,
 			button1 = L.bind_save,
 			button2 = L.bind_discardbind,
@@ -290,7 +290,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 	end
 	if not bind.enabled then
 		bind:Activate()
-		StaticPopup_Show("TUKUI_KEYBIND_MODE")
+		StaticPopup_Show("Nevermore_KEYBIND_MODE")
 	end
 end
 SLASH_MOUSEOVERBIND1 = "/bindkey"

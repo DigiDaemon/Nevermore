@@ -5,7 +5,7 @@ local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Lo
 
 if not C["datatext"].wowtime or C["datatext"].wowtime == 0 then return end
 
-local Stat = CreateFrame("Frame", "TukuiStatTime")
+local Stat = CreateFrame("Frame", "NevermoreStatTime")
 Stat:EnableMouse(true)
 Stat:SetFrameStrata("MEDIUM")
 Stat:SetFrameLevel(3)
@@ -13,7 +13,7 @@ Stat.Option = C.datatext.wowtime
 Stat.Color1 = T.RGBToHex(unpack(C.media.datatextcolor1))
 Stat.Color2 = T.RGBToHex(unpack(C.media.datatextcolor2))
 
-local Text = Stat:CreateFontString("TukuiStatTimeText", "OVERLAY")
+local Text = Stat:CreateFontString("NevermoreStatTimeText", "OVERLAY")
 Text:SetFont(C.media.font, C["datatext"].fontsize)
 T.PP(C["datatext"].wowtime, Text)
 

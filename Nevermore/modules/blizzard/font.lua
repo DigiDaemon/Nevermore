@@ -1,5 +1,5 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
-local TukuiFonts = CreateFrame("Frame", "TukuiFonts", UIParent)
+local NevermoreFonts = CreateFrame("Frame", "NevermoreFonts", UIParent)
 
 local SetFont = function(obj, font, size, style, r, g, b, sr, sg, sb, sox, soy)
 	obj:SetFont(font, size, style)
@@ -9,9 +9,9 @@ local SetFont = function(obj, font, size, style, r, g, b, sr, sg, sb, sox, soy)
 	elseif r then obj:SetAlpha(r) end
 end
 
-TukuiFonts:RegisterEvent("ADDON_LOADED")
-TukuiFonts:SetScript("OnEvent", function(self, event, addon)
-	if addon ~= "Tukui" then return end
+NevermoreFonts:RegisterEvent("ADDON_LOADED")
+NevermoreFonts:SetScript("OnEvent", function(self, event, addon)
+	if addon ~= "Nevermore" then return end
 	
 	local NORMAL     = C.media.font
 	local COMBAT     = C.media.dmgfont
@@ -29,7 +29,7 @@ TukuiFonts:SetScript("OnEvent", function(self, event, addon)
 		SetCVar("CombatHealing",0)
 		
 		-- set an invisible font for xp, honor kill, etc
-		local INVISIBLE = [=[Interface\Addons\Tukui\medias\fonts\invisible_font.ttf]=]
+		local INVISIBLE = [=[Interface\Addons\Nevermore\medias\fonts\invisible_font.ttf]=]
 		COMBAT = INVISIBLE
 	end
 
@@ -71,10 +71,6 @@ TukuiFonts:SetScript("OnEvent", function(self, event, addon)
 	SetFont(SubZoneTextString,                  NORMAL, 25, "OUTLINE")
 	SetFont(PVPInfoTextString,                  NORMAL, 22, "THINOUTLINE")
 	SetFont(PVPArenaTextString,                 NORMAL, 22, "THINOUTLINE")
-	SetFont(FriendsFont_Normal,                 NORMAL, 12)
-	SetFont(FriendsFont_Small,                  NORMAL, 11)
-	SetFont(FriendsFont_Large,                  NORMAL, 14)
-	SetFont(FriendsFont_UserText,               NORMAL, 11)
 
 	SetFont = nil
 	self:SetScript("OnEvent", nil)

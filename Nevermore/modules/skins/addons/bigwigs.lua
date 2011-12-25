@@ -5,7 +5,6 @@
 
 local T, C, L = unpack(select(2, ...))
 
-if not C.general.bigwigsreskin then return end
 if not IsAddOnLoaded("BigWigs") then return end
 
 local buttonsize = 19
@@ -22,7 +21,7 @@ end
 
 local function freestyle(bar)
 	-- reparent and hide bar background
-	local bg = bar:Get("bigwigs:Tukui:bg")
+	local bg = bar:Get("bigwigs:Nevermore:bg")
 	if bg then
 		bg:ClearAllPoints()
 		bg:SetParent(UIParent)
@@ -31,7 +30,7 @@ local function freestyle(bar)
 	end
 
 	-- reparent and hide icon background
-	local ibg = bar:Get("bigwigs:Tukui:ibg")
+	local ibg = bar:Get("bigwigs:Nevermore:bg")
 	if ibg then
 		ibg:ClearAllPoints()
 		ibg:SetParent(UIParent)
@@ -43,30 +42,6 @@ local function freestyle(bar)
 	bar.candyBarBar.SetPoint=bar.candyBarBar.OldSetPoint
 	bar.candyBarIconFrame.SetWidth=bar.candyBarIconFrame.OldSetWidth
 	bar.SetScale=bar.OldSetScale
-	
-	--Reset Positions
-	--Icon
-	bar.candyBarIconFrame:ClearAllPoints()
-	bar.candyBarIconFrame:SetPoint("TOPLEFT")
-	bar.candyBarIconFrame:SetPoint("BOTTOMLEFT")
-	bar.candyBarIconFrame:SetTexCoord(0.07, 0.93, 0.07, 0.93)
-
-	--Status Bar
-	bar.candyBarBar:ClearAllPoints()
-	bar.candyBarBar:SetPoint("TOPRIGHT")
-	bar.candyBarBar:SetPoint("BOTTOMRIGHT")
-
-	--BG
-	bar.candyBarBackground:SetAllPoints()
-
-	--Duration
-	bar.candyBarDuration:ClearAllPoints()
-	bar.candyBarDuration:SetPoint("RIGHT", bar.candyBarBar, "RIGHT", -2, 0)
-
-	--Name
-	bar.candyBarLabel:ClearAllPoints()
-	bar.candyBarLabel:SetPoint("LEFT", bar.candyBarBar, "LEFT", 2, 0)
-	bar.candyBarLabel:SetPoint("RIGHT", bar.candyBarBar, "RIGHT", -2, 0)
 end
 
 local applystyle = function(bar)
@@ -90,7 +65,7 @@ local applystyle = function(bar)
 	bg:Point("BOTTOMRIGHT", bar, "BOTTOMRIGHT", 2, -2)
 	bg:SetFrameStrata("BACKGROUND")
 	bg:Show()
-	bar:Set("bigwigs:Tukui:bg", bg)
+	bar:Set("bigwigs:Nevermore:bg", bg)
 
 	-- create or reparent and use icon background
 	local ibg = nil
@@ -106,7 +81,7 @@ local applystyle = function(bar)
 		ibg:Point("BOTTOMRIGHT", bar.candyBarIconFrame, "BOTTOMRIGHT", 2, -2)
 		ibg:SetFrameStrata("BACKGROUND")
 		ibg:Show()
-		bar:Set("bigwigs:Tukui:ibg", ibg)
+		bar:Set("bigwigs:Nevermore:bg", ibg)
 	end
 
 	-- setup timer and bar name fonts and positions
@@ -147,16 +122,16 @@ local function RegisterStyle()
 	local bars = BigWigs:GetPlugin("Bars", true)
 	local prox = BigWigs:GetPlugin("Proximity", true)
 	if bars then
-		bars:RegisterBarStyle("Tukui", {
+		bars:RegisterBarStyle("Nevermore", {
 			apiVersion = 1,
 			version = 1,
 			GetSpacing = function(bar) return 7 end,
 			ApplyStyle = applystyle,
 			BarStopped = freestyle,
-			GetStyleName = function() return "Tukui" end,
+			GetStyleName = function() return "Nevermore" end,
 		})
 	end
-	if prox and BigWigs.pluginCore.modules.Bars.db.profile.barStyle == "Tukui" then
+	if prox and BigWigs.pluginCore.modules.Bars.db.profile.barStyle == "Nevermore" then
 		hooksecurefunc(BigWigs.pluginCore.modules.Proximity, "RestyleWindow", function()
 			BigWigsProximityAnchor:SetTemplate("Transparent")
 		end)
@@ -165,18 +140,17 @@ end
 
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, addon)
-	if IsAddOnLoaded("Tukui_BigWigs") then return end
-	if addon == "BigWigs_Plugins" then
+	if event == "ADDON_LOADED" and addon == "BigWigs_Plugins" then
 		RegisterStyle()
 		local profile = BigWigs3DB["profileKeys"][T.myname.." - "..T.myrealm]
 		local path = BigWigs3DB["namespaces"]["BigWigs_Plugins_Bars"]["profiles"][profile]
 		path.texture = C.media.normTex
-		path.barStyle = "Tukui"
+		path.barStyle = "Nevermore"
 		path.font = C.media.font
 		
 		path = BigWigs3DB["namespaces"]["BigWigs_Plugins_Proximity"]["profiles"][profile]
 		path.font = C.media.font
 		
-		self:UnregisterEvent("ADDON_LOADED")
+		f:UnregisterEvent("ADDON_LOADED")
 	end
 end)
