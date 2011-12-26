@@ -138,7 +138,7 @@ local function Shared(self, unit)
 	local Leader = self.Health:CreateTexture(nil, "OVERLAY")
 		Leader:SetHeight(14);
 		Leader:SetWidth(14);
-		Leader:SetPoint("LEFT", power, "LEFT", 2, 2);
+		Leader:SetPoint("LEFT", power, "LEFT", 1, 1);
 		self.Leader = Leader
 -----------------------------------------------------------------------------
 -- Targetborder
@@ -251,7 +251,7 @@ function frame:OnEvent(event, arg1)
 oUF:Factory(function(self)
 
 oUF:SetActiveStyle("Party")	
-	local iParty = self:SpawnHeader("iParty", nil, "custom [@raid6,exists] hide;show",
+	local NeDParty = self:SpawnHeader("NeDParty", nil, "custom [@raid6,exists] hide;show",
         'oUF-initialConfigFunction', [[
         local header = self:GetParent()
         self:SetWidth(header:GetAttribute('initial-width'))
@@ -278,14 +278,14 @@ oUF:SetActiveStyle("Party")
 		GroupAnchor:SetHeight(300)
 		GroupAnchor:SetWidth(500)
 		GroupAnchor:SetPoint("TOPLEFT", NevermoreInfo, "TOPLEFT", T.buttonspacing, -T.buttonspacing) 
-		iParty:SetPoint("TOPLEFT", GroupAnchor, 0, 0)
+		NeDParty:SetPoint("TOPLEFT", GroupAnchor, 0, 0)
 	end)
 end
   			if k == "role" and v == "heal" then -- Checks to see if we're heals		
 oUF:Factory(function(self)
 
 oUF:SetActiveStyle("Party")	
-	local iParty = self:SpawnHeader("iParty", nil, "custom [@raid6,exists] hide;show",
+	local NeHParty = self:SpawnHeader("NeHParty", nil, "custom [@raid6,exists] hide;show",
         'oUF-initialConfigFunction', [[
         local header = self:GetParent()
         self:SetWidth(header:GetAttribute('initial-width'))
@@ -312,7 +312,7 @@ oUF:SetActiveStyle("Party")
 	GroupAnchor:SetHeight(300)
 	GroupAnchor:SetWidth(NevermoreCenter:GetWidth())
 	GroupAnchor:SetPoint("BOTTOMLEFT", NevermoreCenter, "TOPLEFT", T.buttonspacing, -(NevermoreCenter:GetHeight() + (iPlayer:GetHeight() * 1.5))) 
-	iParty:SetPoint("TOPLEFT", GroupAnchor, 0, 0)
+	NeHParty:SetPoint("TOPLEFT", GroupAnchor, 0, 0)
 end)
 
 
@@ -321,7 +321,7 @@ end)
 oUF:Factory(function(self)
 
 oUF:SetActiveStyle("Party")	
-	local iParty = self:SpawnHeader("iParty", nil, "custom [@raid6,exists] hide;show",
+	local NeTParty = self:SpawnHeader("NeTParty", nil, "custom [@raid6,exists] hide;show",
         'oUF-initialConfigFunction', [[
         local header = self:GetParent()
         self:SetWidth(header:GetAttribute('initial-width'))
@@ -348,139 +348,8 @@ oUF:SetActiveStyle("Party")
 	GroupAnchor:SetHeight(300)
 	GroupAnchor:SetWidth(500)
 	GroupAnchor:SetPoint("TOPLEFT", NevermoreInfo, "TOPLEFT", T.buttonspacing, -T.buttonspacing) 
-	iParty:SetPoint("TOPLEFT", GroupAnchor, 0, 0)
+	NeTParty:SetPoint("TOPLEFT", GroupAnchor, 0, 0)
 end)
-
-if (GetNumPartyMembers() > 0) then
-	local tankmark = CreateFrame("Frame","NevermoreTankMark", UIParent)
-	tankmark:SetHeight(T.buttonsize * 2)
-	tankmark:SetTemplate("Default")
-	tankmark:Point("BOTTOMLEFT", xprp, "TOPLEFT", 0, T.buttonsize * 1.35)
-	tankmark:Point("BOTTOMRIGHT", xprp, "TOPRIGHT", 0, T.buttonsize * 1.35)
-
-local function ButtonEnter(self)
-	local color = RAID_CLASS_COLORS[T.myclass]
-	if self == mark[i] then
-	self:SetBackdropBorderColor(0, 0, 0, 0)
-	else
-	self:SetBackdropBorderColor(color.r, color.g, color.b)
-	end
-end
- 
-local function ButtonLeave(self)
-	if self == mark[i] then
-	self:SetBackdropBorderColor(0, 0, 0, 0)
-	else
-	self:SetBackdropBorderColor(0.5, 0.5, 0.5)
-	end
-end
-
-local mark = CreateFrame("Button", "Menu", tankmark)
-for i = 1, 8 do
-	mark[i] = CreateFrame("Button", "mark"..i, tankmark)
-	mark[i]:SetNormalTexture("Interface\\TargetingFrame\\UI-RaidTargetingIcons")
-	mark[i]:CreatePanel("", T.buttonsize / 1.5, T.buttonsize / 1.5, "LEFT", tankmark, "LEFT", T.Scale(9), T.Scale(-3))
-	if i == 1 then
-		mark[i]:SetPoint("TOPLEFT", tankmark, "TOPLEFT",  9, -7)
-		mark[i]:SetBackdropColor(0, 0, 0, 0);
-    		mark[i]:SetBackdropBorderColor(0, 0, 0, 0);
-	elseif i == 5 then
-		mark[i]:SetPoint("TOP", mark[1], "BOTTOM", 3, -3)
-		mark[i]:SetBackdropColor(0, 0, 0, 0);
-    		mark[i]:SetBackdropBorderColor(0, 0, 0, 0);
-	else
-		mark[i]:SetPoint("LEFT", mark[i-1], "RIGHT", 5, 0)
-		mark[i]:SetBackdropColor(0, 0, 0, 0);
-    		mark[i]:SetBackdropBorderColor(0, 0, 0, 0);
-	end
-	mark[i]:EnableMouse(true)
-	mark[i]:SetFrameStrata("HIGH")
-	mark[i]:SetScript("OnEnter", ButtonEnter)
-	mark[i]:SetScript("OnLeave", ButtonLeave)
-	mark[i]:SetScript("OnMouseUp", function() SetRaidTarget("target", i) end)
-	
-	-- Set up each button
-	if i == 1 then 
-		mark[i]:GetNormalTexture():SetTexCoord(0,0.25,0,0.25)
-	elseif i == 2 then
-		mark[i]:GetNormalTexture():SetTexCoord(0.25,0.5,0,0.25)
-	elseif i == 3 then
-		mark[i]:GetNormalTexture():SetTexCoord(0.5,0.75,0,0.25)
-	elseif i == 4 then
-		mark[i]:GetNormalTexture():SetTexCoord(0.75,1,0,0.25)
-	elseif i == 5 then
-		mark[i]:GetNormalTexture():SetTexCoord(0,0.25,0.25,0.5)
-	elseif i == 6 then
-		mark[i]:GetNormalTexture():SetTexCoord(0.25,0.5,0.25,0.5)
-	elseif i == 7 then
-		mark[i]:GetNormalTexture():SetTexCoord(0.5,0.75,0.25,0.5)
-	elseif i == 8 then
-		mark[i]:GetNormalTexture():SetTexCoord(0.75,1,0.25,0.5)
-	end
-end
-
-local ClearTargetButton = CreateFrame("Button", "ClearTargetButton", tankmark)
-ClearTargetButton:CreatePanel("", T.buttonsize * 2.2, T.buttonsize / 1.5, "TOPLEFT", mark[4], "TOPRIGHT", 3, 0)
-ClearTargetButton:SetTemplate("Default")
-ClearTargetButton:SetScript("OnEnter", ButtonEnter)
-ClearTargetButton:SetScript("OnLeave", ButtonLeave)
-ClearTargetButton:SetScript("OnMouseUp", function() SetRaidTarget("target", 0) end)
-ClearTargetButton:SetFrameStrata("HIGH")
-
-ClearTargetButtonText = T.SetFontString(ClearTargetButton, C["media"].font, 12, C["media"].fonttnoutline)
-ClearTargetButtonText:SetText("CLEAR")
-ClearTargetButtonText:SetPoint("CENTER")
-ClearTargetButtonText:SetJustifyH("CENTER", 0, 0)
-
-local ToggleButton = CreateFrame("Frame", "ToggleButton", UIParent)
-ToggleButton:CreatePanel("Default", 100, 20, "CENTER", UIParent, "CENTER", 0, 0)
-ToggleButton:ClearAllPoints()
-ToggleButton:Point("BOTTOMLEFT", xprp, "TOPLEFT", 0, T.buttonsize * 1.35)
-ToggleButton:Point("BOTTOMRIGHT", xprp, "TOPRIGHT", 0, T.buttonsize * 1.35)
-ToggleButton:EnableMouse(true)
-ToggleButton:SetFrameStrata("HIGH")
-ToggleButton:SetScript("OnEnter", ButtonEnter)
-ToggleButton:SetScript("OnLeave", ButtonLeave)
-ToggleButton:Hide()
-
-local ToggleButtonText = T.SetFontString(ToggleButton, C["media"].font, 12, C["media"].fonttnoutline)
-ToggleButtonText:SetText("MARK BAR")
-ToggleButtonText:SetPoint("CENTER", ToggleButton, "CENTER")
-	
---Create close button
-local CloseButton = CreateFrame("BUTTON", "CloseButton", tankmark)
-CloseButton:CreatePanel("Default", T.buttonsize * 2.2, T.buttonsize / 1.5, "TOPLEFT", mark[8], "TOPRIGHT", 3, 0)
-CloseButton:EnableMouse(true)
-CloseButton:SetScript("OnEnter", ButtonEnter)
-CloseButton:SetScript("OnLeave", ButtonLeave)
-CloseButton:SetFrameStrata("HIGH")
-	
-local CloseButtonText = T.SetFontString(CloseButton, C["media"].font, 12, C["media"].fonttnoutline)
-CloseButtonText:SetText("HIDE")
-CloseButtonText:SetPoint("CENTER", CloseButton, "CENTER")
-
-	ToggleButton:SetScript("OnMouseDown", function()
-		if tankmark:IsShown() then
-			tankmark:Hide()
-		else
-			tankmark:Show()
-			ToggleButton:Hide()
-		end
-	end)
-	
-	CloseButton:SetScript("OnMouseDown", function()
-		if tankmark:IsShown() then
-			tankmark:Hide()
-			ToggleButton:Show()
-		else
-			ToggleButton:Show()
-		end
-	end)
-
-else
-end
-
-
  			end
 		end
 	end

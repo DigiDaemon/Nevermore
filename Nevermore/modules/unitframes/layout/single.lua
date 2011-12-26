@@ -120,7 +120,11 @@ _, class = UnitClass("player")
 	local Leader = self.Health:CreateTexture(nil, "OVERLAY")
 		Leader:SetHeight(14);
 		Leader:SetWidth(14);
-		Leader:SetPoint("TOPLEFT", 2, 8);
+	if ( unit == "player" or unit == "target" or unit == "focus" ) then
+		Leader:SetPoint("TOPLEFT", 2, 1);
+	else
+		Leader:SetPoint("TOPLEFT", 2, 1)
+	end
 		self.Leader = Leader
 
 -----------------------------------------------------------------------------
@@ -176,10 +180,20 @@ _, class = UnitClass("player")
 -----------------------------------------------------------------------------
 -- Raid Icon
 -----------------------------------------------------------------------------
-	RaidIcon = self.Health:CreateTexture(nil, "OVERLAY")
-	RaidIcon:SetHeight(19)
-	RaidIcon:SetWidth(19)
-	RaidIcon:SetPoint("TOPRIGHT", -15, -2)
+	local RaidIcon = self.Health:CreateTexture(nil, "OVERLAY")
+	if ( unit == "player" or unit == "target" or unit == "focus" ) then
+		RaidIcon:SetHeight(19)
+		RaidIcon:SetWidth(19)
+		RaidIcon:SetPoint("TOPRIGHT", -2, -2)
+	elseif (unit == "target" and class == "ROGUE" ) then
+		RaidIcon:SetHeight(19)
+		RaidIcon:SetWidth(19)
+		RaidIcon:SetPoint("TOPRIGHT", -15, -2)
+	else
+		RaidIcon:SetHeight(11)
+		RaidIcon:SetWidth(11)
+		RaidIcon:SetPoint("TOPRIGHT", -2, -1)
+	end
 	self.RaidIcon = RaidIcon
 
 -----------------------------------------------------------------------------
@@ -499,7 +513,7 @@ local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 		castbar:SetFrameLevel(10)
 		
 	CastbarBorder = CreateFrame("Frame", self:GetName().."Border", castbar)
-   		CastbarBorder:SetPoint("TOPLEFT", -2, 2)
+   	CastbarBorder:SetPoint("TOPLEFT", -2, 2)
        	CastbarBorder:SetPoint("BOTTOMRIGHT", 2, -2)
        	CastbarBorder:SetBackdrop({
        		bgFile = "Interface\\Buttons\\WHITE8x8", 
@@ -518,11 +532,11 @@ local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
         	CastbarBorder:SetBackdropBorderColor(0.5, 0.5, 0.5);
         	CastbarBorder:SetFrameStrata("BACKGROUND")
 		
-			castbar.bg = CastbarBorder:CreateTexture(nil, 'OVERLAY')
-        	castbar.bg:SetPoint("TOPLEFT", 2, -2)
-        	castbar.bg:SetPoint("BOTTOMRIGHT", -2, 2)
-        	castbar.bg:SetTexture(C["media"].normTex);
-        	castbar.bg:SetVertexColor(0.1, 0.1, 0.1)
+	castbar.bg = CastbarBorder:CreateTexture(nil, 'OVERLAY')
+        castbar.bg:SetPoint("TOPLEFT", 2, -2)
+        castbar.bg:SetPoint("BOTTOMRIGHT", -2, 2)
+        castbar.bg:SetTexture(C["media"].normTex);
+        castbar.bg:SetVertexColor(0.1, 0.1, 0.1)
 		
 	castbar.time = T.SetFontString(castbar);
    	castbar.time:SetPoint("RIGHT", castbar, "RIGHT", -4, 0);
@@ -800,7 +814,7 @@ local Experience = CreateFrame("StatusBar", nil, self)
 		
 				Experience.Rested = CreateFrame('StatusBar', nil, Experience)
 				Experience.Rested:SetAllPoints(Experience)
-				Experience.Rested:SetFrameLevel(10)
+				Experience.Rested:SetFrameLevel(9)
 				Experience.Rested:SetStatusBarTexture(C["media"].normTex)
 				Experience.Rested:SetStatusBarColor(1, 0, 1, 0)
 

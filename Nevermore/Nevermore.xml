@@ -152,7 +152,7 @@
 	<Script file="modules\misc\dropdownlist.lua"/>
 	<Script file="core\move.lua"/>
 	<Script file="modules\misc\raidutilities.lua"/>
-
+	<Script file="modules\misc\partyutilities.lua"/>
 	<Script file="modules\misc\profession.lua"/>
 	<Script file="modules\misc\afk.lua"/>
 	<Script file="modules\misc\classtimer.lua"/>
