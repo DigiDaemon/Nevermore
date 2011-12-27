@@ -138,7 +138,7 @@ local function Shared(self, unit)
 	local Leader = self.Health:CreateTexture(nil, "OVERLAY")
 		Leader:SetHeight(14);
 		Leader:SetWidth(14);
-		Leader:SetPoint("LEFT", power, "LEFT", 1, 1);
+		Leader:SetPoint("LEFT", power, "LEFT", 2, 1);
 		self.Leader = Leader
 -----------------------------------------------------------------------------
 -- Targetborder
@@ -209,7 +209,6 @@ local function Shared(self, unit)
 -- Register targetchange
 -----------------------------------------------------------------------------
 
-
 	self:RegisterEvent("PLAYER_TARGET_CHANGED", function(self)
 		if ( UnitIsUnit("target", self.unit) ) then
 			self.Border:Show();
@@ -220,7 +219,13 @@ local function Shared(self, unit)
 -----------------------------------------------------------------------------
 -- Debuffhighlight
 -----------------------------------------------------------------------------	
-	CreateHighlight(self)
+	--CreateHighlight(self)
+	local dbh = hp:CreateTexture(nil, "OVERLAY")
+		dbh:SetWidth(32)
+		dbh:SetHeight(32)
+		dbh:SetPoint("CENTER", self, "CENTER")
+		self.DebuffHighlightUseTexture = true
+		self.DebuffHighlight = dbh
 -----------------------------------------------------------------------------
 -- Range
 -----------------------------------------------------------------------------
@@ -233,8 +238,7 @@ local function Shared(self, unit)
 -----------------------------------------------------------------------------
 -- Aurawatch
 -----------------------------------------------------------------------------
-
-T.createAuraWatch(self)
+	T.createAuraWatch(self)
 
     return self
 end

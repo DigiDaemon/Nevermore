@@ -156,6 +156,7 @@
 	<Script file="modules\misc\profession.lua"/>
 	<Script file="modules\misc\afk.lua"/>
 	<Script file="modules\misc\classtimer.lua"/>
+	<Script file="modules\misc\worldtext.lua"/>
 
 	<Script file="modules\skins\blizzard\achievement.lua"/>
 	<Script file="modules\skins\blizzard\achievementpopup.lua"/>

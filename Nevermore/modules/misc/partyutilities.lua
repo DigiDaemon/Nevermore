@@ -5,9 +5,11 @@
 
 local T, C, L = unpack(select(2, ...))
 
-if (IsPartyLeader("player") or GetNumPartyMembers() > 0 ) then
 
-	local tankmark = CreateFrame("Frame","NevermoreTankMark", UIParent)
+if not (GetNumPartyMembers() > 0) then return end
+
+
+local tankmark = CreateFrame("Frame","NevermoreTankMark", UIParent)
 	tankmark:SetHeight(T.buttonsize * 2)
 	tankmark:SetTemplate("Default")
 	tankmark:Point("BOTTOMLEFT", xprp, "TOPLEFT", 0, T.buttonsize * 1.35)
@@ -121,37 +123,3 @@ CloseButtonText:SetPoint("CENTER", CloseButton, "CENTER")
 			ToggleButton:Show()
 		end
 	end)
-end
-
-
-
---Check if We are Raid Leader or Raid Officer
-local function CheckRaidStatus()
-	local inInstance, instanceType = IsInInstance()
-	if ((GetNumPartyMembers() > 0 and not UnitInRaid("player")) or IsRaidLeader() or IsRaidOfficer()) and not (inInstance and (instanceType == "pvp" or instanceType == "arena")) then
-		return true
-	else
-		return false
-	end
-end
-
-
-
-
-local function ToggleRaidUtil(self, event)
-	if InCombatLockdown() then
-		self:RegisterEvent("PLAYER_REGEN_ENABLED")
-		return
-	end
-
-	if event == "PLAYER_REGEN_ENABLED" then
-		self:UnregisterEvent("PLAYER_REGEN_ENABLED")
-	end
-end
-
---Automatically show/hide the frame if we have RaidLeader or RaidOfficer
-local LeadershipCheck = CreateFrame("Frame")
-LeadershipCheck:RegisterEvent("RAID_ROSTER_UPDATE")
-LeadershipCheck:RegisterEvent("PLAYER_ENTERING_WORLD")
-LeadershipCheck:RegisterEvent("PARTY_MEMBERS_CHANGED")
-LeadershipCheck:SetScript("OnEvent", ToggleRaidUtil)
